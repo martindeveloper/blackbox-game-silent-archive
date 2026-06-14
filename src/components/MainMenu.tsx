@@ -118,22 +118,36 @@ export function MainMenu({
   useEffect(() => {
     if (view !== "menu") return;
 
+    const occupied = selectedSlotData !== null;
+
     function handleKey(e: KeyboardEvent) {
       if (hasOpenModals()) return;
       if (isEditableTarget(e.target)) return;
       if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
-      if (e.key === "1" && selectedSlotData) {
-        e.preventDefault();
-        handleContinue();
-      } else if (e.key === "2") {
-        e.preventDefault();
-        handleRestart();
-      } else if (e.key === "3") {
-        e.preventDefault();
-        setShowOptions((v) => !v);
-      } else if (e.key === "Escape") {
+
+      if (e.key === "Escape") {
         e.preventDefault();
         handleBack();
+        return;
+      }
+
+      if (occupied) {
+        if (e.key === "1") {
+          e.preventDefault();
+          handleContinue();
+        } else if (e.key === "2") {
+          e.preventDefault();
+          handleRestart();
+        } else if (e.key === "3") {
+          e.preventDefault();
+          setShowOptions((v) => !v);
+        }
+      } else if (e.key === "1") {
+        e.preventDefault();
+        handleRestart();
+      } else if (e.key === "2") {
+        e.preventDefault();
+        setShowOptions((v) => !v);
       }
     }
 
