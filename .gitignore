@@ -1,0 +1,12 @@
+.DS_Store
+Thumbs.db
+
+# Editor machine-local state
+**/.blackbox/user.preferences.json
+.blackbox/tool-runs/
+
+# Runtime player saves (not authored content)
+saves/
+
+*.log
+.cache/

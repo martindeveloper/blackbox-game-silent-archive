@@ -1,0 +1,74 @@
+{
+  "spec": "com.blackbox.scenario",
+  "formatVersion": 1,
+  "title": "Silent Archive",
+  "revision": "5.0",
+  "defaultStats": {
+    "hp": 10,
+    "max_hp": 10,
+    "empathy": 3,
+    "logic": 3,
+    "violence": 1,
+    "conviction": 3
+  },
+  "randomSeed": 1337,
+  "itemsRef": "items.json",
+  "charactersRef": "characters.json",
+  "assetsRef": "assets.json",
+  "catalogRef": "catalog.json",
+  "libraryRef": "library.json",
+  "cookRef": "bundle.cook.json",
+  "deathNode": {
+    "title": "Signal Lost",
+    "onEnter": [
+      { "type": "stopMusic" }
+    ],
+    "text": [
+      {
+        "kind": "stage_direction",
+        "text": "Your vitals register an anomaly. The HUD continues updating for eleven seconds after."
+      },
+      {
+        "kind": "paragraph",
+        "text": "Somewhere in the dark, a synthetic is still filing error reports to a god that no longer accepts tickets."
+      },
+      {
+        "kind": "paragraph",
+        "text": "The facility does not notice you stop."
+      }
+    ],
+    "choices": [
+      {
+        "id": "return_to_chapter_start",
+        "label": "Return to start of this chapter",
+        "action": {
+          "type": "openLoadMenu"
+        }
+      },
+      {
+        "id": "restart_investigation",
+        "label": "Restart investigation",
+        "action": {
+          "type": "restartGame",
+          "startNodeId": "prologue_pod_descent"
+        }
+      },
+      {
+        "id": "main_menu",
+        "label": "Go to main menu",
+        "action": {
+          "type": "openMainMenu"
+        }
+      }
+    ]
+  },
+  "chapters": [
+    { "id": "prologue", "title": "Descent", "ref": "chapter_00_prologue.json" },
+    { "id": "chapel", "title": "The Chapel", "ref": "chapter_01_chapel.json" },
+    { "id": "tunnels", "title": "Lower Service Tunnels", "ref": "chapter_02_tunnels.json" },
+    { "id": "stasis", "title": "The Stasis Ward", "ref": "chapter_03_stasis.json" },
+    { "id": "quiet_ward", "title": "The Quiet Ward", "ref": "chapter_04_quiet_ward.json" },
+    { "id": "memory_garden", "title": "The Memory Garden", "ref": "chapter_05_memory_garden.json" },
+    { "id": "director", "title": "The Director's Suite", "ref": "chapter_06_director.json" }
+  ]
+}

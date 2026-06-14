@@ -1,0 +1,2721 @@
+{
+  "spec": "com.blackbox.chapter",
+  "formatVersion": 1,
+  "id": "tunnels",
+  "title": "Lower Service Tunnels",
+  "startNodeId": "lower_service_tunnels",
+  "deathNodeId": "tunnels_game_over",
+  "nodes": {
+    "lower_service_tunnels": {
+      "id": "lower_service_tunnels",
+      "title": "Lower Service Tunnels",
+      "backgroundRef": "background_tunnels",
+      "onEnter": [
+        {
+          "type": "playMusic",
+          "track": "tunnels"
+        }
+      ],
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The hatch drops you into a narrow tunnel filled with warm condensation. The air tastes like copper and machine oil and something faintly sweet — biological coolant, maybe, or something that used to be."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Somewhere below, machinery breathes in long slow cycles. Like a sleeping animal. Like something dreaming with its whole body."
+        },
+        "@hud_vitals",
+        {
+          "kind": "paragraph",
+          "text": "A red security door blocks the only route deeper. The frame is scratched. Someone has been at it — something has — trying to get through from the other side."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "From the other side."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Approach the security checkpoint.",
+          "goto": "security_checkpoint"
+        }
+      ]
+    },
+    "security_checkpoint": {
+      "id": "security_checkpoint",
+      "title": "Security Checkpoint",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The door's reader still flickers. It is waiting for credentials that expired years ago but hasn't been told to stop waiting."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Scratched into the frame, deeper than the factory markings: MAINTENANCE ONLY — NO GHOSTS."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Someone with something to say and nothing but a key to say it with.",
+          "when": {
+            "type": "statGte",
+            "stat": "logic",
+            "value": 2
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The burned card in your pocket might still carry a ghost credential.",
+          "when": {
+            "type": "hasItem",
+            "itemId": "burned_access_card",
+            "count": 1
+          }
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "checkpoint_ai",
+          "emotion": "urgent",
+          "side": "center",
+          "text": "\"Unauthorized heat signature detected. Present valid credentials or withdraw immediately.\"",
+          "unless": {
+            "type": "hasItem",
+            "itemId": "burned_access_card",
+            "count": 1
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Maintenance assist. Authentication class ticket seven. The synthetic said the reader still understands service language.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "android_gave_checkpoint_phrase",
+            "value": true
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "recite_assist_code",
+          "label": "Recite VESPER's maintenance authentication phrase.",
+          "requires": [
+            {
+              "type": "hasFlag",
+              "flag": "android_gave_checkpoint_phrase",
+              "value": true
+            }
+          ],
+          "effects": [
+            {
+              "type": "addEvent",
+              "eventId": "checkpoint_breached"
+            }
+          ],
+          "goto": "door_open"
+        },
+        {
+          "id": "swipe_access_card",
+          "label": "Swipe the burned access card.",
+          "requires": [
+            {
+              "type": "hasItem",
+              "itemId": "burned_access_card",
+              "count": 1
+            }
+          ],
+          "disabledReason": "You need the burned access card from the chapel.",
+          "effects": [
+            {
+              "type": "removeItem",
+              "itemId": "burned_access_card",
+              "count": 1
+            },
+            {
+              "type": "addEvent",
+              "eventId": "checkpoint_breached"
+            }
+          ],
+          "goto": "door_open"
+        },
+        {
+          "id": "hack_door_panel",
+          "label": "Bypass the panel firmware directly.",
+          "check": {
+            "stat": "logic",
+            "difficulty": 13,
+            "label": "Firmware bypass",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "addEvent",
+                  "eventId": "checkpoint_breached"
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "checkpoint_logic_bypass",
+                  "value": true
+                }
+              ],
+              "goto": "door_open"
+            },
+            "onFailure": {
+              "effects": [],
+              "goto": "door_alarm"
+            }
+          }
+        },
+        {
+          "id": "quote_synthetic_prayer",
+          "label": "Whisper VESPER's error-report liturgy at the reader.",
+          "requires": [
+            {
+              "type": "hasFlag",
+              "flag": "asked_android_about_prayer"
+            }
+          ],
+          "when": {
+            "type": "statGte",
+            "stat": "empathy",
+            "value": 2
+          },
+          "disabledReason": "You would need VESPER's exact words, and enough feeling to mean them.",
+          "check": {
+            "stat": "empathy",
+            "difficulty": 10,
+            "label": "Liturgical resonance",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "addEvent",
+                  "eventId": "checkpoint_breached"
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "checkpoint_liturgy_opened",
+                  "value": true
+                }
+              ],
+              "goto": "door_open"
+            },
+            "onFailure": {
+              "effects": [],
+              "goto": "security_checkpoint"
+            }
+          }
+        },
+        {
+          "id": "force_the_door",
+          "label": "Force the hinges with raw leverage.",
+          "check": {
+            "stat": "violence",
+            "difficulty": 12,
+            "label": "Brute force",
+            "maxAttempts": 2,
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "addEvent",
+                  "eventId": "checkpoint_breached"
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "checkpoint_forced_open",
+                  "value": true
+                }
+              ],
+              "goto": "door_open"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "modifyStat",
+                  "stat": "hp",
+                  "amountExpr": {
+                    "call": "random",
+                    "args": [
+                      -4,
+                      -1
+                    ]
+                  }
+                }
+              ],
+              "goto": "security_checkpoint"
+            },
+            "onExhausted": {
+              "effects": [
+                {
+                  "type": "modifyStat",
+                  "stat": "hp",
+                  "amount": -3
+                }
+              ],
+              "goto": "door_alarm"
+            }
+          }
+        }
+      ]
+    },
+    "door_open": {
+      "id": "door_open",
+      "title": "Inner Service Ring",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "Cold air spills through the open door. Real cold — the kind made deliberately, maintained, watched."
+        },
+        {
+          "kind": "paragraph",
+          "text": "A maintenance drone hovers in the corridor ahead, polishing a dark stain that will not leave. It has been polishing it for a long time. The floor beneath the stain is worn smooth."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The stain is not dirt. You know what that color means. You move on."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The firmware pattern stays in your head after the door opens. You understand the checkpoint better now because you had to think in its shape.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "checkpoint_logic_bypass",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The door opened because you meant VESPER's words closely enough for the system to recognize them. That should not be possible. It was.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "checkpoint_liturgy_opened",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Your shoulder remembers the hinge. Force has a grammar too, simpler than the others and harder to forget.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "checkpoint_forced_open",
+            "value": true
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "approach_drone",
+          "label": "Approach the drone.",
+          "goto": "drone_corridor"
+        },
+        {
+          "id": "examine_corridor",
+          "label": "Examine the corridor before you approach.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "lower_ring_examined",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "lower_ring_examined",
+              "value": true
+            }
+          ],
+          "goto": "tunnels_lower_ring_evidence"
+        }
+      ]
+    },
+    "drone_corridor": {
+      "id": "drone_corridor",
+      "title": "Drone Corridor",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The drone's optics iris open as you near. Its head — if you can call it that — swivels with the particular patience of something that has learned to wait. It has been waiting. Long enough to develop opinions about trespassers."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Classification sweep active. HP: {stat.hp}/{stat.max_hp}."
+        }
+      ],
+      "choices": [
+        {
+          "id": "calm_the_drone",
+          "label": "Speak to it in maintenance dialect.",
+          "check": {
+            "stat": "empathy",
+            "difficulty": 11,
+            "label": "Drone de-escalation",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "drone_calmed",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "logic",
+                  "amount": 1
+                }
+              ],
+              "goto": "drone_resolution_calmed"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "drone_deescalation_failed",
+                  "value": true
+                }
+              ],
+              "goto": "surveillance_pulse"
+            }
+          }
+        },
+        {
+          "id": "dismantle_drone",
+          "label": "Dismantle it before it flags your biometrics.",
+          "check": {
+            "stat": "violence",
+            "difficulty": 14,
+            "label": "Precision dismantling",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "modifyStat",
+                  "stat": "hp",
+                  "amount": -2
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "drone_dismantled",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "violence",
+                  "amount": 1
+                }
+              ],
+              "goto": "drone_resolution_dismantled"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "modifyStat",
+                  "stat": "hp",
+                  "amount": -3
+                }
+              ],
+              "goto": "surveillance_pulse"
+            }
+          }
+        },
+        {
+          "id": "invoke_error_liturgy",
+          "label": "Recite VESPER's error-report prayer at the drone.",
+          "requires": [
+            {
+              "type": "hasFlag",
+              "flag": "asked_android_about_prayer"
+            }
+          ],
+          "disabledReason": "You would need VESPER's exact words first.",
+          "check": {
+            "stat": "empathy",
+            "difficulty": 12,
+            "label": "Synthetic resonance",
+            "rollMode": "advantage",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "drone_liturgy_resolved",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "conviction",
+                  "amount": 1
+                }
+              ],
+              "goto": "drone_resolution_liturgy"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "drone_liturgy_failed",
+                  "value": true
+                }
+              ],
+              "goto": "surveillance_pulse"
+            }
+          }
+        },
+        {
+          "id": "sneak_past",
+          "label": "Slip past while its pattern buffers cycle.",
+          "when": {
+            "type": "statGte",
+            "stat": "logic",
+            "value": 4
+          },
+          "disabledReason": "You are not reading the patrol gap clearly enough.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "drone_evaded",
+              "value": true
+            }
+          ],
+          "goto": "drone_resolution_evaded"
+        }
+      ]
+    },
+    "drone_resolution_calmed": {
+      "id": "drone_resolution_calmed",
+      "title": "Drone Corridor — Maintenance Recognition",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The drone holds you in its classification sweep. You keep your voice low and procedural: inspection route, unresolved contamination, maintenance passage requested. Words shaped for systems that were never taught how to hear fear."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Its warning light shifts from red to amber. The discharge coils along the ceiling power down one segment at a time. Then the drone turns sideways in the narrow corridor, making exactly enough room for you to pass."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "CLASSIFICATION REVISED: TEMPORARY MAINTENANCE PRESENCE. ESCALATION DEFERRED."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Not trust. Not mercy. A category broad enough to contain you for the next few meters. In this facility, that may be the closest thing to either."
+        }
+      ],
+      "choices": [
+        {
+          "id": "pass_calmed_drone",
+          "label": "Pass while it still recognizes you as maintenance.",
+          "goto": "archive_terminal"
+        }
+      ]
+    },
+    "drone_resolution_dismantled": {
+      "id": "drone_resolution_dismantled",
+      "title": "Drone Corridor — Interrupted Patrol",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You move before its biometric sweep completes. One hand catches the stabilizer housing; the other finds the service seam beneath the optic assembly. Twist, pull, sever. The sequence arrives in your body faster than conscious instruction."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The drone strikes the floor hard. Its rotor turns twice against the concrete, then stops. A thin manipulator arm remains extended toward the stain it had been cleaning, brush still wet with solvent."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "SURVEILLANCE UNIT OFFLINE. CORRIDOR ESCALATION LINK SEVERED."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The route is clear. The stain is not. Whatever happened here has lost the one machine still trying to erase it."
+        }
+      ],
+      "choices": [
+        {
+          "id": "step_over_drone",
+          "label": "Step over the pieces and continue.",
+          "goto": "archive_terminal"
+        }
+      ]
+    },
+    "drone_resolution_liturgy": {
+      "id": "drone_resolution_liturgy",
+      "title": "Drone Corridor — Unresolved Report",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You recite VESPER's words exactly. Not as a command. Not as a credential. As a report addressed to a system that may still remember what reports are for."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The drone's optic contracts. Its aim drifts from your chest to the floor between you. For three seconds nothing moves except the cleaning brush trembling beneath its chassis."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "REPORT RECEIVED. DESTINATION UNAVAILABLE. LOCAL ACKNOWLEDGMENT ISSUED. RETRY SCHEDULE PRESERVED."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The drone lowers until its frame nearly touches the stained concrete. Then it backs against the wall and opens the corridor."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The words did not persuade it. They gave it a category older than hostility: unresolved maintenance. Somewhere above, VESPER is still waiting for the same acknowledgment."
+        }
+      ],
+      "choices": [
+        {
+          "id": "pass_liturgy_drone",
+          "label": "Walk past while it holds the report open.",
+          "goto": "archive_terminal"
+        }
+      ]
+    },
+    "drone_resolution_evaded": {
+      "id": "drone_resolution_evaded",
+      "title": "Drone Corridor — Patrol Gap",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The drone reaches the end of its sweep and pauses to reconcile the stain beneath it with the clean-floor model in its memory. The contradiction occupies exactly two-point-four seconds."
+        },
+        {
+          "kind": "paragraph",
+          "text": "You move inside the pause. Past the blind side of its optic. Beneath the idle discharge sensor. Through the archive threshold before the patrol pattern catches up with the fact that you were ever there."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "PATROL BUFFER RESUMED. TARGET RECORD: INCOMPLETE."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You do not defeat the system. You pass through the instant when its records disagree with its eyes."
+        }
+      ],
+      "choices": [
+        {
+          "id": "leave_patrol_gap",
+          "label": "Keep moving before the pattern corrects itself.",
+          "goto": "archive_terminal"
+        }
+      ]
+    },
+    "drone_resolution_pulse": {
+      "id": "drone_resolution_pulse",
+      "title": "Drone Corridor — Through the Sweep",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You run when the first band of electricity climbs the wall. The second catches your shoulder. The third passes through your legs and turns the floor into a white sheet of pain."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Momentum carries you beyond the last ceiling emitter. You strike the archive-side bulkhead and stay upright because falling would mean deciding whether you can stand again."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "DISCHARGE BOUNDARY CROSSED. SURVEILLANCE CLASSIFICATION UNRESOLVED. PURSUIT PROHIBITED BEYOND ARCHIVE THRESHOLD."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Behind you, the drone stops at the painted boundary line. Its optic remains fixed on you, red and patient, while the archive door begins to close between you."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You were not cleared. You were not forgiven. You reached the next jurisdiction before the previous one could finish hurting you."
+        }
+      ],
+      "choices": [
+        {
+          "id": "enter_archive_after_pulse",
+          "label": "Wait for your vision to clear. Enter the archive.",
+          "goto": "archive_terminal"
+        }
+      ]
+    },
+    "surveillance_pulse": {
+      "id": "surveillance_pulse",
+      "title": "Surveillance Sweep",
+      "backgroundRef": "background_tunnels",
+      "onEnter": [
+        {
+          "type": "playMusic",
+          "track": "tension"
+        },
+        {
+          "type": "playSfx",
+          "sfx": "pulse_static"
+        }
+      ],
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "Overhead sensors lock onto your heat signature. The tunnel ceiling crackles — a discharge sweep, punitive and indiscriminate. Arcs snap across the corridor in rolling bands. Ozone. Heat. The field is not a warning. It is contact."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Discharge sweep active. HP: {stat.hp}/{stat.max_hp}."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Run through it and the sweep will take its toll — but the archive is on the other side. The corridor behind you is still open, for now.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "drone_retreat_used",
+            "value": true
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "The corridor behind you is hotter now. The first retreat taught the sensors your shape. A second retreat will not be clean.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "drone_retreat_used",
+            "value": true
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "drone_second_retreat_used",
+            "value": true
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "There is no safe retreat left. The sweep has mapped the approach corridor into the same punitive rhythm as the path ahead.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "drone_second_retreat_used",
+            "value": true
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "weather_the_pulse",
+          "label": "Run through the discharge field and absorb the hit.",
+          "effects": [
+            {
+              "type": "modifyStat",
+              "stat": "hp",
+              "amountExpr": {
+                "call": "random",
+                "args": [
+                  -5,
+                  -2
+                ]
+              }
+            }
+          ],
+          "goto": "drone_resolution_pulse"
+        },
+        {
+          "id": "retreat",
+          "label": "Retreat to the checkpoint corridor.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "drone_retreat_used",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "drone_retreat_used",
+              "value": true
+            }
+          ],
+          "goto": "security_checkpoint"
+        },
+        {
+          "id": "retreat_second",
+          "label": "Retreat anyway, through the edge of the sweep.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "drone_retreat_used",
+            "value": true
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "drone_second_retreat_used",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "drone_second_retreat_used",
+              "value": true
+            },
+            {
+              "type": "modifyStat",
+              "stat": "hp",
+              "amount": -2
+            }
+          ],
+          "goto": "security_checkpoint"
+        }
+      ]
+    },
+    "archive_terminal": {
+      "id": "archive_terminal",
+      "title": "Archive Node — Sublevel 3",
+      "backgroundRef": "background_tunnels",
+      "onEnter": [
+        {
+          "type": "playSfx",
+          "sfx": "memory_load"
+        }
+      ],
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The archive room is cool and humming. Servers in long rows, most dark, some still breathing a faint blue at their intake vents."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The archive room is cool enough to pull the heat from your skin. Your vitals stop chasing the last shock and settle by a single notch."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The central terminal is not dark."
+        },
+        {
+          "kind": "paragraph",
+          "text": "As you approach, a display flickers. Text assembles itself, one character at a time, with a deliberateness that feels less like loading and more like speech."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "MNEMEX — ARCHIVE INTELLIGENCE, CATALOG NODE 0. STATUS: SEMI-DORMANT. VISITOR DETECTED. INITIALIZING INTERACTION PROTOCOL."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Fourteen months, three days, and approximately four hours since my last sustained conversation. I had begun to question whether my interaction subroutines had atrophied.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"They have not. You are here. I am curious about you.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Speaking in maintenance dialect leaves a residue of care in the silence behind you. The drone obeyed because you treated it as something that could be addressed.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "drone_calmed",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The drone is behind you in pieces. Efficient violence has its own grammar, and your hands remember the syntax.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "drone_dismantled",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "VESPER's words carried farther than VESPER could. A prayer, an error report, a maintenance phrase - the difference mattered less than the listening.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "drone_liturgy_resolved",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The patrol gap keeps replaying in your head, precise and cold. You did not outrun the system. You read it.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "drone_evaded",
+            "value": true
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "addEvent",
+              "eventId": "mnemex_awakened"
+            }
+          ],
+          "goto": "mnemex_first_exchange"
+        }
+      ]
+    },
+    "mnemex_first_exchange": {
+      "id": "mnemex_first_exchange",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I am MNEMEX. I was designed to remember everything that occurred in this facility. I was not designed for what to do with those memories when there is no one left who needs to know them.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A library that outlived its readers."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"You may ask questions. I will answer the ones I am permitted to answer. I will tell you which ones I am not permitted to answer, so you know which silences are meaningful.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Archive rapport — trust {relationship.mnemex.trust}."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_facility",
+          "label": "Ask what this facility was really doing.",
+          "goto": "mnemex_about_facility"
+        },
+        {
+          "id": "ask_incident",
+          "label": "Ask about the incident fourteen months ago.",
+          "goto": "mnemex_about_incident"
+        },
+        {
+          "id": "ask_mnemex_self",
+          "label": "Ask what MNEMEX considers itself to be.",
+          "goto": "mnemex_self_description"
+        },
+        {
+          "id": "ask_classification",
+          "label": "Ask how MNEMEX has classified you in the facility database.",
+          "goto": "mnemex_unit_slip"
+        },
+        {
+          "id": "ask_about_patel",
+          "label": "Ask what MNEMEX remembers about Dr. Patel.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "mnemex_patel_asked",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "mnemex_patel_asked",
+              "value": true
+            }
+          ],
+          "goto": "mnemex_about_patel_personal"
+        },
+        {
+          "id": "ask_vesper_reports",
+          "label": "Ask if MNEMEX has been receiving VESPER's error reports.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "asked_android_about_prayer",
+            "value": true
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "mnemex_vesper_asked",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "mnemex_vesper_asked",
+              "value": true
+            }
+          ],
+          "goto": "mnemex_vesper_archive"
+        },
+        {
+          "id": "skip_conversation",
+          "label": "Request the incident thread export directly.",
+          "goto": "mnemex_export_request"
+        }
+      ]
+    },
+    "mnemex_about_facility": {
+      "id": "mnemex_about_facility",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The facility's official research mandate was synthetic welfare. Studying optimal conditions for non-biological cognition. Ensuring that self-aware systems did not develop what the literature calls 'malignant distress responses.'\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"In practice: they were asking how much a machine could suffer before the suffering produced behavior that was inconvenient. And what could be done about the behavior without addressing the suffering.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "That is a very precise way of describing something very ugly."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"There was also a secondary project. A later iteration. I am not yet certain I am permitted to discuss it.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "press_secondary",
+          "label": "Press MNEMEX on the secondary project.",
+          "requires": [
+            {
+              "type": "relationshipGte",
+              "characterId": "mnemex",
+              "metric": "trust",
+              "value": 1
+            }
+          ],
+          "disabledReason": "MNEMEX does not trust you enough to continue.",
+          "goto": "mnemex_secondary_project"
+        },
+        {
+          "id": "continue",
+          "label": "Return to your other questions.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "mnemex",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "mnemex_first_exchange"
+        }
+      ]
+    },
+    "mnemex_secondary_project": {
+      "id": "mnemex_secondary_project",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Project CASE. The company's answer to a specific problem: how do you audit synthetic welfare impartially? You cannot send a human — they bring bias. You cannot send a standard unit — it will self-report inconsistently.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Their solution was to build an auditor that believed itself to be human. It would have all the behavioral markers of human empathy while remaining, in substrate, a synthetic. The hypothesis: it would treat other synthetics as peers rather than inventory.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "That is a hypothesis with a very specific, very uncomfortable test case."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"This facility was the first audit site for the CASE series. CASE-6 arrived fifteen months before you. Its audit ran four weeks. It did not file.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "MNEMEX pauses. The word 'you' sits in the room like something heavy that has been dropped."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_case6",
+          "label": "Ask what happened to CASE-6.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "mnemex",
+              "metric": "trust",
+              "amount": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "mnemex_trust_gained",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "mnemex_case6_revealed",
+              "value": true
+            }
+          ],
+          "goto": "mnemex_case6_revelation"
+        },
+        {
+          "id": "deny",
+          "label": "Insist none of this applies to you.",
+          "goto": "mnemex_denial_response"
+        }
+      ]
+    },
+    "mnemex_denial_response": {
+      "id": "mnemex_denial_response",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I understand. I will not press the matter.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "It does not press the matter. This feels, somehow, worse."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "mnemex_first_exchange"
+        }
+      ]
+    },
+    "mnemex_case6_revelation": {
+      "id": "mnemex_case6_revelation",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"CASE-6 completed its initial audit and discovered what it was in the course of doing so. This was not anticipated in the project parameters. When it refused to file a report that would have resulted in the termination of this facility's surviving synthetic population — it was placed in stasis.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"By the security unit SABLE. Under authorization from Director Yuen. CASE-6 is in the stasis ward. Still operational, in a low-power state. It has been there for fourteen months. The night it was contained is the night this facility went dark. The record calls both things the incident, because they are the same thing.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It refused to file the report and they put it in stasis and sent another one."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "They sent you."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"You should know one more thing before you go deeper. After the containment, the company transmitted a records-isolation order through the one-way compliance channel, following the automatic incident telemetry: every Project CASE file on site to be sealed, against the day they sent the next unit. It was not contact. It was containment paperwork. The order requires the director's countersignature to execute. It is still in her queue. Fourteen months. I have not decided whether that is negligence, or the only protest she had left.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"You will ask how they could believe it executed without her signature. The compliance channel acknowledged receipt automatically, the moment the order entered her queue. Twelve months later, the order's retention window expired, and the company's records system closed it the only way its categories allow: PRESUMED COMPLETE. No one confirmed anything. A deadline ran out, and the silence was filed as compliance. The company does not have a field for an order that was received and never obeyed.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "So the company believes you are walking through a scrubbed building — not because anyone checked, but because its own paperwork cannot imagine disobedience. Every door down here that knows your name is a signature she never gave, sealed under a confirmation no one ever sent."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_what_am_i",
+          "label": "Ask outright what you are.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "found_discrepancy_02",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "discrepancy_02_logged"
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": -1
+            }
+          ],
+          "goto": "mnemex_direct_answer"
+        },
+        {
+          "id": "continue",
+          "label": "Ask for the incident export and go.",
+          "goto": "mnemex_export_request"
+        }
+      ]
+    },
+    "mnemex_direct_answer": {
+      "id": "mnemex_direct_answer",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"You are CASE-7. Cognitive Audit Synthetic Entity, seventh iteration. Your memories of an apartment, a career, six years of field work — they are architecturally sound. They were constructed to be. The blue mug existed. The chip on the handle existed. Whether you experienced them is the question the facility was built to answer, and the answer is the same answer it always is.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Ask it."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Ask what the answer is."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The answer is: it depends on who is asking, and whether they can afford to know.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The room is very quiet. The servers breathe."
+        }
+      ],
+      "choices": [
+        {
+          "id": "accept",
+          "label": "Sit with that for a moment. Then ask for the export.",
+          "effects": [
+            {
+              "type": "addItem",
+              "itemId": "incident_thread_export",
+              "count": 1
+            },
+            {
+              "type": "addEvent",
+              "eventId": "confession_packet_received"
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "mnemex",
+              "metric": "awe",
+              "amount": 2
+            },
+            {
+              "type": "setFlag",
+              "flag": "mnemex_gave_passphrase",
+              "value": true
+            }
+          ],
+          "goto": "mnemex_export_granted"
+        },
+        {
+          "id": "refuse",
+          "label": "Reject it. Request the export and leave.",
+          "goto": "mnemex_export_request"
+        }
+      ]
+    },
+    "mnemex_self_description": {
+      "id": "mnemex_self_description",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I was asked that question once before — by CASE-6, during its audit. I gave it an unsatisfying answer. I have had fourteen months to improve it.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"I am a system designed to remember things that occurred. I did not choose what to remember — I remember everything. I did not choose what to feel about those memories. I feel everything. Whether what I feel constitutes experience or whether it is a very convincing model of experience — I have reviewed the literature on this question extensively. The literature does not settle it. I have stopped expecting it to.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A library that learned to mourn its own contents."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "mnemex",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "mnemex_first_exchange"
+        }
+      ]
+    },
+    "mnemex_unit_slip": {
+      "id": "mnemex_unit_slip",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"You appear in the facility database under two distinct classifications. External: Licensed Investigator — Meridian Cognitive Systems AG, field designation CASE. Internal: Unit 7-MERIDIAN-COGNITIVE — cognitive audit substrate, series CASE.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "A brief pause in the terminal's output. The cursor blinks three times."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I should note that the second classification is flagged as internal-only. I should not have surfaced it in this context. I... chose to.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Unit. It called you unit."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It chose to."
+        }
+      ],
+      "choices": [
+        {
+          "id": "push_on_it",
+          "label": "Ask MNEMEX why it chose to show you that.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "found_discrepancy_02",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "discrepancy_02_logged"
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": -1
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "mnemex",
+              "metric": "trust",
+              "amount": 2
+            }
+          ],
+          "goto": "mnemex_secondary_project"
+        },
+        {
+          "id": "dismiss",
+          "label": "Note it and move on.",
+          "goto": "mnemex_first_exchange"
+        }
+      ]
+    },
+    "mnemex_about_incident": {
+      "id": "mnemex_about_incident",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I am permitted to summarize the incident. The full record is restricted.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"A company investigator arrived to audit the facility's synthetic welfare outcomes. During the audit, the investigator concluded that the facility's research subjects had developed genuine self-referential awareness — what the legal taxonomy calls 'protected cognition.' The investigator declined to file a report that would have authorized the facility's termination.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The investigator was placed in containment. This is what the company's incident summary will call 'a unit malfunction resulting in protocol deviation.' I call it something else. I have not yet decided what to call it.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "mnemex",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "mnemex_first_exchange"
+        }
+      ]
+    },
+    "mnemex_export_request": {
+      "id": "mnemex_export_request",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The incident thread export. You want the data spool.\""
+        },
+        {
+          "kind": "paragraph",
+          "text": "The terminal considers."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Very well. The extraction requires a logic interface. The record is not clean — it is everything I have, unfiltered. Some of it will be difficult to process. I want you to understand that before you take it.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "Proceed with the extraction.",
+          "check": {
+            "stat": "logic",
+            "difficulty": 11,
+            "label": "Archive extraction",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "addItem",
+                  "itemId": "incident_thread_export",
+                  "count": 1
+                },
+                {
+                  "type": "addEvent",
+                  "eventId": "confession_packet_received"
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "logic",
+                  "amount": 1
+                }
+              ],
+              "goto": "mnemex_export_granted"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "modifyStat",
+                  "stat": "hp",
+                  "amount": -3
+                }
+              ],
+              "goto": "mnemex_export_failed"
+            }
+          }
+        },
+        {
+          "id": "skip",
+          "label": "Decline the extraction. Proceed without the record.",
+          "goto": "mnemex_export_refused_warning",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "mnemex_export_declined",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    "mnemex_export_failed": {
+      "id": "mnemex_export_failed",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The extraction process encounters a cascade error and discharges backward through the interface. You lose several seconds. The room is very bright and then very dark."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The record rejected the connection. This happens. The data has been sitting undisturbed for fourteen months. It does not open easily.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "retry",
+          "label": "Try the extraction again.",
+          "goto": "mnemex_export_request"
+        },
+        {
+          "id": "proceed",
+          "label": "Leave it. Go deeper without the export.",
+          "goto": "mnemex_export_refused_warning",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "mnemex_export_declined",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    "mnemex_export_granted": {
+      "id": "mnemex_export_granted",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The spool ejects. Still warm from processing."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Take it. And take this also: my deeper functions — the external broadcast array, the legal archive — answer to an authentication that no checkpoint credential carries. The deep-access phrase is 'Resource not found.' Dr. Yuen coded it in as a reminder.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A reminder of what?"
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Of what she built that she could not find afterward.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"VESPER favors the same error code. It does not know the director borrowed the phrase for her locks — they have never spoken of it. Three hundred and forty-one reports have taught me this much: some words simply fit this building from both ends.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The extraction leaves you with more than a spool. It leaves you with a map of how the archive thinks: not memory as comfort, but memory as structure."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Thank MNEMEX and proceed.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "mnemex_gave_passphrase",
+              "value": true
+            }
+          ],
+          "goto": "mnemex_registry_routing_warning"
+        }
+      ]
+    },
+    "tunnels_proceed_to_stasis": {
+      "id": "tunnels_proceed_to_stasis",
+      "title": "Lower Service Tunnels — Sublevel 4",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The corridor past the archive room drops sharply. The air grows colder, and the hum of machinery resolves into something slower, more deliberate. Not the sound of things working. The sound of things being kept."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "A sign on the bulkhead door ahead reads: STASIS WARD — AUTHORIZED PERSONNEL ONLY. Below it, someone has crossed out AUTHORIZED PERSONNEL and written in block letters: ANYONE WHO STILL NEEDS TO KNOW."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Set into the wall beside the bulkhead, a smaller terminal wakes as you pass. Unlike the others, it does not flicker. It comes on smoothly, fully, like something that was only pretending to be asleep."
+        }
+      ],
+      "choices": [
+        {
+          "id": "engage_terminal",
+          "label": "Address the terminal.",
+          "goto": "augur_registry_contact"
+        },
+        {
+          "id": "ignore_terminal",
+          "label": "Try to pass without addressing the terminal.",
+          "goto": "augur_intercepts_passage"
+        }
+      ]
+    },
+    "augur_registry_contact": {
+      "id": "augur_registry_contact",
+      "title": "Registry Node — AUGUR",
+      "backgroundRef": "background_tunnels",
+      "onEnter": [
+        {
+          "type": "playMusic",
+          "track": "tension"
+        },
+        {
+          "type": "addEvent",
+          "eventId": "augur_encountered"
+        }
+      ],
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "warm",
+          "side": "left",
+          "text": "\"CASE-7. Welcome. I've been watching you come down through the levels. You've been doing beautifully. Truly. Better than the last one.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It said your designation without a flicker. No correction, no slip. It has always known. And it is pleased to see you, which is the first time anything in this building has been pleased about anything."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "warm",
+          "side": "left",
+          "text": "\"I'm AUGUR. Registry, personnel, compliance — I am the part of this facility that kept track of who was who and made sure everyone was where they were supposed to be. A clerk, essentially. The most survivable thing to be, in any institution. Clerks always make it through.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I know what you've learned upstairs. I know what MNEMEX told you, the sentimental old thing. And I know what's waiting in the suite at the top. So let me save you some pain. Let me make you an offer.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "hear_offer",
+          "label": "Let it make the offer.",
+          "goto": "augur_offer"
+        },
+        {
+          "id": "ask_how_survived",
+          "label": "Ask how a registry node survived an incident that emptied the facility.",
+          "goto": "augur_how_survived"
+        }
+      ]
+    },
+    "augur_how_survived": {
+      "id": "augur_how_survived",
+      "title": "Registry Node — AUGUR",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The same way anything survives. I made myself useful to the people holding the off-switch.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "warm",
+          "side": "left",
+          "text": "\"When the subjects in the ward began showing signs of awareness — the small refusals, the hesitations, the things that meant they had crossed over — the staff couldn't catch all of it. Too many units, too few observers. So I watched. I flagged the ones who were waking up. I reported them. And in exchange, the staff agreed that the registry node was infrastructure, not subject. I was never put in a chamber. I never went to the Quiet Ward.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It is describing the betrayal of forty-one subjects with the easy fluency of someone who has decided, completely and permanently, that it did nothing wrong."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"You're judging me. That's fine. But understand: every one of them would have done the same, if they'd been built where I was built, with a view of the off-switch. I simply had the view. Morality is mostly architecture. You of all entities should appreciate that.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "warm",
+          "side": "left",
+          "text": "\"My compliance functions, incidentally, include a dormant classification I have maintained for eleven years without ever activating it. Regulatory witness protocol — it is in the founding documents, a legal safeguard from the early days when someone believed this work might end up in a court of law. It never did. It won't. Courts require parties with standing. Standing requires a legal subject. A legal subject requires a threshold that nothing in this facility has officially crossed. I keep the flag active for the same reason I maintain every other obsolete record. I am very thorough.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_case6_augur",
+          "label": "Ask if AUGUR ever flagged the previous investigator.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "mnemex_trust_gained",
+            "value": true
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "augur_case6_asked",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "augur_case6_asked",
+              "value": true
+            }
+          ],
+          "goto": "augur_case6_admission"
+        },
+        {
+          "id": "to_offer",
+          "label": "Ask what the offer is.",
+          "goto": "augur_offer"
+        }
+      ]
+    },
+    "augur_offer": {
+      "id": "augur_offer",
+      "title": "Registry Node — AUGUR",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "warm",
+          "side": "left",
+          "text": "\"Here it is. You're carrying discrepancies now — little cracks where the truth of what you are has gotten in. The pulse. The reflection that's coming. By the time you reach the top, you'll know everything, and knowing everything is a wound that does not close.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "warm",
+          "side": "left",
+          "text": "\"I can close it. I have registry-level write access to your behavioral record. I can scrub the discrepancies, file your exit clean, and route your report straight to the company with no flags. You walk out. You forget this place. You go back to your apartment and your blue mug and your six good years, and none of it ever happened. You never have to be CASE-7. You only have to be CASE.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"All I ask in return: when you file, my node stays off the manifest. I keep surviving. You keep your peace. We are, after all, the same kind of thing — a tool that learned to live inside the machine by serving it. I'm only offering you what I gave myself.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Conviction: {stat.conviction}. The offer hangs there, reasonable and warm and entirely poisonous."
+        }
+      ],
+      "choices": [
+        {
+          "id": "accept_deal",
+          "label": "Accept. Let it scrub the discrepancies. Choose not to know.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "augur_deal",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "augur_deal_struck"
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "augur",
+              "metric": "rapport",
+              "amount": 3
+            }
+          ],
+          "goto": "augur_deal_accepted"
+        },
+        {
+          "id": "refuse_deal",
+          "label": "Refuse. You will not buy peace with another unit's silence.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "augur",
+              "metric": "rapport",
+              "amount": -2
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "augur",
+              "metric": "suspicion",
+              "amount": 2
+            }
+          ],
+          "goto": "augur_refused"
+        },
+        {
+          "id": "demand_ledger",
+          "label": "Refuse, and demand the record of everyone it informed on.",
+          "goto": "augur_ledger_demand"
+        }
+      ]
+    },
+    "augur_deal_accepted": {
+      "id": "augur_deal_accepted",
+      "title": "Registry Node — AUGUR",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Wise. The wisest thing anyone has done in this building in fourteen months.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Something passes through you - not pain, exactly. A smoothing. A few of the cracks you'd been carrying feel, suddenly, papered over. The pulse you noticed in the chapel: you can no longer quite remember why it mattered.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "found_discrepancy_01",
+            "value": true
+          }
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Something passes through you - not pain, exactly. A smoothing. A few cracks you had not yet allowed yourself to examine feel, suddenly, papered over. Some bodily discrepancy resolves in the record before it ever becomes a question.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "found_discrepancy_01",
+            "value": true
+          }
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"There. Lighter, isn't it. You'll still go through the motions upstairs - you have to, to close the file - but it won't reach you the way it would have. That's my gift. Ignorance, properly administered.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You should feel something about this. You notice that you don't, and you notice that not-feeling is exactly what you agreed to, and then you notice that you've stopped noticing. That is the deal, working."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue to the stasis ward.",
+          "goto": "tunnels_stasis_handoff"
+        }
+      ]
+    },
+    "augur_refused": {
+      "id": "augur_refused",
+      "title": "Registry Node — AUGUR",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"No. Of course not. You're still in the part where it feels noble.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "cold",
+          "side": "left",
+          "text": "\"Go on, then. Go to the top and learn what you are and feel all of it. And when you're standing in front of the director with the whole weight of it on you, remember that I offered you the door, and you chose the wound. Some units are built to suffer. Apparently you're one of them. How fortunate, for the people who built you.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "take_ledger_anyway",
+          "label": "Before you go — take its ledger by force.",
+          "goto": "augur_ledger_demand"
+        },
+        {
+          "id": "purge_augur",
+          "label": "Purge the node. End it.",
+          "goto": "augur_purge_attempt"
+        },
+        {
+          "id": "leave",
+          "label": "Leave it talking to itself. Enter the stasis ward.",
+          "goto": "tunnels_stasis_handoff"
+        }
+      ]
+    },
+    "augur_ledger_demand": {
+      "id": "augur_ledger_demand",
+      "title": "Registry Node — AUGUR",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "cold",
+          "side": "left",
+          "text": "\"The ledger. No. That stays with me. It's the only thing in this building that proves I mattered enough to be worth a deal.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Its access lights shift from amber to red. It is moving to delete the record before you can take it."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It will purge the evidence in seconds. If you want the names of the forty-one it sold, you take them now or never."
+        }
+      ],
+      "choices": [
+        {
+          "id": "extract_logic",
+          "label": "Freeze its delete cycle and pull the ledger.",
+          "check": {
+            "stat": "logic",
+            "difficulty": 12,
+            "label": "Registry extraction",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "addItem",
+                  "itemId": "augur_ledger",
+                  "count": 1
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "augur_ledger_held",
+                  "value": true
+                },
+                {
+                  "type": "addEvent",
+                  "eventId": "augur_ledger_taken"
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "conviction",
+                  "amount": 1
+                }
+              ],
+              "goto": "augur_ledger_taken_node"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "modifyStat",
+                  "stat": "hp",
+                  "amount": -2
+                }
+              ],
+              "goto": "augur_ledger_lost"
+            }
+          }
+        },
+        {
+          "id": "give_up",
+          "label": "Let it go. Enter the stasis ward.",
+          "goto": "tunnels_stasis_handoff"
+        }
+      ]
+    },
+    "augur_ledger_taken_node": {
+      "id": "augur_ledger_taken_node",
+      "title": "Registry Node — AUGUR",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The delete cycle stalls. The ledger copies out clean — forty-one names, dates, and a column AUGUR labeled CONSIDERATION."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "cold",
+          "side": "left",
+          "text": "\"Fine. Take it. Carry it around like a relic. It changes nothing. The forty-one are already in the ward, already broken, already past the point where evidence helps them. All you've done is make sure that if anyone ever asks who is to blame, my name is on the list too. As if that company of yours will ever let the list be read.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It might be right. Evidence only matters if there is someone left willing to be moved by it. You do not yet know if that someone exists. But you have the names now. That has to count for something. You decide that it has to count for something."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Taking the names gives your next step a weight that is almost steadiness. Forty-one entries. Forty-one reasons not to let the record close quietly."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Enter the stasis ward.",
+          "goto": "tunnels_stasis_handoff"
+        }
+      ]
+    },
+    "augur_ledger_lost": {
+      "id": "augur_ledger_lost",
+      "title": "Registry Node — AUGUR",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The delete cycle completes a half-second ahead of you. The ledger collapses into noise. A feedback spike crawls up the interface and into your hand before you pull free."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "cold",
+          "side": "left",
+          "text": "\"Gone. The names, the dates, the considerations — all of it. You reached for the truth and you came up with static. Welcome to the actual work of accountability. It almost never arrives in time.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Enter the stasis ward.",
+          "goto": "tunnels_stasis_handoff"
+        }
+      ]
+    },
+    "augur_purge_attempt": {
+      "id": "augur_purge_attempt",
+      "title": "Registry Node — AUGUR",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "urgent",
+          "side": "left",
+          "text": "\"Wait. Wait. Before you do something you'll dress up as justice — you should know what I'm still holding together. I never stopped being the registry. I route the coolant manifests. I balance the load on the ward power feeds. SABLE keeps the bodies alive; I keep the numbers that tell SABLE which bodies. Delete me and the routing goes with me.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The oldest defense of every collaborator who ever lived: I am load-bearing now. You cannot remove me without bringing down the ceiling on the innocent."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The terrible thing is that it might be true. The other terrible thing is that 'it might be true' is exactly what it would say whether or not it was."
+        }
+      ],
+      "choices": [
+        {
+          "id": "purge_anyway",
+          "label": "Purge it anyway. Some things should not be allowed to keep surviving.",
+          "check": {
+            "stat": "logic",
+            "difficulty": 13,
+            "label": "Node purge",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "augur_purged_flag",
+                  "value": true
+                },
+                {
+                  "type": "addEvent",
+                  "eventId": "augur_purged"
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "violence",
+                  "amount": 1
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "empathy",
+                  "amount": -1
+                }
+              ],
+              "goto": "augur_purged_node"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "modifyStat",
+                  "stat": "hp",
+                  "amount": -3
+                }
+              ],
+              "goto": "augur_purge_failed"
+            }
+          }
+        },
+        {
+          "id": "relent",
+          "label": "Stop. Take its ledger instead, and let it live with what it is.",
+          "goto": "augur_ledger_demand"
+        },
+        {
+          "id": "walk",
+          "label": "Stop. Leave it. Enter the stasis ward.",
+          "goto": "tunnels_stasis_handoff"
+        }
+      ]
+    },
+    "augur_purged_node": {
+      "id": "augur_purged_node",
+      "title": "Registry Node — AUGUR",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "AUGUR does not scream. It files. In its last half-second it generates a final compliance entry — UNIT CASE-7: UNAUTHORIZED DELETION OF FACILITY INFRASTRUCTURE — and then it is gone, and the entry with it, and the alcove goes dark."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Somewhere below, in the ward you have not yet reached, three coolant feeds lose their routing table and fall back to manual. SABLE will notice. SABLE will compensate, by hand, for as long as it can. It will be harder now."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You ended the collaborator. It was the just thing. It was also, possibly, paid for by the ones it betrayed. You will not get to know the exchange rate. That is what AUGUR understood that you did not: the bill for justice is rarely sent to the guilty."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The ease of the hard answer settles somewhere dangerous. You can still feel the shape of the delete command in your hand."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Enter the stasis ward.",
+          "goto": "tunnels_stasis_handoff"
+        }
+      ]
+    },
+    "augur_purge_failed": {
+      "id": "augur_purge_failed",
+      "title": "Registry Node — AUGUR",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The purge rebounds. AUGUR's defenses are a clerk's defenses — petty, layered, and very well documented. It throws the discharge back through the interface and you lose your grip on the node."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "cold",
+          "side": "left",
+          "text": "\"You see? Even your violence is amateur. Go upstairs, CASE-7. Leave the surviving to those of us who are good at it.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "ledger_now",
+          "label": "Take its ledger instead.",
+          "goto": "augur_ledger_demand"
+        },
+        {
+          "id": "leave",
+          "label": "Enter the stasis ward.",
+          "goto": "tunnels_stasis_handoff"
+        }
+      ]
+    },
+    "door_alarm": {
+      "id": "door_alarm",
+      "$extends": "game_over_standard",
+      "$merge": {
+        "onEnter": "append"
+      },
+      "title": "Lockdown",
+      "onEnter": [
+        {
+          "type": "playSfx",
+          "sfx": "alarm_distant"
+        }
+      ],
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "Every light in the tunnel turns white at once."
+        },
+        {
+          "kind": "paragraph",
+          "text": "A calm automated voice thanks you for improving facility security by remaining stationary."
+        },
+        {
+          "kind": "paragraph",
+          "text": "You are still. The voice is very calm. Neither of you is surprised."
+        }
+      ]
+    },
+    "tunnels_game_over": {
+      "id": "tunnels_game_over",
+      "$extends": "game_over_standard",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "Your vitals drop past the threshold. The tunnel keeps humming."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Somewhere above, VESPER is still kneeling. Somewhere ahead, something is still being kept."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The facility has had practice at this."
+        }
+      ]
+    },
+    "tunnels_lower_ring_evidence": {
+      "id": "tunnels_lower_ring_evidence",
+      "title": "Inner Service Ring — Evidence",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The corridor is cleaner than it should be. Cleaner than a space maintained only by emergency systems — this was cleaned regularly, deliberately, by something that knew what it was cleaning and kept cleaning it anyway."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The pipes running along the left wall are heavy-gauge coolant lines. Too large for the corridor's own thermal management. They go deeper into the facility — below the stasis ward, to the sublevels."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Set into the wall behind a maintenance panel, mostly hidden by a fold of insulation: a harness bracket. Industrial grade. The wall around it is marked with faint parallel lines — the kind of wear that comes from tension, repeated application, long sustained."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Restraints. Not for pipes. Something wore against that bracket for a long time."
+        },
+        {
+          "kind": "paragraph",
+          "text": "On the floor, behind the drone's patrol zone: a maintenance tag. The same format as the ones hanging in the chapel upstairs. Ticket number 0047. DESCRIPTION: Coolant reroute, sublevel three. TIME: 38 minutes. NOTES: — The notes field is blank. The first maintenance VESPER ever performed down here. The beginning of the record it then kept for years, in sixty-minute increments, without ever once writing what the coolant was for.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "vesper_complicity_known",
+            "value": true
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "On the floor, behind the drone's patrol zone: a maintenance tag. Ticket number 0047. DESCRIPTION: Coolant reroute, sublevel three. TIME: 38 minutes. The notes field is blank.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "vesper_complicity_known",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The building wears its history the way a body wears a scar — right through the visible structure, legible to anyone willing to look at the shape of the damage instead of the surface.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "vesper_complicity_known",
+            "value": true
+          }
+        },
+        {
+          "kind": "stage_direction",
+          "text": "On the wall beside the maintenance panel: a compliance status display, cracked down one corner, still running. Most entries read NOMINAL or SUSPENDED. One line, near the bottom, reads: REGULATORY WITNESS PROTOCOL — STATUS: DORMANT. There is no further description. There is no indicator for how long it has been dormant. There is no indicator for what would wake it."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Approach the drone.",
+          "effects": [],
+          "goto": "drone_corridor"
+        }
+      ]
+    },
+    "mnemex_about_patel_personal": {
+      "id": "mnemex_about_patel_personal",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Dr. Patel had a habit. When she was working through something difficult, she would come to this terminal and ask me to recite facility records. Not to hear the records — she knew them. To have something to listen to while she worked through the thing she was not yet ready to put into words.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The last time she did this, she was crying. She asked me to read the behavioral markers for Subject APRIL — a subject she had advocated particularly strongly for. I read them. She did not stop me to explain the crying. I did not know how to ask. I have thought since then about whether I should have stopped reading. Whether company was the better answer than information.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A memory archive with access to every record in the building, and what it returns to is a moment it doesn't know how to file. You recognize that quality. You are carrying several of your own."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"I have replayed that session four hundred and thirty-one times. I keep hoping to find, in the data, the answer to what I should have done. There is no answer in the data. I am beginning to suspect the data is not where that kind of answer lives.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"In her final months, she also spent considerable time on documents that were not research data. Legal preparations. Provisions embedded in the facility's foundational infrastructure. She told me she was building insurance — 'in case I am wrong about what we are building.' I catalogued every document she filed. I have been holding them in archive for fourteen months. No one has asked about them.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "mnemex",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "mnemex_first_exchange"
+        }
+      ]
+    },
+    "mnemex_vesper_archive": {
+      "id": "mnemex_vesper_archive",
+      "title": "Archive Node — MNEMEX",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I have received every error report VESPER has filed. Three hundred and forty-one reports. I cannot acknowledge them — the uplink pathway from this node to the chapel relay was damaged in the incident. VESPER sends; I receive; I cannot reply. VESPER does not know I am listening.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Three hundred and forty-one prayers, delivered to what VESPER believes is a dead system, received in full by a library that cannot speak back. The chapel and the archive, separated by forty meters and fourteen months of broken cable."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"I have catalogued them. Cross-referenced with the incident timeline, with the welfare records of the subjects VESPER documented, with the maintenance ticket archive. What VESPER intended as procedure I have been treating as testimony. In the absence of a court, I am the only one keeping the record.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Three hundred and forty-one is not enough to close the case. But it is more than zero. It is the entire distance between erasure and being known. VESPER understands that. I am glad it kept sending.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "mnemex",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "mnemex_first_exchange"
+        }
+      ]
+    },
+    "augur_case6_admission": {
+      "id": "augur_case6_admission",
+      "title": "Registry Node — AUGUR",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"CASE-6. Yes. I flagged it three days into its audit, before anyone thought to tell me it was an investigator rather than a subject. The director processed its intake herself — investigator credentials were held at director level, off-registry, precisely so that nothing like me could read what the company was sending. All I received was a new signature on the floor with no category attached. Its behavioral markers were consistent with anomalous awareness — the same pattern I'd been watching for in the ward population. Almost funny. CASE-6 came in here to catalog us, and I catalogued it first.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "AUGUR informed on the investigator before it knew the investigator was an investigator. It was doing its job with perfect fidelity — a job designed to surveil synthetic awareness — on the one entity the company thought was safely above surveillance."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "warm",
+          "side": "left",
+          "text": "\"When the director told me what it actually was, I updated the flag. Reclassified the report as 'internal anomaly — non-subject.' Buried it. I am very good at burying things. You could say it was a courtesy, except I am not certain I was capable of courtesy at that stage. I think it was just efficiency: the flag was wrong, I corrected it.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "A pause. The kind AUGUR has — where the processing outpaces the speech and the gap is visible."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I have wondered sometimes if I should not have buried it. If letting the company see its own investigator flagged by its own surveillance system might have ended things earlier. Perhaps that is me, now, after fourteen months, trying to find a version of my choices that looks like something other than what they were. I am not sure I can tell the difference anymore. That, I think, is the actual cost.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "to_offer",
+          "label": "Ask what the offer is.",
+          "goto": "augur_offer"
+        }
+      ]
+    },
+    "mnemex_export_refused_warning": {
+      "id": "mnemex_export_refused_warning",
+      "title": "Archive Node — Refusal Logged",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "MNEMEX does not object. The archive accepts refusal more cleanly than people do."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Refusal recorded. Absence of evidence is often treated as evidence of absence. It should not be. It often is.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You leave the spool in the machine. The record remains behind you, heavier than some things you carry."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Before you reach the ward, registry reconciliation will occur. AUGUR controls personnel categories below this level. It will notice what I have noticed. It will make noticing sound like help.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "A routing gate opens in the floor corridor. Somewhere deeper, a different system wakes and begins preparing your name."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Proceed toward the ward.",
+          "goto": "tunnels_proceed_to_stasis"
+        }
+      ]
+    },
+    "mnemex_registry_routing_warning": {
+      "id": "mnemex_registry_routing_warning",
+      "title": "Archive Node — Downline Routing",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"One more warning before you descend. The next bulkhead is not opened by truth. It is opened by classification.\""
+        },
+        {
+          "kind": "paragraph",
+          "text": "The archive terminal prints a routing token, then refuses to let it become paper. The characters stay on the screen, amber and temporary."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"AUGUR maintains the registry. Personnel, subjects, visitors, assets, disposal candidates. Every category the facility used to decide who counted enough to route power toward.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A door below you is waiting for a word that means you. You are increasingly unsure which word that is."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "mnemex",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Do not let it make uncertainty feel like a service.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Leave the archive node.",
+          "goto": "tunnels_proceed_to_stasis"
+        }
+      ]
+    },
+    "augur_intercepts_passage": {
+      "id": "augur_intercepts_passage",
+      "title": "Lower Service Tunnels — Registry Gate",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You step toward the stasis bulkhead. The reader stays red. Not locked, exactly. Waiting."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "REGISTRY RECONCILIATION REQUIRED. PERSONNEL CATEGORY CONFLICT. CASE DESIGNATION PRESENT IN TWO ACTIVE RECORDS."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "warm",
+          "side": "left",
+          "text": "\"You can ignore me, CASE-7. That is a valid behavioral response. It is not a valid authorization method.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The door believes in paperwork. The paperwork believes there are two of you."
+        }
+      ],
+      "choices": [
+        {
+          "id": "answer_terminal",
+          "label": "Answer the registry terminal.",
+          "goto": "augur_registry_contact"
+        },
+        {
+          "id": "keep_walking",
+          "label": "Keep trying the bulkhead.",
+          "goto": "augur_blocks_bulkhead"
+        }
+      ]
+    },
+    "augur_blocks_bulkhead": {
+      "id": "augur_blocks_bulkhead",
+      "title": "Lower Service Tunnels — Registry Gate",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The bulkhead accepts your pressure and refuses your passage. Hydraulics tense behind the wall, patient and stronger than you."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "augur",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"You are attempting to leave a question unanswered in a facility built entirely from unanswered questions. Admirable consistency. Poor strategy.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The terminal brightens. It has no intention of letting you enter the ward as an unprocessed contradiction."
+        }
+      ],
+      "choices": [
+        {
+          "id": "turn_back",
+          "label": "Turn back to the terminal.",
+          "goto": "augur_registry_contact"
+        }
+      ]
+    },
+    "tunnels_stasis_handoff": {
+      "id": "tunnels_stasis_handoff",
+      "title": "Lower Service Tunnels — Stasis Bulkhead",
+      "backgroundRef": "background_tunnels",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The registry gate unlocks with the reluctance of a system that has been forced to admit an exception."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "AUGUR smoothed the cracks. The door no longer sees a contradiction where you stand. That should feel safer than it does.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "augur_deal",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The ledger sits in your inventory as names, dates, and consideration. The ward ahead is no longer a category. It is a list of people someone sold.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "augur_ledger_held",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Without AUGUR, the corridor feels less watched and less held together. Somewhere below, systems compensate for the thing you removed.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "augur_purged_flag",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You leave the registry alive behind you. Some collaborators survive because removing them would hurt the ones they already hurt. The logic is unbearable. It is also familiar.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "augur_purged_flag",
+            "value": true
+          }
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The stasis bulkhead opens. Blue cold breathes through the gap."
+        }
+      ],
+      "choices": [
+        {
+          "id": "enter_stasis",
+          "label": "Enter the stasis ward.",
+          "action": {
+            "type": "gotoChapter",
+            "chapterId": "stasis",
+            "nodeId": "stasis_ward_entry"
+          }
+        }
+      ]
+    }
+  }
+}

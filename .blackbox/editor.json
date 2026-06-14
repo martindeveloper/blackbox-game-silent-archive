@@ -1,0 +1,24 @@
+{
+  "id": "t4kW7JnHxqw",
+  "path": "$workspace/data/silent_archive",
+  "tools": {
+    "linter": {
+      "linux": "$target/debug/blackbox-lint",
+      "darwin": "$target/debug/blackbox-lint",
+      "win32": "$target/debug/blackbox-lint.exe",
+      "build": "cargo build -p blackbox-lint"
+    },
+    "bundler": {
+      "linux": "$target/debug/blackbox-bundler",
+      "darwin": "$target/debug/blackbox-bundler",
+      "win32": "$target/debug/blackbox-bundler.exe",
+      "build": "cargo build -p blackbox-bundler"
+    },
+    "simulator": {
+      "linux": "$target/debug/blackbox-simulator",
+      "darwin": "$target/debug/blackbox-simulator",
+      "win32": "$target/debug/blackbox-simulator.exe",
+      "build": "cargo build -p blackbox-simulator"
+    }
+  }
+}

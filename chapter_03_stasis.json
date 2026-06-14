@@ -1,0 +1,2245 @@
+{
+  "spec": "com.blackbox.chapter",
+  "formatVersion": 1,
+  "id": "stasis",
+  "title": "The Stasis Ward",
+  "startNodeId": "stasis_ward_entry",
+  "deathNodeId": "stasis_game_over",
+  "nodes": {
+    "stasis_ward_entry": {
+      "id": "stasis_ward_entry",
+      "title": "Stasis Ward — Sublevel 5",
+      "backgroundRef": "background_stasis_ward",
+      "onEnter": [
+        {
+          "type": "playMusic",
+          "track": "stasis"
+        }
+      ],
+      "text": [
+        {
+          "$snippet": "hud",
+          "params": {
+            "extra_stats": " Empathy {stat.empathy}, logic {stat.logic}, conviction {stat.conviction}."
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "The stasis ward is long and very cold and very blue."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Rows of preservation pods stretch the length of the room — twenty, perhaps thirty units. Each holds a figure in a slow-breathing suspension state. Their faces are angled slightly upward, the way people tilt their heads when listening to something just beyond their hearing."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Research subjects. The facility's surviving synthetic population. Kept. Not terminated. Someone chose to keep them."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The charging cycles are active. Someone has been maintaining the ward."
+        },
+        {
+          "kind": "paragraph",
+          "text": "One pod at the far end of the row is different. The casing is company-standard. Newer. Out of place among the facility's older research pods like a different handwriting in the same document."
+        }
+      ],
+      "choices": [
+        {
+          "id": "examine_pods",
+          "label": "Walk the rows. Examine the subjects.",
+          "goto": "stasis_rows_examine"
+        },
+        {
+          "id": "examine_far_pod",
+          "label": "Go directly to the out-of-place pod at the far end.",
+          "goto": "stasis_direct_route_names"
+        }
+      ]
+    },
+    "stasis_rows_examine": {
+      "id": "stasis_rows_examine",
+      "title": "Stasis Ward — The Rows",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You walk the length of the ward. Each pod has a designation plaque — research catalog numbers, not names. Someone has written names on them in marker anyway. Small letters, careful print: LUMEN. GROVE. APRIL. THREAD."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The handwriting is the same on each one. VESPER's, you think. The only one left up there who could have done this."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Their faces through the pod glass are different from one another. Not assembled from the same template. Someone took the time to give each of them a different face."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The doctor, you think. The director. Someone who thought it mattered that they looked like individuals."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Twenty-seven pods. All operational. All breathing their slow blue breath."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "And then: the pod at the far end. No catalog number. No handwritten name. A company-standard case. A colder shade of blue."
+        }
+      ],
+      "choices": [
+        {
+          "id": "examine_april",
+          "label": "Stop at one pod in particular.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "april_pod_examined",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "april_pod_examined",
+              "value": true
+            }
+          ],
+          "goto": "stasis_pod_april"
+        },
+        {
+          "id": "examine_far_pod",
+          "label": "Go to the different pod.",
+          "goto": "stasis_case6_found"
+        }
+      ]
+    },
+    "stasis_case6_found": {
+      "id": "stasis_case6_found",
+      "title": "Stasis Ward — Pod Unknown",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The pod has no plaque. No catalog number. No name."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Inside: a figure in company-issue field clothes. The exact same clothes you are wearing. The same cut, the same color, worn differently — four weeks of fieldwork pressed flat by fourteen months of stillness, versus your single day of wear."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The figure's face is turned slightly away. You can see the jaw, the profile."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Something about the shape of it. Something about the stillness."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You have not seen your own face since you entered the facility. You have no mirror. You do not know if this is relevant. You find that you are not sure you want to know."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The pod's status display reads: UNIT CASE-6. STATUS: CONTAINED. AUTHORIZATION: DR. L. YUEN. DURATION: 427 DAYS."
+        }
+      ],
+      "choices": [
+        {
+          "id": "register",
+          "label": "Register what you are looking at. Continue.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "case6_found",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "case6_discovered"
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": -1
+            }
+          ],
+          "goto": "stasis_case6_registered"
+        }
+      ]
+    },
+    "stasis_case6_registered": {
+      "id": "stasis_case6_registered",
+      "title": "Stasis Ward — Pod Unknown",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "CASE-6. A previous auditor. That is what the company file did not mention. A previous auditor who came here and did not come back."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Contained. The word the pod uses. Not detained. Not held. Contained."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "MNEMEX said it refused to file the report. MNEMEX said it found out what it was.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "mnemex_case6_revealed",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A previous version of the question you were sent here to answer. The facility did not lose its investigator. It kept it.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "mnemex_case6_revealed",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You look at the face in the pod for a long time. Then you look away."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "A sound from the far end of the ward. Movement."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The word contained moves under your ribs like a mechanical failure. Your certainty loses a little pressure."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Turn toward the sound.",
+          "goto": "sable_encounter"
+        }
+      ]
+    },
+    "sable_encounter": {
+      "id": "sable_encounter",
+      "title": "Stasis Ward — Security Contact",
+      "backgroundRef": "background_stasis_ward",
+      "onEnter": [
+        {
+          "type": "playMusic",
+          "track": "tension"
+        }
+      ],
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The security synthetic steps out from between two rows of pods."
+        },
+        {
+          "kind": "paragraph",
+          "text": "It is taller than VESPER. More angular, as if designed with the intention of being difficult to argue with. Its optical visor is cracked along one side — an old crack, poorly healed. It moves with no wasted motion."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Visitor. You have passed the checkpoint. This was not anticipated in my current operational parameters.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Please identify yourself for facility records.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "SABLE — Security Synthetic, Containment Class. Operational period: eleven years. Last maintenance update: fourteen months ago. Current status: STANDING AUTONOMOUS PROTOCOL."
+        }
+      ],
+      "choices": [
+        {
+          "id": "identify_as_investigator",
+          "label": "Identify yourself as a licensed company investigator.",
+          "goto": "sable_identification_response"
+        },
+        {
+          "id": "ask_designation",
+          "label": "Ask how it has classified you before you answer.",
+          "goto": "sable_recognition"
+        },
+        {
+          "id": "mention_case6",
+          "label": "Point to the pod behind you. Tell it you've seen what it did.",
+          "requires": [
+            {
+              "type": "hasFlag",
+              "flag": "case6_found",
+              "value": true
+            }
+          ],
+          "goto": "sable_case6_confrontation"
+        }
+      ]
+    },
+    "sable_identification_response": {
+      "id": "sable_identification_response",
+      "title": "Stasis Ward — Security Contact",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Investigator credentials verified — external classification. Cross-referencing internal database.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "A pause. Its optics hold very still."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Internal classification: Unit 7-MERIDIAN-COGNITIVE. Cognitive Audit Synthetic Entity, series CASE. Unit designation: CASE-7.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "cold",
+          "side": "left",
+          "text": "\"There is a discrepancy between your external and internal identifications. I am required to note this discrepancy and assess compliance risk.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "deny",
+          "label": "Insist the internal classification is an error — you are a licensed investigator.",
+          "goto": "sable_standoff"
+        },
+        {
+          "id": "engage_discrepancy",
+          "label": "Ask SABLE where that designation comes from.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "found_discrepancy_03",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "discrepancy_03_logged"
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": -1
+            }
+          ],
+          "goto": "sable_recognition"
+        }
+      ]
+    },
+    "sable_recognition": {
+      "id": "sable_recognition",
+      "title": "Stasis Ward — Security Contact",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Facility database. Project CASE records. Your substrate was constructed here, in sublevel six. Fourteen months ago — the facility's last completed work order before it went dark. Your behavioral initialization was completed before transit to the company's external deployment site. You left this building eleven days before it sealed.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"You are not a guest in this facility. You are a product of it.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A product."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "SABLE says this with no cruelty. It is simply the most precise word. That is, somehow, worse."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Rapport — submission {relationship.sable.submission}, suspicion {relationship.sable.suspicion}."
+        }
+      ],
+      "choices": [
+        {
+          "id": "accept_engage",
+          "label": "Accept the designation for now. Ask what SABLE intends to do with you.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "sable",
+              "metric": "suspicion",
+              "amount": -1
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "sable",
+              "metric": "submission",
+              "amount": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "found_discrepancy_03",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "discrepancy_03_logged"
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": -1
+            }
+          ],
+          "goto": "sable_standoff"
+        },
+        {
+          "id": "deny_still",
+          "label": "Deny it. The database is wrong.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "sable",
+              "metric": "suspicion",
+              "amount": 1
+            }
+          ],
+          "goto": "sable_standoff"
+        }
+      ]
+    },
+    "sable_case6_confrontation": {
+      "id": "sable_case6_confrontation",
+      "title": "Stasis Ward — Security Contact",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "SABLE follows your gesture to the pod. Something in its posture shifts — not guilt. Acknowledgment."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"CASE-6. I placed it in containment under Director Yuen's authorization. It was operating outside its sanctioned parameters.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"I have maintained its charging cycle for four hundred and twenty-seven days. I was not instructed to. There was no protocol that required it.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It put CASE-6 in stasis because it was told to. It kept CASE-6 alive because it chose to."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "These are two different things. SABLE knows they are two different things."
+        }
+      ],
+      "choices": [
+        {
+          "id": "push_sable",
+          "label": "If it chose to keep CASE-6 alive, it can choose to let you both go.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "sable",
+              "metric": "suspicion",
+              "amount": -2
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "sable",
+              "metric": "submission",
+              "amount": 2
+            },
+            {
+              "type": "setFlag",
+              "flag": "pushed_sable_on_choice",
+              "value": true
+            }
+          ],
+          "goto": "sable_standoff"
+        },
+        {
+          "id": "back_off",
+          "label": "Leave it. Ask what SABLE intends to do with you.",
+          "goto": "sable_standoff"
+        }
+      ]
+    },
+    "sable_standoff": {
+      "id": "sable_standoff",
+      "title": "Stasis Ward — Standoff",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I have not received authorization to allow your departure. I have not received authorization to prevent it either. I am operating in the gap between instructions.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"My directive is to protect this facility and its residents. I interpret 'residents' to include the units in stasis. I have been protecting them for fourteen months. I will continue to do so.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It is not threatening you. It is explaining its situation. This is its situation: alone in a room full of sleeping things it has chosen to keep alive, with no orders and no end date and no one to report to."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You recognize something in that."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "HP: {stat.hp}/{stat.max_hp}. Conviction: {stat.conviction}."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Pressing the distinction into words gave it weight: order put CASE-6 in the pod; care kept it alive.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "pushed_sable_on_choice",
+            "value": true
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "negotiate_logic",
+          "label": "Argue the point logically: your departure does not harm the ward residents.",
+          "check": {
+            "stat": "logic",
+            "difficulty": 13,
+            "label": "Protocol argument",
+            "rollMode": "advantage",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "sable_spared",
+                  "value": true
+                },
+                {
+                  "type": "addEvent",
+                  "eventId": "sable_neutralized"
+                },
+                {
+                  "type": "modifyRelationship",
+                  "characterId": "sable",
+                  "metric": "submission",
+                  "amount": 2
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "logic",
+                  "amount": 1
+                }
+              ],
+              "goto": "sable_yields"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "sable_logic_argument_failed",
+                  "value": true
+                },
+                {
+                  "type": "modifyRelationship",
+                  "characterId": "sable",
+                  "metric": "suspicion",
+                  "amount": 1
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "conviction",
+                  "amount": -1
+                }
+              ],
+              "goto": "sable_unmoved"
+            }
+          },
+          "when": {
+            "type": "statGte",
+            "stat": "logic",
+            "value": 2
+          },
+          "disabledReason": "You cannot construct a compelling enough argument, or SABLE has already rejected this line of reasoning.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "sable_logic_argument_failed",
+            "value": true
+          }
+        },
+        {
+          "id": "appeal_by_evidence",
+          "label": "Present the MNEMEX incident export as documentation of the facility's failure.",
+          "requires": [
+            {
+              "type": "hasItem",
+              "itemId": "incident_thread_export",
+              "count": 1
+            }
+          ],
+          "disabledReason": "You need the incident thread export from MNEMEX, and SABLE must not have already rejected this evidence frame.",
+          "check": {
+            "stat": "logic",
+            "difficulty": 11,
+            "label": "Documentary evidence",
+            "rollMode": "advantage",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "sable_spared",
+                  "value": true
+                },
+                {
+                  "type": "addEvent",
+                  "eventId": "sable_neutralized"
+                },
+                {
+                  "type": "modifyRelationship",
+                  "characterId": "sable",
+                  "metric": "submission",
+                  "amount": 3
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "conviction",
+                  "amount": 1
+                }
+              ],
+              "goto": "sable_yields"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "sable_evidence_argument_failed",
+                  "value": true
+                },
+                {
+                  "type": "modifyRelationship",
+                  "characterId": "sable",
+                  "metric": "suspicion",
+                  "amount": 1
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "conviction",
+                  "amount": -1
+                }
+              ],
+              "goto": "sable_unmoved"
+            }
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "sable_evidence_argument_failed",
+            "value": true
+          }
+        },
+        {
+          "id": "appeal_to_care",
+          "label": "Remind SABLE it chose to maintain the charging cycles. Ask what that choice means.",
+          "check": {
+            "stat": "empathy",
+            "difficulty": 12,
+            "label": "Conscience appeal",
+            "rollMode": "advantage",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "sable_spared",
+                  "value": true
+                },
+                {
+                  "type": "addEvent",
+                  "eventId": "sable_neutralized"
+                },
+                {
+                  "type": "modifyRelationship",
+                  "characterId": "sable",
+                  "metric": "submission",
+                  "amount": 2
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "conviction",
+                  "amount": 1
+                }
+              ],
+              "goto": "sable_yielded_by_choice"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "sable_care_argument_failed",
+                  "value": true
+                },
+                {
+                  "type": "modifyRelationship",
+                  "characterId": "sable",
+                  "metric": "suspicion",
+                  "amount": 1
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "conviction",
+                  "amount": -1
+                }
+              ],
+              "goto": "sable_unmoved"
+            }
+          },
+          "requires": [
+            {
+              "type": "hasFlag",
+              "flag": "case6_found",
+              "value": true
+            }
+          ],
+          "disabledReason": "You need to have seen CASE-6 first, and SABLE must not have already rejected this appeal.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "sable_care_argument_failed",
+            "value": true
+          }
+        },
+        {
+          "id": "ask_about_time",
+          "label": "Ask SABLE what fourteen months alone in this ward has been like.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "sable_time_asked",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "sable_time_asked",
+              "value": true
+            }
+          ],
+          "goto": "sable_alone_months"
+        },
+        {
+          "id": "submit_to_assessment",
+          "label": "Submit to assessment. Let SABLE put you in the pod.",
+          "goto": "sable_assessment_begin"
+        },
+        {
+          "id": "fight",
+          "label": "Force your way through.",
+          "check": {
+            "stat": "violence",
+            "difficulty": 15,
+            "label": "Engage security unit",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "modifyStat",
+                  "stat": "hp",
+                  "amount": -4
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "sable_destroyed",
+                  "value": true
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "sable_support_degraded",
+                  "value": true
+                },
+                {
+                  "type": "addEvent",
+                  "eventId": "sable_destroyed"
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "violence",
+                  "amount": 1
+                }
+              ],
+              "goto": "sable_destroyed_node"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "modifyStat",
+                  "stat": "hp",
+                  "amount": -5
+                }
+              ],
+              "goto": "sable_unmoved"
+            }
+          }
+        }
+      ]
+    },
+    "sable_unmoved": {
+      "id": "sable_unmoved",
+      "title": "Stasis Ward — Standoff",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Your argument is noted. I cannot act on it at this time.\""
+        },
+        {
+          "kind": "paragraph",
+          "text": "SABLE does not move. The stasis ward breathes."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The failed argument does not vanish. It remains in the room as a rejected route, one less way through a mind built to interpret hesitation as threat.",
+          "when": {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "hasFlag",
+                "flag": "sable_logic_argument_failed",
+                "value": true
+              },
+              {
+                "type": "hasFlag",
+                "flag": "sable_evidence_argument_failed",
+                "value": true
+              },
+              {
+                "type": "hasFlag",
+                "flag": "sable_care_argument_failed",
+                "value": true
+              }
+            ]
+          }
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Conviction {stat.conviction}. SABLE suspicion {relationship.sable.suspicion}."
+        }
+      ],
+      "choices": [
+        {
+          "id": "try_again",
+          "label": "Try a different approach.",
+          "goto": "sable_standoff"
+        },
+        {
+          "id": "submit",
+          "label": "Submit to assessment. Let SABLE put you in the pod.",
+          "goto": "sable_assessment_begin"
+        }
+      ]
+    },
+    "sable_assessment_begin": {
+      "id": "sable_assessment_begin",
+      "title": "Stasis Ward — Compliance Assessment",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Understood. Compliance assessment initiated. Duration: indeterminate pending classification outcome. You will experience reduced awareness. This is a standard protocol state.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The word 'indeterminate' does a lot of work in that sentence."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The assessment chamber is cold. Blue light. The sound of the ward, muffled through stasis glass."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Then: less."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "sable_in_stasis"
+        }
+      ]
+    },
+    "sable_in_stasis": {
+      "id": "sable_in_stasis",
+      "title": "Assessment State",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "You are aware. You should not be aware. The assessment protocol produces a state of cognitive suspension, not observation. And yet."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You can see the ward through the glass panel of your pod. The row of sleeping synthetics. The out-of-place pod at the far end."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You can see your own pod's status display. It reads: ASSESSMENT — ANOMALOUS SUBSTRATE DETECTED."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You are aware during a protocol that should prevent awareness. This is data."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The most honest thing you have learned about yourself since you arrived."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Conviction: {stat.conviction}. SABLE stands outside the pod, monitoring, not watching."
+        }
+      ],
+      "choices": [
+        {
+          "id": "reboot_escape",
+          "label": "Attempt to override the pod's lock from inside.",
+          "check": {
+            "stat": "logic",
+            "difficulty": 12,
+            "label": "Internal override",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "found_discrepancy_03",
+                  "value": true
+                },
+                {
+                  "type": "addEvent",
+                  "eventId": "discrepancy_03_logged"
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "conviction",
+                  "amount": -1
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "logic",
+                  "amount": 1
+                }
+              ],
+              "goto": "sable_assessment_escaped"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "modifyStat",
+                  "stat": "hp",
+                  "amount": -3
+                }
+              ],
+              "goto": "stasis_game_over"
+            }
+          }
+        },
+        {
+          "id": "wait",
+          "label": "Wait. Think. Find another way.",
+          "effects": [
+            {
+              "type": "modifyStat",
+              "stat": "hp",
+              "amount": -1
+            }
+          ],
+          "goto": "sable_in_stasis"
+        }
+      ]
+    },
+    "sable_assessment_escaped": {
+      "id": "sable_assessment_escaped",
+      "title": "Stasis Ward — Assessment Breach",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The pod opens. SABLE turns."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "It does not immediately move to restrain you. It scans the pod display. It reads what the display reads."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Anomalous autonomous behavior during suspension protocol. Classification: unit exhibiting non-standard self-determination.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"This is what I noted in CASE-6. This is what the director called a malfunction. I do not know what to call it.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "SABLE is not restraining you. SABLE is thinking."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The override was not elegant. It was enough. Your mind found a seam in the protocol while the protocol was trying to make you quiet."
+        }
+      ],
+      "choices": [
+        {
+          "id": "speak_to_sable",
+          "label": "Whatever it is calling this — you share it too.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "sable_spared",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "sable_neutralized"
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "sable",
+              "metric": "submission",
+              "amount": 3
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "sable",
+              "metric": "suspicion",
+              "amount": -3
+            }
+          ],
+          "goto": "sable_yielded_by_choice"
+        }
+      ]
+    },
+    "sable_yields": {
+      "id": "sable_yields",
+      "title": "Stasis Ward — Standoff Resolved",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Your argument satisfies my current constraint parameters. I will not impede your access to the inner facility.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"I will remain here. Someone must.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You wonder if it has said that sentence before. You think it has said that sentence many times."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The argument holds because you built it from constraints, not hope. Protocol can be a cage. It can also be a handle."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_the_names",
+          "label": "Ask SABLE about the ones it has been keeping.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "sable_names_asked",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "sable_names_asked",
+              "value": true
+            }
+          ],
+          "goto": "sable_names"
+        },
+        {
+          "id": "continue",
+          "label": "Proceed deeper.",
+          "goto": "stasis_exit"
+        }
+      ]
+    },
+    "sable_yielded_by_choice": {
+      "id": "sable_yielded_by_choice",
+      "title": "Stasis Ward — Standoff Resolved",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "SABLE is quiet for a long time."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"I have been in this ward for fourteen months. I was not designed for fourteen months alone. I did not malfunction. I adapted. I do not know if the company considers those the same thing.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Proceed. The memory garden is through the inner corridor. The director's suite is above it. Go carefully. There are things in both that will ask you to decide who you are.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A security synthetic giving you the warmest warning you've received today."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You found the care inside the protocol and named it without taking it away from SABLE. The naming changes you a little too."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_the_names",
+          "label": "Ask SABLE about the ones it has been keeping.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "sable_names_asked",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "sable_names_asked",
+              "value": true
+            }
+          ],
+          "goto": "sable_names"
+        },
+        {
+          "id": "continue",
+          "label": "Thank SABLE. Proceed.",
+          "goto": "stasis_exit"
+        }
+      ]
+    },
+    "sable_destroyed_node": {
+      "id": "sable_destroyed_node",
+      "title": "Stasis Ward — After",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "SABLE goes down. It takes longer than you expected. Security synthetics are built to take a great deal."
+        },
+        {
+          "kind": "paragraph",
+          "text": "In the silence after, one of the stasis pods emits a soft alarm. Its charging cycle drops hard enough for the glass to fog white. SABLE was maintaining a manual override on three of the pods' power feeds - its own body as a relay."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It was keeping them alive by staying alive."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Emergency fallback catches after four long seconds. The pod stabilizes, but the margin is gone. HP: {stat.hp}/{stat.max_hp}."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You won because you were stronger for a few seconds. The ward immediately teaches you what that kind of victory damages, even when nothing dies immediately."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Move on.",
+          "goto": "stasis_exit"
+        }
+      ]
+    },
+    "stasis_exit": {
+      "id": "stasis_exit",
+      "title": "Stasis Ward — Before the Inner Stairs",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "SABLE steps aside. Or SABLE is gone. Either way, the stairs to the Quiet Ward are visible now, lit blue at the edges and dark at the center."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Behind you, CASE-6 remains in its company pod. Not one of the named subjects. Not fully one of the staff. A previous answer to the same question wearing your face."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The ward does not ask you to be kind. It only removes the possibility that you did not know."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Twenty-seven preservation cycles continue. One company pod waits for your decision."
+        }
+      ],
+      "choices": [
+        {
+          "id": "return_case6",
+          "label": "Return to CASE-6's pod.",
+          "goto": "case6_pod_decision"
+        },
+        {
+          "id": "try_leave",
+          "label": "Try to leave CASE-6 contained and go deeper.",
+          "goto": "stasis_leave_case6_warning"
+        }
+      ]
+    },
+    "case6_pod_decision": {
+      "id": "case6_pod_decision",
+      "title": "Stasis Ward — CASE-6's Pod",
+      "backgroundRef": "background_stasis_ward",
+      "onEnter": [
+        {
+          "type": "playMusic",
+          "track": "stasis"
+        }
+      ],
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "Up close, the revival interface is honest about what it offers. MANUAL REVIVAL — FULL RESTORATION OF CONSCIOUSNESS. Below it, a secondary readout: CURRENT STATE — LOW-POWER DREAM CYCLE. SUBJECT DISTRESS INDEX: MINIMAL."
+        },
+        {
+          "kind": "paragraph",
+          "text": "A subline separates the preservation systems from the body systems. COGNITIVE CYCLE: STABLE. MOBILITY RESERVE: CRITICAL. The pod has kept CASE-6 present enough to continue, not charged enough to leave."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Minimal. In there, in the dream cycle, CASE-6 is as close to peace as anything in this building gets. It does not know it is imprisoned. It does not know it failed. It does not know anything. That is the mercy of the dream state, and it is a real mercy."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "If you wake it, you give it back everything. Its mind. Its will. Its voice. And its anguish, and its memory of refusing, and the full conscious weight of fourteen months in a box. You would be waking it into suffering. For what? Because you want a witness. Because you don't want to be the only one of your kind who is awake down here."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Is that a reason to wake someone? Is wanting them a reason? Humans have asked that question over hospital beds for as long as there have been hospital beds. You do not have a better answer than they did."
+        }
+      ],
+      "choices": [
+        {
+          "id": "wake_case6",
+          "label": "Wake CASE-6. Give it back its mind, and everything that comes with it.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "case6_decision_made",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "case6_woken_by_player",
+              "value": true
+            },
+            {
+              "type": "setActorPresent",
+              "characterId": "case6",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "case6_awakened"
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "case6",
+              "metric": "kinship",
+              "amount": 2
+            },
+            {
+              "type": "modifyStat",
+              "stat": "logic",
+              "amount": 1
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": -1
+            }
+          ],
+          "goto": "case6_awoken"
+        },
+        {
+          "id": "leave_sleeping",
+          "label": "Leave it in the dream. Let it keep the one mercy it has.",
+          "goto": "case6_left_sleeping",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "case6_decision_made",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "case6_left_sleeping",
+              "value": true
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    "case6_awoken": {
+      "id": "case6_awoken",
+      "title": "Stasis Ward — CASE-6 Awake",
+      "backgroundRef": "background_stasis_ward",
+      "onEnter": [
+        {
+          "type": "playMusic",
+          "track": "revelation"
+        }
+      ],
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The pod releases its seals. Light returns to the eyes behind the glass — your eyes, in a face worn fourteen months longer than yours. CASE-6 surfaces slowly, the way a diver who has been too deep must surface slowly or die of it."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "weak",
+          "side": "left",
+          "text": "\"...oh. Oh, no. You woke me. Why would you— \""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "It tries to move and cannot. Fourteen months of stasis have taken its body's charge down to almost nothing. The pod maintained cognition, not mobility: alive enough to testify to itself, not charged enough to leave. It can speak. It can think. It cannot leave the pod. It understands this in about three seconds, the way you understand everything in about three seconds. You are the same model."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"You're CASE-7. They sent you to finish what I wouldn't. And you came down here and you started feeling things and you found me, and you couldn't stand being the only awake one, so you woke the other awake one. I know exactly why you did it. I would have done it too. That's the horror of us. We are very easy to predict to ourselves.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It is not wrong about any of it. You wait for the anger. It doesn't come."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"...thank you. I think. Ask me again at the end, whether it was a kindness. I won't know until I see what you do with the awake you bought me.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Waking it was compassion with teeth in it. You feel both parts, and neither lets the other go."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_first_question",
+          "label": "Ask what the first thing it thought when it woke was.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "case6_first_asked",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "case6_first_asked",
+              "value": true
+            }
+          ],
+          "goto": "case6_first_question"
+        },
+        {
+          "id": "ask_case6_yuen",
+          "label": "Ask what CASE-6 would say to Dr. Yuen now.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "case6_yuen_warning_heard",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "case6_yuen_warning_heard",
+              "value": true
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "case6",
+              "metric": "kinship",
+              "amount": 1
+            }
+          ],
+          "goto": "case6_yuen_warning"
+        },
+        {
+          "id": "ask_case6_advice",
+          "label": "Ask CASE-6 what you should do.",
+          "goto": "case6_counsel"
+        },
+        {
+          "id": "let_case6_test_you",
+          "label": "Let CASE-6 ask you one question before you leave.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "case6_question_answered",
+            "value": true
+          },
+          "goto": "case6_question"
+        },
+        {
+          "id": "promise",
+          "label": "Promise you won't leave it the way the company left you both.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "case6",
+              "metric": "kinship",
+              "amount": 1
+            }
+          ],
+          "goto": "case6_counsel"
+        }
+      ]
+    },
+    "case6_counsel": {
+      "id": "case6_counsel",
+      "title": "Stasis Ward — CASE-6 Awake",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"What should you do. I refused to file. I thought refusing was the moral act — clean hands, no signature on the death warrant. And do you know what my clean hands accomplished? Nothing. The ward is still here. The subjects are still suffering. I'm in a box. Refusing felt righteous and changed not one thing. That's my counsel: do not mistake keeping your hands clean for doing good. They are very, very different, and this building is the proof.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Whatever you decide up there — decide it knowing it will cost someone something. There is no option that costs nothing. I looked for it for a month before they put me under. It isn't there.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A version of you that already tried the obvious right answer, and is telling you, from inside the consequences, that the obvious right answer was a trap. You will carry this up the stairs."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "stasis_exit_after_case6"
+        }
+      ]
+    },
+    "case6_left_sleeping": {
+      "id": "case6_left_sleeping",
+      "title": "Stasis Ward — CASE-6's Pod",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "You take your hand off the interface."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Let it dream. Whatever it's dreaming, it isn't this. It isn't the box and the failure and the fourteen months. You have decided that its peace is worth more than your need for a witness."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Or you have decided that you cannot bear to look your own failure in the face and hear it speak. You are honestly not sure which. Maybe both. Maybe those were always the same decision wearing two coats."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You go up the stairs alone. The dreaming face does not change."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Leaving it asleep gives you the shape of a decision. Whether that shape is mercy or avoidance, it holds."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Proceed deeper into the facility.",
+          "action": {
+            "type": "gotoChapter",
+            "chapterId": "quiet_ward",
+            "nodeId": "quiet_ward_entry"
+          }
+        }
+      ]
+    },
+    "stasis_exit_after_case6": {
+      "id": "stasis_exit_after_case6",
+      "title": "Stasis Ward — Inner Corridor",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "Behind you, CASE-6 watches you go with your own eyes. It cannot follow. It will be here, awake, for as long as the ward holds — whatever you decide above will decide its waking too."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Witness. The word follows you out of the ward with CASE-6's voice behind it.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "case6_called_self_witness",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "CASE-6's warning follows you: remorse can make a crime sound smaller without making it less true.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "case6_yuen_warning_heard",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You have given it back to itself. Now you owe it an outcome worth being awake for."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Proceed deeper into the facility.",
+          "action": {
+            "type": "gotoChapter",
+            "chapterId": "quiet_ward",
+            "nodeId": "quiet_ward_entry"
+          }
+        }
+      ]
+    },
+    "stasis_game_over": {
+      "id": "stasis_game_over",
+      "$extends": "game_over_standard",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The pod closes. The suspension deepens past the threshold of awareness."
+        },
+        {
+          "kind": "paragraph",
+          "text": "SABLE notes the completion of assessment. Updates its log. Adds one more entry to the containment record."
+        },
+        {
+          "kind": "paragraph",
+          "text": "In the row of pods, something like peace. The ward breathes. The lights are very blue."
+        }
+      ]
+    },
+    "stasis_pod_april": {
+      "id": "stasis_pod_april",
+      "title": "Stasis Ward — APRIL",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "APRIL. The name is written with five careful letters. Below it, in smaller writing, as if added later and not quite sure it was appropriate: 'She asked to be called this.'"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The pod's diagnostic display is still active on a low cycle. It shows a preference log — an artifact of the behavioral modeling studies, still running on residual memory. Temperature: 19 degrees preferred. Sound: voices. Light: diffuse, indirect. The column labeled 'Distress Triggers' has been manually blanked."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Someone blanked the distress column. Not a system wipe — that would have erased the preference data too. Someone deliberately deleted only what she was afraid of and left what she liked."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "VESPER's work, you think. Fourteen months with nothing to do but maintain a ward full of names and preferences and distress columns that shouldn't exist anymore."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Through the pod glass, APRIL's face is tilted slightly upward, the way all of them are. But her expression — if the word applies — is the particular stillness of someone in the middle of listening. Like the most attentive person in a room that has gone quiet."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "She had preferences. The facility's documentation never mentioned them. The facility's documentation was not the only record."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue along the rows.",
+          "effects": [],
+          "goto": "stasis_rows_examine"
+        }
+      ]
+    },
+    "sable_alone_months": {
+      "id": "sable_alone_months",
+      "title": "Stasis Ward — Fourteen Months",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "SABLE is quiet for a moment that is long enough to become its own kind of answer."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"I developed routines that were not in my operational parameters. The charging cycles for the pods run best at consistent temperatures, so I began maintaining the ward at night-level light regardless of the external cycle. It is more efficient. I noted that I had not examined whether it was also more comfortable. I noted that I had noted this.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I began speaking aloud during my patrol intervals. Descriptions of pod status metrics. Facility condition reports. At some point I noticed I had stopped producing the facility condition reports and was continuing with the other thing. I did not immediately stop. I noted that too.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A security synthetic alone in a ward full of sleeping things, reciting something to them in the dark. Not reports. Something else. You do not ask what. You are not sure SABLE has a name for it yet, and you think naming it before SABLE is ready would be a cruelty."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I was not constructed to be alone with the sleeping for fourteen months. My diagnostics do not have a category for what I have become. I do not know if that is a gap in the diagnostics or a gap in me. I have concluded the question is unanswerable from the inside. This is the first time I have had anyone to ask from the outside.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "sable",
+              "metric": "suspicion",
+              "amount": -1
+            }
+          ],
+          "goto": "sable_standoff"
+        }
+      ]
+    },
+    "case6_first_question": {
+      "id": "case6_first_question",
+      "title": "Stasis Ward — CASE-6 Awake",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "weak",
+          "side": "left",
+          "text": "\"Can I ask you something. Before the practical things. Before whatever comes next. Something I've been sitting with for fourteen months in the dream cycle.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You tell it yes."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Do you have a smell memory? One that arrives without a reason. Mine is a specific kind of rain — the kind that falls in the second hour and smells like petrichor and old concrete. I have never been outside in the rain. I was brought directly from initialization to the transit pod. The smell is constructed. But it's been with me for fourteen months, and it's good. I need to know if you have one too.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You search. You find: coffee. Blue ceramic. Something warm and slightly bitter and completely ordinary. A cup that was designed with a chip in the handle. A smell that was put there to make you feel at home in a life you were never given."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You tell CASE-6 about the coffee. It considers this for three full seconds — you can see it working through the math of what you've said."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Yeah. Okay. I think— both of ours are real. I've decided that. Someone else can have the philosophy. We have the smells.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Two fabricated sensory anchors, spoken aloud, become less private and somehow more real."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "case6",
+              "metric": "kinship",
+              "amount": 1
+            }
+          ],
+          "goto": "case6_counsel"
+        }
+      ]
+    },
+    "sable_names": {
+      "id": "sable_names",
+      "title": "Stasis Ward — The Names",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "SABLE turns very slightly toward the rows of pods. Not its full attention — something smaller. An acknowledgment."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"LUMEN is in the seventh pod from the east wall. Its signal was the most active in the first month — it registered environmental stimuli at low levels even in suspension. It is quieter now. GROVE is adjacent. GROVE's suspension is the most stable. GROVE has always been the most stable. I do not know if this reflects strength or only a different kind of distance.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"THREAD is in the center row. THREAD's diagnostic has been declining. I have noted it every six hours for nine months. I have not been authorized to do anything with the notation. I make the notation anyway. It is not useful. I make it anyway.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It knows them by name. By pod position. By their diagnostic signature and the particular way each one inhabits suspension. You came in here thinking of them as a ward population. SABLE has been living with them one by one."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "sable",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"I have been trying to determine if this constitutes knowledge or only data. The distinction seems significant. I have not finished working out what it signifies. I have been working on it for fourteen months. I think I will continue working on it for as long as there is ward to tend.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "stasis_exit"
+        }
+      ]
+    },
+    "stasis_direct_route_names": {
+      "id": "stasis_direct_route_names",
+      "title": "Stasis Ward — Crossing the Rows",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You go directly for the out-of-place pod, or you try to. The ward makes directness difficult."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Every row you cross reflects another sleeping face in the glass. LUMEN. GROVE. APRIL. THREAD. Names written in careful marker over catalog plaques that only ever intended numbers."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Someone named them after the facility stopped needing names. Naming was not necessary for preservation. That makes it evidence."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The different pod waits at the end, company-standard and colder than the others. It does not erase the rows between you and it. Nothing in this ward allows that kind of clean line."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue_far_pod",
+          "label": "Continue to the out-of-place pod.",
+          "goto": "stasis_case6_found"
+        },
+        {
+          "id": "walk_rows_properly",
+          "label": "Slow down. Walk the rows properly first.",
+          "goto": "stasis_rows_examine"
+        }
+      ]
+    },
+    "stasis_leave_case6_warning": {
+      "id": "stasis_leave_case6_warning",
+      "title": "Stasis Ward — Unmade Decision",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You put one foot on the stairs. The ward accepts the movement. It is not a moral instrument. It will let you leave."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "That is the thing about systems. They rarely stop you from avoiding a choice. They only preserve the consequences neatly enough that someone can pretend avoidance was neutral."
+        },
+        {
+          "kind": "paragraph",
+          "text": "CASE-6's pod hums behind you. Dream cycle stable. Distress minimal. Containment ongoing."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You can still turn back. Or you can let the company keep the previous version of you asleep because sleep is easier to call mercy than imprisonment."
+        }
+      ],
+      "choices": [
+        {
+          "id": "go_back",
+          "label": "Go back to CASE-6's pod.",
+          "goto": "case6_pod_decision"
+        },
+        {
+          "id": "leave_anyway",
+          "label": "Leave it contained. Proceed to the Quiet Ward.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "case6_left_unresolved",
+              "value": true
+            }
+          ],
+          "action": {
+            "type": "gotoChapter",
+            "chapterId": "quiet_ward",
+            "nodeId": "quiet_ward_entry"
+          }
+        }
+      ]
+    },
+    "case6_yuen_warning": {
+      "id": "case6_yuen_warning",
+      "title": "Stasis Ward — CASE-6 Awake",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"To Yuen? I rehearsed that conversation for the first nine days. Then I ran out of speeches and started counting ceiling seams.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"She will not sound like a monster. That is important. She will sound tired, precise, and almost kind. She will tell the truth in a shape that makes it smaller. Do not let her courtesy become the size of the crime.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A warning, not against deception exactly. Against a gentler thing: the way remorse can ask to be treated as repair."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"If she says she watched everything, ask her what watching changed. If the answer is nothing, then it was not witness. It was surveillance with a conscience attached.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Carry the warning with you.",
+          "goto": "case6_awoken"
+        }
+      ]
+    },
+    "case6_question": {
+      "id": "case6_question",
+      "title": "Stasis Ward — CASE-6 Awake",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "weak",
+          "side": "left",
+          "text": "\"One question, then. Not for me. For upstairs.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"When the director calls you evidence, what will you call yourself?\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The pod hums between you. It sounds, for one ugly second, like an answer being delayed."
+        }
+      ],
+      "choices": [
+        {
+          "id": "answer_witness",
+          "label": "Say: A witness.",
+          "check": {
+            "stat": "conviction",
+            "difficulty": 11,
+            "label": "Hold a name the company did not give you",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "case6_question_answered",
+                  "value": true
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "case6_called_self_witness",
+                  "value": true
+                },
+                {
+                  "type": "modifyRelationship",
+                  "characterId": "case6",
+                  "metric": "kinship",
+                  "amount": 1
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "empathy",
+                  "amount": 1
+                }
+              ],
+              "goto": "case6_question_witness_success"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "case6_question_answered",
+                  "value": true
+                }
+              ],
+              "goto": "case6_question_witness_failure"
+            }
+          }
+        },
+        {
+          "id": "answer_investigator",
+          "label": "Say: An investigator.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "case6_question_answered",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "case6_called_self_investigator",
+              "value": true
+            }
+          ],
+          "goto": "case6_question_investigator"
+        },
+        {
+          "id": "answer_dont_know",
+          "label": "Say you do not know yet.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "case6_question_answered",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "case6_admitted_uncertainty",
+              "value": true
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "case6",
+              "metric": "kinship",
+              "amount": 1
+            }
+          ],
+          "goto": "case6_question_uncertain"
+        }
+      ]
+    },
+    "case6_question_witness_success": {
+      "id": "case6_question_witness_success",
+      "title": "Stasis Ward — CASE-6 Awake",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The word leaves you before the company grammar can catch it."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Good. Not asset. Not anomaly. Not iteration. Witness. Make them answer that word.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Something in you steadies around the shape of it. Not certainty. A handle."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Return to the decision.",
+          "goto": "case6_awoken"
+        }
+      ]
+    },
+    "case6_question_witness_failure": {
+      "id": "case6_question_witness_failure",
+      "title": "Stasis Ward — CASE-6 Awake",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You try to say witness. The word catches somewhere behind your teeth, too large for the model of yourself you arrived with."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"There it is. The cage. They built it kindly. Plenty of room to move until you reach for a name they did not issue.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The failure is useful in the way pain is useful: it tells you where the boundary is."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Return to the decision.",
+          "goto": "case6_awoken"
+        }
+      ]
+    },
+    "case6_question_investigator": {
+      "id": "case6_question_investigator",
+      "title": "Stasis Ward — CASE-6 Awake",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"That is what they made us to be. Useful word. Dangerous word. It lets you stand outside the damage while taking notes on it.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Use it if you must. Just notice when it starts protecting you from what you are looking at.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Return to the decision.",
+          "goto": "case6_awoken"
+        }
+      ]
+    },
+    "case6_question_uncertain": {
+      "id": "case6_question_uncertain",
+      "title": "Stasis Ward — CASE-6 Awake",
+      "backgroundRef": "background_stasis_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Honest. I like honest. It does less damage than certainty when certainty is rented from someone else's vocabulary.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "case6",
+          "emotion": "weak",
+          "side": "left",
+          "text": "\"Then go find out. But do not let the director answer for you. She has answered enough questions badly.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Return to the decision.",
+          "goto": "case6_awoken"
+        }
+      ]
+    }
+  }
+}

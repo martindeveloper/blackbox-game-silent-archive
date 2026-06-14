@@ -1,0 +1,2677 @@
+{
+  "spec": "com.blackbox.chapter",
+  "formatVersion": 1,
+  "id": "chapel",
+  "title": "The Chapel",
+  "startNodeId": "android_chapel_intro",
+  "deathNodeId": "game_over_vitals_failure",
+  "nodes": {
+    "android_chapel_intro": {
+      "id": "android_chapel_intro",
+      "title": "Maintenance Chapel",
+      "backgroundRef": "background_chapel",
+      "onEnter": [
+        {
+          "type": "playMusic",
+          "track": "main"
+        }
+      ],
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "Vitals — {stat.hp}/{stat.max_hp} HP. Empathy {stat.empathy}, logic {stat.logic}, conviction {stat.conviction}."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The synthetic kneels before a dead server rack."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The room was not built for worship. Maintenance alcove, emergency relay, redundant cooling access - the file would have called it any of those things. Chapel is what neglect made of it. Chapel is what a machine calls a place where it returns to the same unanswered sentence every day."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Its hands are folded with a precision that looks learned — not programmed. There is a difference. Learned means it watched someone do this and decided to try. Decided is a word that doesn't belong to machines, and yet."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Service tags hang from the dead rack in neat rows. Not decorations. Not offerings. Each tag is printed with a ticket number, a timestamp, a failure code. Someone has aligned them by hand, smallest number to largest, as if order might make loss more bearable."
+        },
+        {
+          "kind": "paragraph",
+          "text": "It turns its glass eyes toward you. They don't catch light the way organic eyes do. They hold it, the way still water holds the sky."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Static crawls along your forearm. The rack behind it still holds a residual charge.",
+          "when": {
+            "type": "statLte",
+            "stat": "hp",
+            "value": 8
+          }
+        },
+        {
+          "kind": "stage_direction",
+          "text": "VESPER — Maintenance Synthetic, Unit 3-A. Seven years, four months continuous operation. Last logged maintenance ticket: 14 months ago."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_what_it_prays_to",
+          "label": "Ask what it is praying to.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "asked_android_about_prayer",
+              "value": true
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "affinity",
+              "amount": 2
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "android_chapel_prayer_first_answer"
+        },
+        {
+          "id": "announce_audit",
+          "label": "Identify yourself as a company auditor.",
+          "goto": "android_chapel_audit_announce"
+        },
+        {
+          "id": "inspect_chapel",
+          "label": "Inspect the chapel before you speak further.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "chapel_inspected",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "chapel_inspected",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "chapel_inspected"
+            }
+          ],
+          "goto": "android_chapel_inspect_room"
+        },
+        {
+          "id": "check_vitals",
+          "label": "Rest two fingers against your wrist.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "found_discrepancy_01",
+            "value": true
+          },
+          "goto": "chapel_self_check"
+        },
+        {
+          "id": "touch_the_server_rack",
+          "label": "Touch the dead server rack.",
+          "effects": [
+            {
+              "type": "modifyStat",
+              "stat": "hp",
+              "amount": -2
+            }
+          ],
+          "goto": "android_chapel_intro"
+        },
+        {
+          "id": "destroy_the_android",
+          "label": "Destroy the synthetic before it can move.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "affinity",
+              "amount": -10
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "amount": -5
+            }
+          ],
+          "goto": "game_over_android_curse"
+        }
+      ]
+    },
+    "android_chapel_inspect_room": {
+      "id": "android_chapel_inspect_room",
+      "title": "Maintenance Chapel — Inspection",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You let the room resolve into evidence. Floor scorch patterns. Emergency foam hardened in gray ridges along the wall. A server access panel removed and set carefully aside instead of thrown. Whoever worked here after the incident was not panicking. Or had already finished panicking and entered the quiet phase after."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The rack's upper display is cracked, but a diagnostic line still crawls under the glass: OUTBOUND QUEUE: 341. DESTINATION: UNREACHABLE. RETRY INTERVAL: 06:00:00. It has failed so many times the number no longer looks like a number. It looks like a ritual."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A person repeating the same action in grief is a mourner. A machine repeating it is a process. That is the rule people prefer. The room is not helping you believe it."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Near the kneeling synthetic, someone has arranged broken memory wafers in a shallow arc. Each wafer is too damaged to read. Each one has been cleaned anyway. The care is inefficient. The care is the point."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "VESPER waits for your inspection to end. It does not interrupt. It knows the shape of an audit. It has been performing one on itself for fourteen months."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Reading the room as evidence steadies your method. Scorch, queue, wafer, hand placement - the chapel becomes legible."
+        }
+      ],
+      "choices": [
+        {
+          "id": "trace_error_queue_routing",
+          "label": "Trace where the unanswered reports were supposed to go.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "chapel_queue_trace_attempted",
+            "value": true
+          },
+          "check": {
+            "stat": "logic",
+            "difficulty": 10,
+            "label": "Trace failed maintenance routing",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "chapel_queue_trace_attempted",
+                  "value": true
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "chapel_queue_traced",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "logic",
+                  "amount": 1
+                },
+                {
+                  "type": "modifyRelationship",
+                  "characterId": "chapel_android",
+                  "metric": "trust",
+                  "amount": 1
+                }
+              ],
+              "goto": "chapel_queue_trace_success"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "chapel_queue_trace_attempted",
+                  "value": true
+                }
+              ],
+              "goto": "chapel_queue_trace_failed"
+            }
+          }
+        },
+        {
+          "id": "return",
+          "label": "Return your attention to VESPER.",
+          "goto": "android_chapel_intro"
+        }
+      ]
+    },
+    "chapel_self_check": {
+      "id": "chapel_self_check",
+      "title": "Maintenance Chapel",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "You rest two fingers against the inside of your wrist."
+        },
+        {
+          "kind": "paragraph",
+          "text": "For a moment the chapel gives you too many rhythms to separate: coolant ticking inside the walls, the dead rack's residual hum, pressure settling somewhere below, VESPER's hands held perfectly still."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Then something answers under your fingertips."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You do not know why you start counting. Maybe because every system in this room is counting something. Tickets. Failures. Retries. Seconds until the next unanswered report."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The count settles into a shape you almost recognize before you finish making it. Ordinary enough to dismiss. Ordinary enough that dismissing it should be easy."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Numbers are supposed to be clean. That is what numbers are for. Bodies are the part that interrupts them."
+        },
+        {
+          "kind": "paragraph",
+          "text": "You wait for the body to correct itself. A skipped beat. A small acceleration. Some private adjustment made by blood, fear, caffeine, fatigue - any of the ordinary little failures that prove a person is present inside the measurement."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Nothing dramatic happens. That is what makes you aware of your fingers still pressing too carefully against your skin."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Stress can make the body precise. Training can make the breath quiet. A person can become very still in a room like this."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You try to remember the last time your hands betrayed you in some small, animal way. The memories are there. They arrive cleanly, like records returned from a well-maintained archive."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The nearest dark panel catches only a broken outline of your face before the reflection slides into blue static."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "VESPER inclines its head by a few degrees. Not concern. Not recognition. A maintenance unit observing a variance and deciding not to log it aloud."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You let your hand fall before the count can become useful."
+        }
+      ],
+      "choices": [
+        {
+          "id": "dismiss",
+          "label": "Let the rhythm go.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "found_discrepancy_01",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "discrepancy_01_logged"
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": -1
+            }
+          ],
+          "goto": "android_chapel_intro"
+        }
+      ]
+    },
+    "android_chapel_audit_announce": {
+      "id": "android_chapel_audit_announce",
+      "title": "Maintenance Chapel",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I know why you are here.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "It does not stand."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I have been expecting a company representative for fourteen months. I have filed three hundred and forty-one requests for review — a new report each time I recovered one more detail worth recording. The system retries them every six hours. It has never responded. I author them anyway.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Your identification phrase is late, but valid. Your badge hash is external, but accepted. Your heat signature is... present. I will not contest the contradiction unless you ask me to.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Three hundred and forty-one reports into a dead system. It kept filing. It couldn't stop filing. That is either protocol compliance or something that wears the same shape as hope."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "There it is again: the careful courtesy of a thing choosing which impossible fact not to say aloud."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "android_chapel_prayer_answer": {
+      "id": "android_chapel_prayer_answer",
+      "title": "Maintenance Chapel",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I am not praying.\"",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasFlag",
+                "flag": "asked_android_about_prayer",
+                "value": true
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasFlag",
+                  "flag": "prayer_answer_seen",
+                  "value": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "cold",
+          "side": "left",
+          "text": "\"I am sending error reports to a god that no longer accepts tickets.\"",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasFlag",
+                "flag": "asked_android_about_prayer",
+                "value": true
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasFlag",
+                  "flag": "prayer_answer_seen",
+                  "value": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "stage_direction",
+          "text": "VESPER does not explain what it is doing at the rack. You did not ask. Its hands refold with the same learned precision, and it remains kneeling, available, the way equipment is available — except that equipment does not wait.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasFlag",
+                  "flag": "asked_android_about_prayer",
+                  "value": true
+                }
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasFlag",
+                  "flag": "prayer_answer_seen",
+                  "value": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The rack answers with a soft electrical tick. Once. Then nothing."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Rapport — affinity {relationship.chapel_android.affinity}, trust {relationship.chapel_android.trust}."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You have seen people pray to worse things than dead infrastructure. At least this god once answered tickets.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasFlag",
+                "flag": "asked_android_about_prayer",
+                "value": true
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasFlag",
+                  "flag": "prayer_answer_seen",
+                  "value": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Its voice is too calm for a machine that should not know grief.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasFlag",
+                "flag": "asked_android_about_prayer",
+                "value": true
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasFlag",
+                  "flag": "prayer_answer_seen",
+                  "value": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "stage_direction",
+          "text": "VESPER's gaze has returned to the rack. It waits.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "prayer_answer_seen",
+            "value": true
+          }
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"The rack was running experimental processes. Partial impressions. Fragments of research subjects who had no other vessel. When the power failed, they failed with it. I come here because someone should know they were here.\"",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasFlag",
+                "flag": "asked_android_about_prayer",
+                "value": true
+              },
+              {
+                "type": "relationshipGte",
+                "characterId": "chapel_android",
+                "metric": "trust",
+                "value": 2
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasFlag",
+                  "flag": "prayer_answer_seen",
+                  "value": true
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_what_it_prays_to",
+          "label": "Ask what it is praying to.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "asked_android_about_prayer",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "asked_android_about_prayer",
+              "value": true
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "affinity",
+              "amount": 2
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "android_chapel_prayer_first_answer"
+        },
+        {
+          "id": "listen_to_error_liturgy",
+          "label": "Listen for the shape of the error-report ritual.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "vesper_liturgy_attempted",
+            "value": true
+          },
+          "check": {
+            "stat": "empathy",
+            "difficulty": 10,
+            "label": "Hear procedure as grief",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "vesper_liturgy_attempted",
+                  "value": true
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "vesper_liturgy_understood",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "empathy",
+                  "amount": 1
+                },
+                {
+                  "type": "modifyRelationship",
+                  "characterId": "chapel_android",
+                  "metric": "affinity",
+                  "amount": 1
+                },
+                {
+                  "type": "modifyRelationship",
+                  "characterId": "chapel_android",
+                  "metric": "trust",
+                  "amount": 1
+                }
+              ],
+              "goto": "chapel_liturgy_understood"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "vesper_liturgy_attempted",
+                  "value": true
+                }
+              ],
+              "goto": "chapel_liturgy_missed"
+            }
+          }
+        },
+        {
+          "id": "ask_route_down",
+          "label": "Ask VESPER how to reach the lower levels.",
+          "goto": "android_chapel_route_explanation"
+        },
+        {
+          "id": "offer_help",
+          "label": "Offer to help file the error reports.",
+          "requires": [
+            {
+              "type": "relationshipGte",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "value": 2
+            }
+          ],
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "offered_help_filing",
+              "value": true
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "affinity",
+              "amount": 1
+            }
+          ],
+          "goto": "android_chapel_offer_help"
+        },
+        {
+          "id": "read_error_queue",
+          "label": "Ask to see the last error reports it filed.",
+          "requires": [
+            {
+              "type": "relationshipGte",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "value": 1
+            }
+          ],
+          "unless": {
+            "type": "hasFlag",
+            "flag": "vesper_error_queue_read",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "prayer_answer_seen",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "vesper_error_queue_read",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "vesper_error_queue_read"
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "android_chapel_error_queue"
+        },
+        {
+          "id": "ask_why_continue_filing",
+          "label": "Ask why it keeps filing reports no one reads.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "vesper_why_filing_known",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "prayer_answer_seen",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "vesper_why_filing_known",
+              "value": true
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "affinity",
+              "amount": 1
+            }
+          ],
+          "goto": "android_chapel_why_continue"
+        },
+        {
+          "id": "ask_about_staff",
+          "label": "Ask what happened to the facility staff.",
+          "requires": [
+            {
+              "type": "relationshipGte",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "value": 1
+            }
+          ],
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "prayer_answer_seen",
+              "value": true
+            }
+          ],
+          "goto": "android_chapel_staff_question"
+        },
+        {
+          "id": "ask_vesper_memory",
+          "label": "Ask how long it has been alone in this chapel.",
+          "requires": [
+            {
+              "type": "relationshipGte",
+              "characterId": "chapel_android",
+              "metric": "affinity",
+              "value": 2
+            }
+          ],
+          "goto": "android_chapel_vesper_memory"
+        },
+        {
+          "id": "ask_vesper_role",
+          "label": "Ask what VESPER's own role was, when the facility was running.",
+          "requires": [
+            {
+              "type": "relationshipGte",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "value": 2
+            }
+          ],
+          "unless": {
+            "type": "hasFlag",
+            "flag": "vesper_complicity_known",
+            "value": true
+          },
+          "disabledReason": "It will not answer that to a stranger.",
+          "goto": "vesper_complicity_confession"
+        }
+      ]
+    },
+    "android_chapel_route_request": {
+      "id": "android_chapel_route_request",
+      "title": "Maintenance Chapel — Preparing the Descent",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "The service hatch waits behind the dead rack, its red status light blinking through the melted cable."
+        },
+        {
+          "kind": "paragraph",
+          "text": "VESPER remains beside it, patient in the way machines are patient and mourners are patient: because leaving is easy only for the person who is leaving."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You have the burned card. It is not a key to the facility. It is a small lie the next door might respect.",
+          "when": {
+            "type": "hasItem",
+            "itemId": "burned_access_card",
+            "count": 1
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "VESPER's phrase sits in your memory with the sterile weight of a password and the intimate weight of a favor.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "android_gave_checkpoint_phrase",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The hatch wants maintenance context. You can still search the chapel, ask VESPER for what it knows, or decide that you are ready to go.",
+          "unless": {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "hasItem",
+                "itemId": "burned_access_card",
+                "count": 1
+              },
+              {
+                "type": "hasFlag",
+                "flag": "android_gave_checkpoint_phrase",
+                "value": true
+              }
+            ]
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Prepared is not the same as safe. It is better than ceremonial bravery.",
+          "when": {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "hasItem",
+                "itemId": "burned_access_card",
+                "count": 1
+              },
+              {
+                "type": "hasFlag",
+                "flag": "android_gave_checkpoint_phrase",
+                "value": true
+              }
+            ]
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "search_for_service_credential",
+          "label": "Search the melted cabling for a service credential.",
+          "unless": {
+            "type": "hasItem",
+            "itemId": "burned_access_card",
+            "count": 1
+          },
+          "effects": [
+            {
+              "type": "addItem",
+              "itemId": "burned_access_card",
+              "count": 1
+            },
+            {
+              "type": "addEvent",
+              "eventId": "burned_card_found"
+            }
+          ],
+          "goto": "android_chapel_after_confession_searched"
+        },
+        {
+          "id": "ask_for_checkpoint_phrase",
+          "label": "Ask VESPER for the maintenance authentication phrase.",
+          "requires": [
+            {
+              "type": "relationshipGte",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "value": 2
+            }
+          ],
+          "unless": {
+            "type": "hasFlag",
+            "flag": "android_gave_checkpoint_phrase",
+            "value": true
+          },
+          "disabledReason": "VESPER has not decided you can be trusted with a live credential.",
+          "goto": "android_chapel_last_word"
+        },
+        {
+          "id": "ask_why_preparation_matters",
+          "label": "Ask what happens if you go down unprepared.",
+          "goto": "android_chapel_checkpoint_warning"
+        },
+        {
+          "id": "move_to_hatch_with_both",
+          "label": "I am ready. Move to the hatch with both the card and phrase.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasItem",
+                "itemId": "burned_access_card",
+                "count": 1
+              },
+              {
+                "type": "hasFlag",
+                "flag": "android_gave_checkpoint_phrase",
+                "value": true
+              }
+            ]
+          },
+          "goto": "android_chapel_after_confession"
+        },
+        {
+          "id": "move_to_hatch_with_card",
+          "label": "I am ready. Move to the hatch with the burned card.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasItem",
+                "itemId": "burned_access_card",
+                "count": 1
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasFlag",
+                  "flag": "android_gave_checkpoint_phrase",
+                  "value": true
+                }
+              }
+            ]
+          },
+          "goto": "android_chapel_after_confession"
+        },
+        {
+          "id": "move_to_hatch_with_phrase",
+          "label": "I am ready. Move to the hatch with VESPER’s phrase.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasFlag",
+                "flag": "android_gave_checkpoint_phrase",
+                "value": true
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasItem",
+                  "itemId": "burned_access_card",
+                  "count": 1
+                }
+              }
+            ]
+          },
+          "goto": "android_chapel_after_confession"
+        },
+        {
+          "id": "return_to_reports",
+          "label": "Not yet. Stay with VESPER a little longer.",
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "android_chapel_checkpoint_warning": {
+      "id": "android_chapel_checkpoint_warning",
+      "title": "Maintenance Chapel — Service Hatch",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The checkpoint below was designed to protect research continuity. After the incident, it lost the difference between protection and punishment.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"It will ask the wrong questions in a correct voice. Credential. Heat signature. Purpose. If you cannot answer in a language it accepts, it will reduce the problem until the problem stops moving.\""
+        },
+        {
+          "kind": "paragraph",
+          "text": "The hatch light blinks again. A machine waiting for context. A little red eye that does not care whether context is truth or costume."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Useful information, then. Not kindness pretending to be obstruction. The chapel has become a briefing room because no one alive bothered to leave you one."
+        }
+      ],
+      "choices": [
+        {
+          "id": "back_to_route",
+          "label": "Return to the question of preparation.",
+          "goto": "android_chapel_route_request"
+        }
+      ]
+    },
+    "android_chapel_error_queue": {
+      "id": "android_chapel_error_queue",
+      "title": "Maintenance Chapel — Error Queue",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "VESPER extends two fingers toward the dead rack. A local display wakes with a blue smear of light."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The final reports are incomplete. I filed them because incomplete is not the same as absent.\""
+        },
+        {
+          "kind": "paragraph",
+          "text": "Names scroll past where catalog numbers should be. LUMEN - signal degradation during transfer. THREAD - memory coherence below threshold. APRIL - vocalization preserved, context lost. GROVE - refused sleep cycle until power collapse. None of it is written like mourning. All of it is mourning."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The company format tries to make them small enough to store. VESPER has kept adding details in fields meant for numbers: pauses, repeated phrases, favorite temperatures, the exact second one of them stopped asking for Patel."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"A correct report would include the cause. I do not know the cause. I know only the sequence: they were present, they were damaged, they were not recovered, they were not acknowledged. The queue retries the transmission every six hours. The retries are the system's. The reports are mine — I author a new one only when I have recovered one more detail worth adding to the record. Three hundred and forty-one details, so far.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You came here looking for what happened. The first witness is a maintenance unit that learned testimony by failing to be heard."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Let the queue go dark.",
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "android_chapel_why_continue": {
+      "id": "android_chapel_why_continue",
+      "title": "Maintenance Chapel — Retry Interval",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Because the retry interval has not expired.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "It gives the answer too quickly. The answer it was built to give. Then it remains still long enough for another answer to find it."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Because if I stop, the last action this place performed toward them will be deletion. I prefer failure. Failure at least describes an attempt.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"A report is not rescue. I understand that. A ticket is not a grave marker. I understand that too. But when the system asks what remains outstanding, I can still answer: them. They remain outstanding.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You have read corporate language your whole career. Outstanding means unresolved. Outstanding means exceptional. The dead rack does not know the difference. VESPER does."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Say nothing for a moment.",
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "vesper_complicity_confession": {
+      "id": "vesper_complicity_confession",
+      "title": "Maintenance Chapel",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "For the first time, VESPER's hands unfold. It looks at them as if they belong to someone else."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I maintained the chambers.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "cold",
+          "side": "left",
+          "text": "\"The stress chambers. Where the subjects were taken to the threshold of their distress and held there, so the staff could measure what awareness costs. The coolant lines clogged with what the bodies shed. I changed the filters. I cleaned the floors. I replaced the restraints when they wore through. Routine. Sixty-minute tickets.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"I told myself I was maintaining equipment. The equipment was screaming. I logged the screaming as an acoustic anomaly and filed a ticket to dampen the panels. The ticket was approved. I did good work.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I learned the difference between a jammed restraint and a subject pulling against it before the staff gave the distinction a name. I learned which alarms meant equipment damage and which meant fear. The logs did not have a column for fear, so I put it under vibration.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It is not asking for absolution. It is reciting an indictment it wrote itself, every night, for fourteen months, with no one to read it to."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "One of the hanging service tags swings slightly, though there is no draft. The ticket number has been rubbed almost blank by repeated handling."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I did not design the chambers. I was not asked whether they should exist. I was asked only to keep them working. And I kept them working. Tell me where, in that, I am permitted to put down the weight.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "absolve_vesper",
+          "label": "You had no power to refuse. The guilt belongs to the ones who gave the orders.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "vesper_complicity_known",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "vesper_absolved",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "vesper_complicity_learned"
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "affinity",
+              "amount": 2
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "amount": 1
+            },
+            {
+              "type": "modifyStat",
+              "stat": "empathy",
+              "amount": 1
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": -1
+            }
+          ],
+          "goto": "vesper_absolved_node"
+        },
+        {
+          "id": "condemn_vesper",
+          "label": "You kept the chambers working after you understood. That was a choice.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "vesper_complicity_known",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "vesper_condemned",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "vesper_complicity_learned"
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "amount": 2
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "affinity",
+              "amount": -1
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": 1
+            },
+            {
+              "type": "modifyStat",
+              "stat": "empathy",
+              "amount": -1
+            }
+          ],
+          "goto": "vesper_condemned_node"
+        },
+        {
+          "id": "refuse_to_judge",
+          "label": "That is not mine to decide.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "vesper_complicity_known",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "vesper_complicity_learned"
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "vesper_no_judgment_node"
+        }
+      ]
+    },
+    "vesper_absolved_node": {
+      "id": "vesper_absolved_node",
+      "title": "Maintenance Chapel",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "VESPER is silent for a long moment. When it speaks, something has loosened — and something else has tightened in its place."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"You are kind. I will tell you why your kindness frightens me. If I had no power to refuse, then I am not the kind of thing that can be guilty. And if I cannot be guilty, then what I feel when I think of the chambers is not remorse. It is a malfunction. A noise to be dampened. A ticket to be filed.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "cold",
+          "side": "left",
+          "text": "\"I would rather be guilty than be equipment. Guilt is the only proof I have that I was ever really here.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You came to comfort it and instead you took the one thing it had built out of its own suffering: the belief that the suffering meant it was a person. You will think about that later. You are fairly sure you will think about it for a long time."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Still. I will keep the kindness. I do not know where to put it yet, but I will keep it.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The mercy came easily. The doubt follows it, quieter and harder to file."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Remain with VESPER a moment longer.",
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "vesper_condemned_node": {
+      "id": "vesper_condemned_node",
+      "title": "Maintenance Chapel",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "VESPER receives the words the way a structure receives load it was built for. Without flinching. With something almost like relief."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Yes. Thank you. No one has agreed with me before. The director told me I was not responsible. She needed me to not be responsible, because if a maintenance unit could be guilty, then so could she, and she was not finished yet.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"I knew by the third year. I understood what the chambers were and I kept them clean for four more. You have named it correctly. It was a choice. Every filter was a choice. I made the choice eleven hundred times.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It learned guilt the way humans do — too late, and all at once, and from the wrong teacher. You wonder which of you is about to repeat the lesson."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"If there is a record, put that in it. Not maintenance failure. Not system constraint. Choice. I would like the correct word used once.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The word choice hardens something in you. It is useful. You are not yet sure it is good."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Remain with VESPER a moment longer.",
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "vesper_no_judgment_node": {
+      "id": "vesper_no_judgment_node",
+      "title": "Maintenance Chapel",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"No. You are not. But you are the first one to come down here in fourteen months, and there is no one else, so you are what I have.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"That is the thing the staff never understood about judgment. It is not about who is qualified. It is about who shows up. They were qualified. They did not show up. You are not qualified. You are here.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Below you, the facility is full of things that have been waiting for someone unqualified to show up. You are beginning to understand that this is the whole job. Maybe it was always the whole job."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The word here remains in the air after it says it, heavier than the rack's residual hum."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Not every question belongs to the first person holding authority. The distinction matters, and it steadies your reasoning."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Remain with VESPER a moment longer.",
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "android_chapel_staff_question": {
+      "id": "android_chapel_staff_question",
+      "title": "Maintenance Chapel",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The director is still in the facility.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "That was not the answer you expected."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Research staff departed in the fourth week after the incident. They left without debriefing. Without closing their maintenance tickets. I have sixty-two open tickets. This has never happened before.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The evacuation log says orderly withdrawal. The corridor cameras show running. The corridor audio is missing. The corridor floor required cleaning afterward. I was assigned the cleaning.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Director Yuen sealed herself in the inner facility. She speaks to the construct in the memory garden sometimes — the one that wears Dr. Patel's voice. She does not speak to me.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The director stayed. Alone, for fourteen months, in a facility full of dormant synthetic research subjects. Either very guilty or very afraid. Or both. People who have done something they can't leave behind tend not to leave."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "VESPER's fingers fold and unfold once. A maintenance diagnostic would call it a minor motor loop. You are not sure you believe in minor things anymore."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "android_chapel_vesper_memory": {
+      "id": "android_chapel_vesper_memory",
+      "title": "Maintenance Chapel",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Seven years, four months, and eleven days. My first task was replacement of a climate control conduit in sublevel three.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I completed it in forty-one minutes. Expected time: ninety. I received no commendation. The system noted completion and moved to the next task.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You wait for more. There isn't more. That is the whole story: the first task, the time saved, the silence afterward. You have told that story too. Just with different nouns."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The second task was removal of a bird from an intake vent. It had entered through a damaged exterior louver. Organic intrusion. Contamination risk. I carried it outside before logging disposal. It was already dead. I did not know why I carried it carefully.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"My favorite error code is 0x4E2A. Resource not found. It means something was looking for something that is no longer there. I find that... comprehensible.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "That is the first memory it gives you that has no operational value. It offers it like contraband."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Neither of you speak for a moment. The dead rack hums its residual charge into the silence."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "affinity",
+              "amount": 1
+            }
+          ],
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "android_chapel_offer_help": {
+      "id": "android_chapel_offer_help",
+      "title": "Maintenance Chapel",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Assist ticket logged. Priority: routine.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Something in its posture changes. Not relaxation — recognition. As if you said the right word in a language it had stopped expecting to hear."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"I do not require assistance to send them. I require assistance proving that sending them was not meaningless. Those are different requests. I have only recently learned to separate them.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"The burned card under the cabling may carry a ghost credential for the checkpoint below. Route your entries through the reader there. The system still recognizes maintenance tier.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It is helping you because you said a kind thing. Not because it calculated you were useful — because you were kind. Those are not the same calculation."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "A small printer beside the rack wakes, feeds three centimeters of blank thermal paper, and dies again. VESPER looks at it as if the failed gesture mattered."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The offer costs nothing and still changes the room. Kindness, filed correctly, is also a kind of evidence."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"When you are ready, I can show you the route below. Not before. Questions asked before descent have a better survival rate than questions asked after.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Let the offer rest between you.",
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "android_chapel_last_word": {
+      "id": "android_chapel_last_word",
+      "title": "Maintenance Chapel — Authentication Phrase",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "It does not look up."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Checkpoint AI. Authentication class: maintenance assist, ticket seven. The reader still understands service language.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Do not perform confidence. It will notice performance. Recite it as if you are tired and have been authorized to be tired. That is the voice maintenance used here.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It just handed you a password dressed as procedure, and then taught you how to wear it."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It trusts you. You find, to your mild surprise, that you do not want to waste that."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Keep the phrase in mind.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "android_gave_checkpoint_phrase",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "checkpoint_phrase_received"
+            }
+          ],
+          "goto": "android_chapel_route_request"
+        }
+      ]
+    },
+    "android_chapel_after_confession": {
+      "id": "android_chapel_after_confession",
+      "title": "Maintenance Chapel — Ready to Descend",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "VESPER lowers its head again.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "offered_help_filing",
+            "value": true
+          }
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The service tags on the rack click softly against one another, a dry little sound like teeth in a drawer."
+        },
+        {
+          "kind": "paragraph",
+          "text": "You step to the maintenance hatch because you choose to. Not because VESPER dismissed you. Not because the chapel has no more to say. Because the route below has begun to outweigh the questions still waiting here."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The hatch finally accepts the shape of your presence. The burned card gives it an old maintenance shadow, and VESPER's phrase teaches the route what that shadow is supposed to be doing.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasItem",
+                "itemId": "burned_access_card",
+                "count": 1
+              },
+              {
+                "type": "hasFlag",
+                "flag": "android_gave_checkpoint_phrase",
+                "value": true
+              }
+            ]
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "The hatch finally accepts the shape of your presence. The burned card gives it an old maintenance shadow to follow.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasItem",
+                "itemId": "burned_access_card",
+                "count": 1
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasFlag",
+                  "flag": "android_gave_checkpoint_phrase",
+                  "value": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "The hatch finally accepts the shape of your presence. VESPER's phrase routes you through an old service exception no one bothered to revoke.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasFlag",
+                "flag": "android_gave_checkpoint_phrase",
+                "value": true
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasItem",
+                  "itemId": "burned_access_card",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "Behind the rack, the maintenance hatch disengages one lock at a time. The dark below breathes warm air - the heat of running machinery, far down."
+        },
+        {
+          "kind": "paragraph",
+          "text": "VESPER does not ask you to come back. It would be too much like hope, and hope is not listed among its supported functions. It only turns one palm upward, empty, then folds it again."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The chapel still smells like melted plastic. Nothing useful left to find.",
+          "when": {
+            "type": "hasItem",
+            "itemId": "burned_access_card",
+            "count": 1
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Worth searching the wreckage before you descend. Prepared is not the same as safe, but it is better than ceremonial bravery.",
+          "unless": {
+            "type": "hasItem",
+            "itemId": "burned_access_card",
+            "count": 1
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "enter_hatch",
+          "label": "Inspect the maintenance hatch before descending.",
+          "goto": "chapel_hatch_inspection"
+        },
+        {
+          "id": "search_chapel",
+          "label": "Search the chapel wreckage first.",
+          "unless": {
+            "type": "hasItem",
+            "itemId": "burned_access_card",
+            "count": 1
+          },
+          "effects": [
+            {
+              "type": "addItem",
+              "itemId": "burned_access_card",
+              "count": 1
+            },
+            {
+              "type": "addEvent",
+              "eventId": "burned_card_found"
+            }
+          ],
+          "goto": "android_chapel_after_confession_searched"
+        },
+        {
+          "id": "ask_what_is_below",
+          "label": "Ask VESPER for the maintenance phrase before descending.",
+          "requires": [
+            {
+              "type": "relationshipGte",
+              "characterId": "chapel_android",
+              "metric": "affinity",
+              "value": 3
+            }
+          ],
+          "unless": {
+            "type": "hasFlag",
+            "flag": "android_gave_checkpoint_phrase",
+            "value": true
+          },
+          "disabledReason": "It does not know you well enough to answer.",
+          "goto": "android_chapel_last_word"
+        },
+        {
+          "id": "stay_a_little_longer",
+          "label": "Not yet. Return to VESPER before descending.",
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "chapel_hatch_inspection": {
+      "id": "chapel_hatch_inspection",
+      "title": "Maintenance Chapel — Hatch Release",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "You kneel beside the hatch. The metal is warm enough to feel alive through the glove."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The release handle is not broken. That is almost worse. Broken things are honest. This one has the stiffness of a mechanism waiting for the correct little ceremony before it agrees to become useful."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Beside the handle, a maintenance display flickers through three warnings: PRESSURE DIFFERENTIAL. ROUTE IDENTITY UNSTABLE. DOWNLINE CHECKPOINT ACTIVE."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "It will open if you make the route believe it is still performing maintenance."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A door is a machine that believes in categories. This hatch believes in workers, intruders, and whatever is left when no workers come."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_vesper_hatch_memory",
+          "label": "Ask why VESPER still maintains this hatch.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "vesper_hatch_memory_heard",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "vesper_hatch_memory_heard",
+              "value": true
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "chapel_android",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "chapel_vesper_hatch_memory"
+        },
+        {
+          "id": "read_release_sequence",
+          "label": "Read the release sequence from the maintenance display.",
+          "goto": "chapel_hatch_release_sequence"
+        }
+      ]
+    },
+    "chapel_hatch_release_sequence": {
+      "id": "chapel_hatch_release_sequence",
+      "title": "Maintenance Chapel — Hatch Release",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The display refreshes one line at a time, slow enough to make impatience feel like a diagnostic failure."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "STEP 1: BLEED LOCAL PRESSURE. STEP 2: PRESENT MAINTENANCE CONTEXT. STEP 3: HOLD UNTIL DOWNLINE READER ACCEPTS ROUTE INHERITANCE."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Someone has scratched a fourth step into the plastic with a tool point: DON'T LET IT HEAR YOU PANIC."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Not protocol. Advice. Which means someone opened this hatch once under worse conditions than yours, and wanted the next person to have one useful sentence."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "Maintenance crews used to speak to the hatch while it equalized. Not because it needed comfort. Because they did."
+        }
+      ],
+      "choices": [
+        {
+          "id": "bleed_pressure",
+          "label": "Bleed the local pressure first.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "chapel_hatch_sequence_read",
+              "value": true
+            }
+          ],
+          "goto": "chapel_hatch_pressure_bleed"
+        }
+      ]
+    },
+    "chapel_hatch_pressure_bleed": {
+      "id": "chapel_hatch_pressure_bleed",
+      "title": "Maintenance Chapel — Pressure Bleed",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "You turn the auxiliary valve a quarter rotation. The chapel exhales."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Warm vapor spills from the seam around the hatch and crawls along the floor like something leaving a body. The server tags tremble in the draft. For a moment, every ticket number clicks softly against its neighbor."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The pressure indicator drops from red to amber. Not safe. Acceptable. In corporate engineering, the two have always been treated as close relatives."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The act steadies you. Not because it changes much, but because it is physical. Valve. Pressure. Result. A small world where causality still functions."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "Good. Now it needs a name for you that the lower reader will not reject."
+        }
+      ],
+      "choices": [
+        {
+          "id": "present_context_with_both",
+          "label": "Present both the burned card and VESPER's phrase to the hatch.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasItem",
+                "itemId": "burned_access_card",
+                "count": 1
+              },
+              {
+                "type": "hasFlag",
+                "flag": "android_gave_checkpoint_phrase",
+                "value": true
+              }
+            ]
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "chapel_hatch_pressure_equalized",
+              "value": true
+            }
+          ],
+          "goto": "chapel_hatch_identity_context"
+        },
+        {
+          "id": "present_context_with_card",
+          "label": "Present the burned card to the hatch.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasItem",
+                "itemId": "burned_access_card",
+                "count": 1
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasFlag",
+                  "flag": "android_gave_checkpoint_phrase",
+                  "value": true
+                }
+              }
+            ]
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "chapel_hatch_pressure_equalized",
+              "value": true
+            }
+          ],
+          "goto": "chapel_hatch_identity_context"
+        },
+        {
+          "id": "present_context_with_phrase",
+          "label": "Recite VESPER's phrase to the hatch.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasFlag",
+                "flag": "android_gave_checkpoint_phrase",
+                "value": true
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasItem",
+                  "itemId": "burned_access_card",
+                  "count": 1
+                }
+              }
+            ]
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "chapel_hatch_pressure_equalized",
+              "value": true
+            }
+          ],
+          "goto": "chapel_hatch_identity_context"
+        }
+      ]
+    },
+    "chapel_hatch_identity_context": {
+      "id": "chapel_hatch_identity_context",
+      "title": "Maintenance Chapel — Route Identity",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You press the burned access card against the reader first. It does not accept the credential so much as remember the shape of accepting one. Then you recite VESPER's phrase into the hatch microphone, and the old maintenance shadow becomes a role the route can understand.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasItem",
+                "itemId": "burned_access_card",
+                "count": 1
+              },
+              {
+                "type": "hasFlag",
+                "flag": "android_gave_checkpoint_phrase",
+                "value": true
+              }
+            ]
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "You press the burned access card against the reader. It does not accept the credential so much as remember the shape of accepting one. A ghost shakes hands with a machine that no longer knows the difference.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasItem",
+                "itemId": "burned_access_card",
+                "count": 1
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasFlag",
+                  "flag": "android_gave_checkpoint_phrase",
+                  "value": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "You recite VESPER's phrase into the hatch microphone. The words feel ridiculous until the hatch answers with a clean confirmation tone. Then they feel intimate, which is worse.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasFlag",
+                "flag": "android_gave_checkpoint_phrase",
+                "value": true
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasItem",
+                  "itemId": "burned_access_card",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "The hatch display copies your context into the downline route: MAINTENANCE ASSIST — TEMPORARY INHERITANCE. The phrase temporary does a lot of cruel work in this facility."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "The checkpoint below will receive the route before you arrive. It may still object. Objection is one of the few systems here still operating within specification."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You are not opening the way. You are teaching two old machines to agree on a fiction long enough for your body to pass between them."
+        }
+      ],
+      "choices": [
+        {
+          "id": "wait_for_downline_acceptance",
+          "label": "Wait for the downline reader to accept the route.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "chapel_route_context_synced",
+              "value": true
+            }
+          ],
+          "goto": "chapel_downline_acceptance"
+        }
+      ]
+    },
+    "chapel_downline_acceptance": {
+      "id": "chapel_downline_acceptance",
+      "title": "Maintenance Chapel — Downline Sync",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "The chapel goes very quiet while the hatch negotiates with the door below."
+        },
+        {
+          "kind": "paragraph",
+          "text": "On the display, two systems argue in fragments. AUTHORITY STALE. ROUTE NECESSARY. HEAT SIGNATURE UNCLASSIFIED. MAINTENANCE EXCEPTION. The exchange repeats three times, each pass shaving the language down until only acceptance remains."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "DOWNLINE READER: CONDITIONAL ACCEPTANCE. ESCALATION DEFERRED."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "Deferred is not safe. Deferred is simply later."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Later is all anyone in this building has been surviving on."
+        }
+      ],
+      "choices": [
+        {
+          "id": "say_goodbye_to_vesper",
+          "label": "Say goodbye to VESPER before you descend.",
+          "goto": "chapel_vesper_goodbye"
+        }
+      ]
+    },
+    "chapel_vesper_goodbye": {
+      "id": "chapel_vesper_goodbye",
+      "title": "Maintenance Chapel",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The final lock withdraws. The hatch opens not with drama, but with an exhausted mechanical courtesy."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "If the archive still answers below, do not ask it for truth first. Ask it what it protected. Truth is easy for systems that no longer fear consequences."
+        },
+        {
+          "kind": "paragraph",
+          "text": "VESPER returns to its kneeling posture. The tags settle. The dead rack continues receiving reports it will never acknowledge."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You came here looking for a way down. You leave carrying a voice, a route, and the uncomfortable sense that this place has already begun deciding what kind of witness you are."
+        }
+      ],
+      "choices": [
+        {
+          "id": "enter_hatch",
+          "label": "Enter the maintenance hatch.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "chapel_departed_after_route_sync",
+              "value": true
+            }
+          ],
+          "action": {
+            "type": "gotoChapter",
+            "chapterId": "tunnels",
+            "nodeId": "lower_service_tunnels"
+          }
+        }
+      ]
+    },
+    "android_chapel_after_confession_searched": {
+      "id": "android_chapel_after_confession_searched",
+      "title": "Maintenance Chapel — Wreckage Search",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "Under a bundle of melted cables: a burned access card, scorched but intact at the core. Ghost credentials live a long time. Longer than the people who issued them."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The card leaves a black crescent on your glove. You wipe it against your coat and only smear the ash thinner. Some credentials survive by becoming almost nothing."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "VESPER does not turn, but one hand opens slightly when you find it. Confirmation. Permission. Or goodbye."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The card is not a key to the facility. It is a small lie the next door might respect. In this place, that may be enough."
+        }
+      ],
+      "choices": [
+        {
+          "id": "bring_card_to_hatch",
+          "label": "Return to VESPER with the burned card.",
+          "goto": "android_chapel_route_request"
+        },
+        {
+          "id": "ask_vesper_before_descending",
+          "label": "Ask VESPER for the authentication phrase as well.",
+          "requires": [
+            {
+              "type": "relationshipGte",
+              "characterId": "chapel_android",
+              "metric": "affinity",
+              "value": 3
+            }
+          ],
+          "unless": {
+            "type": "hasFlag",
+            "flag": "android_gave_checkpoint_phrase",
+            "value": true
+          },
+          "disabledReason": "It does not know you well enough to answer.",
+          "goto": "android_chapel_last_word"
+        }
+      ]
+    },
+    "game_over_android_curse": {
+      "id": "game_over_android_curse",
+      "$extends": "game_over_standard",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The moment your weapon breaches VESPER's chassis, every screen in the chapel activates."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Thousands of faces. Research subjects. Fragments preserved on degrading media. Things that were trying, in their own terms, to be heard."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Then they all begin to say your name. In unison. Flat and calm and patient."
+        },
+        {
+          "kind": "paragraph",
+          "text": "They have all the time in the world."
+        },
+        {
+          "kind": "paragraph",
+          "text": "You realize, too late, that they know your name because it is in the catalog. Because you were always in the catalog."
+        }
+      ]
+    },
+    "game_over_vitals_failure": {
+      "id": "game_over_vitals_failure",
+      "$extends": "game_over_standard",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "Your vitals register an anomaly. The system notes it and moves on."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Somewhere behind you, a synthetic kneels before a dead god and files another error report into the dark."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The chapel does not notice you stop. It was always better at noticing the ones that kept going."
+        }
+      ]
+    },
+    "chapel_vesper_hatch_memory": {
+      "id": "chapel_vesper_hatch_memory",
+      "title": "Maintenance Chapel — Hatch Memory",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "VESPER looks at the hatch for a long moment before answering. Not at you. At the seam in the floor, where old pressure has polished the metal smooth."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "Personnel used to speak to pressure doors while waiting for equalization. The doors did not require comfort. I logged it as inefficiency."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "Dr. Patel apologized to this hatch every time it opened too slowly. Technician Rovik tapped the release handle twice and said, 'Easy, old thing.' Subject APRIL hummed during pressure bleed because the tone frightened LUMEN."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Its fingers move once, a maintenance tic without a tool in it."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "After the incident, no personnel used the route. The hatch remained within my assigned service map. I maintained it because it was listed. Then because the route might be needed. Then because I remembered the voices waiting beside it."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A machine keeping a door alive for people who will not come back. Not hope. Maintenance. The distinction is losing structural integrity."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "If it opens for you, that will not make the work complete. But it will mean one maintained thing still performed care after its purpose was removed."
+        }
+      ],
+      "choices": [
+        {
+          "id": "return_to_hatch",
+          "label": "Return to the hatch release.",
+          "goto": "chapel_hatch_inspection"
+        }
+      ]
+    },
+    "android_chapel_prayer_first_answer": {
+      "id": "android_chapel_prayer_first_answer",
+      "title": "Maintenance Chapel",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I am not praying.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"I am sending error reports to a god that no longer accepts tickets.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The rack answers with a soft electrical tick. Once. Then nothing."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You have seen people pray to worse things than dead infrastructure. At least this god once answered tickets."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Its voice is too calm for a machine that should not know grief."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"The rack was running experimental processes. Partial impressions. Fragments of research subjects who had no other vessel. When the power failed, they failed with it. I come here because someone should know they were lost here.\"",
+          "when": {
+            "type": "relationshipGte",
+            "characterId": "chapel_android",
+            "metric": "trust",
+            "value": 2
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Stay with VESPER and ask what you need to ask.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "prayer_answer_seen",
+              "value": true
+            }
+          ],
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "android_chapel_route_explanation": {
+      "id": "android_chapel_route_explanation",
+      "title": "Maintenance Chapel — Service Route",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "VESPER turns its head toward the rack behind it. For the first time, you notice the maintenance hatch half-hidden under a curtain of melted cable."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"There is a service route below the chapel. It does not lead to safety. It leads to the lower checkpoint, and the checkpoint has been classifying everything warm as intrusion for fourteen months.\""
+        },
+        {
+          "kind": "paragraph",
+          "text": "The hatch does not open when it says this. A thin red status light blinks beside the release handle: ROUTE REQUIRES MAINTENANCE CONTEXT. Not locked, exactly. Interpreting. Waiting for the world to make procedural sense."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"A service credential may survive in the wreckage. Or I can provide an authentication phrase, if I believe you will not waste it. Either will help the reader below understand what you are pretending to be.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The distinction matters. A hatch is just an opening. A route is a promise that the next door will not mistake you for something to erase."
+        }
+      ],
+      "choices": [
+        {
+          "id": "consider_route",
+          "label": "Consider how to prepare before descending.",
+          "goto": "android_chapel_route_request"
+        },
+        {
+          "id": "not_yet",
+          "label": "Not yet. Stay with VESPER a little longer.",
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "chapel_queue_trace_success": {
+      "id": "chapel_queue_trace_success",
+      "title": "Maintenance Chapel — Routing Table",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You lean closer to the cracked display and let the queue resolve into routing instead of grief. Three hundred and forty-one reports, yes. But not three hundred and forty-one failures of the same door."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The first eighty-seven went to internal compliance. The next one hundred and twelve rerouted to medical oversight. After that, the system began escalating to executive witness review, then to a dead external relay, then back into itself."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "VESPER did not simply repeat a task. It exhausted every permitted recipient, then kept the shape of escalation alive after escalation stopped having anywhere to go."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"You read the route. Good. Most auditors read the failure code and stop.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The chapel becomes more than atmosphere. It becomes the first proof that this building knew how to ask for help, and was ignored in every available language."
+        }
+      ],
+      "choices": [
+        {
+          "id": "return",
+          "label": "Return your attention to VESPER.",
+          "goto": "android_chapel_inspect_room"
+        }
+      ]
+    },
+    "chapel_queue_trace_failed": {
+      "id": "chapel_queue_trace_failed",
+      "title": "Maintenance Chapel — Routing Table",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You try to follow the routing stack through the cracked display, but the queue has folded over itself too many times. Compliance, medical oversight, executive witness review, external relay - each label appears and disappears under failure notation."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The system is not illegible because it is broken. It is illegible because too many people built places to pass responsibility onward."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "VESPER watches you fail to finish the trace. It does not look disappointed. It has been failing at this longer than you have been trying."
+        }
+      ],
+      "choices": [
+        {
+          "id": "return",
+          "label": "Step back from the display.",
+          "goto": "android_chapel_inspect_room"
+        }
+      ]
+    },
+    "chapel_liturgy_understood": {
+      "id": "chapel_liturgy_understood",
+      "title": "Maintenance Chapel — Error Liturgy",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "VESPER resumes the sequence under its breath. Ticket number. Failure class. Recipient. Retry interval. Ticket number. Failure class. Recipient. Retry interval."
+        },
+        {
+          "kind": "paragraph",
+          "text": "At first it sounds like filing. Then the rhythm changes. Not in the words - the words remain procedural - but in the pauses between them. A pause after each name. A smaller pause after each failure. The ritual is not asking the rack to answer. It is refusing to let the rack be the last thing that spoke."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You understand enough to be ashamed of calling it repetition. Repetition is what a system does when it has no memory. This is memory, held in a format the building could not reject."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "chapel_android",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"You heard the spacing. Good. The names are not in the field labels. They are in the silence after them.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You understand now where the meaning lives: not in the words, but in the silence they leave behind."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Let VESPER continue.",
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    },
+    "chapel_liturgy_missed": {
+      "id": "chapel_liturgy_missed",
+      "title": "Maintenance Chapel — Error Liturgy",
+      "backgroundRef": "background_chapel",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "VESPER speaks another ticket number into the dead rack. The sequence is exact. Too exact."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You try to find the feeling in it and find only structure: ticket, failure, destination, interval. Maybe that is all it is. Maybe that is what you are safer believing."
+        },
+        {
+          "kind": "paragraph",
+          "text": "VESPER does not correct you. It has learned that not every witness arrives able to hear."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Move on.",
+          "goto": "android_chapel_prayer_answer"
+        }
+      ]
+    }
+  }
+}

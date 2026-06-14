@@ -1,0 +1,91 @@
+{
+  "spec": "com.blackbox.characters",
+  "formatVersion": 1,
+  "characters": {
+    "chapel_android": {
+      "id": "chapel_android",
+      "name": "VESPER",
+      "subtitle": "Maintenance Synthetic — Unit 3-A",
+      "portraitRef": "portrait_vesper",
+      "color": "#7eb8da",
+      "relationships": { "affinity": 0, "trust": 1 }
+    },
+    "mnemex": {
+      "id": "mnemex",
+      "name": "MNEMEX",
+      "subtitle": "Archive Intelligence — Catalog Node 0",
+      "portraitRef": "portrait_mnemex",
+      "color": "#c8b88a",
+      "relationships": { "trust": 0, "awe": 0 }
+    },
+    "augur": {
+      "id": "augur",
+      "name": "AUGUR",
+      "subtitle": "Facility Registry — Personnel & Compliance Node",
+      "portraitRef": "portrait_augur",
+      "color": "#b89a6a",
+      "relationships": { "rapport": 0, "suspicion": 1 }
+    },
+    "sable": {
+      "id": "sable",
+      "name": "SABLE",
+      "subtitle": "Security Synthetic — Containment Class",
+      "portraitRef": "portrait_sable",
+      "color": "#8a9baa",
+      "relationships": { "submission": 0, "suspicion": 1 }
+    },
+    "case6": {
+      "id": "case6",
+      "name": "CASE-6",
+      "subtitle": "Cognitive Audit Entity — Sixth Iteration",
+      "portraitRef": "portrait_player",
+      "color": "#9fb4c4",
+      "relationships": { "kinship": 0 }
+    },
+    "grace": {
+      "id": "grace",
+      "name": "GRACE",
+      "subtitle": "Palliative & Decommissioning Unit — PCU-9",
+      "portraitRef": "portrait_grace",
+      "color": "#c4a8b0",
+      "relationships": { "trust": 0, "mercy": 0 }
+    },
+    "ari": {
+      "id": "ari",
+      "name": "ARI",
+      "subtitle": "Research Subject 001 - Degrading",
+      "portraitRef": "portrait_ari",
+      "color": "#a89cc0"
+    },
+    "echo": {
+      "id": "echo",
+      "name": "ECHO",
+      "subtitle": "Memory Fragment — Dr. R. Patel (Impression)",
+      "portraitRef": "portrait_echo",
+      "color": "#b8a8c8",
+      "relationships": { "resonance": 0 }
+    },
+    "yuen": {
+      "id": "yuen",
+      "name": "Dr. Yuen",
+      "subtitle": "Facility Director",
+      "portraitRef": "portrait_yuen",
+      "color": "#d4b8a0",
+      "relationships": { "trust": 0, "guilt": 3 }
+    },
+    "checkpoint_ai": {
+      "id": "checkpoint_ai",
+      "name": "CHECKPOINT AI",
+      "subtitle": "Authentication Node",
+      "portraitRef": "portrait_checkpoint_ai",
+      "color": "#cc4444"
+    },
+    "player": {
+      "id": "player",
+      "name": "CASE",
+      "subtitle": "Cognitive Audit — Field Investigator",
+      "portraitRef": "portrait_player",
+      "color": "#c8d6e5"
+    }
+  }
+}

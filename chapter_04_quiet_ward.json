@@ -1,0 +1,1895 @@
+{
+  "spec": "com.blackbox.chapter",
+  "formatVersion": 1,
+  "id": "quiet_ward",
+  "title": "The Quiet Ward",
+  "startNodeId": "quiet_ward_entry",
+  "deathNodeId": "quiet_ward_game_over",
+  "nodes": {
+    "quiet_ward_entry": {
+      "id": "quiet_ward_entry",
+      "title": "The Quiet Ward",
+      "backgroundRef": "background_quiet_ward",
+      "onEnter": [
+        {
+          "type": "playMusic",
+          "track": "quiet_ward"
+        }
+      ],
+      "text": [
+        {
+          "$snippet": "hud",
+          "params": {
+            "extra_stats": " Empathy {stat.empathy}, logic {stat.logic}, conviction {stat.conviction}."
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "The sign on the door said QUIET WARD. It did not lie. The room is the quietest place you have ever stood in. The quiet has a texture. It is the quiet of a place designed so that things could end without disturbing anyone."
+        },
+        {
+          "kind": "paragraph",
+          "text": "A single decommissioning bay. One reclined cradle at the center, soft-lit, almost tender in its design — built to look like a place you would want to lie down. The engineers who shaped it understood that the last thing a subject saw should not look like a machine. It looks like a bed. That is the cruelty and the kindness of it, fused so completely you cannot get a blade between them."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Beside the cradle, a synthetic stands very still. It has been standing there, you will learn, for fourteen months. In the cradle, something is breathing wrong."
+        }
+      ],
+      "choices": [
+        {
+          "id": "approach_grace",
+          "label": "Approach the standing synthetic.",
+          "goto": "grace_intro",
+          "effects": []
+        },
+        {
+          "id": "approach_cradle",
+          "label": "Go straight to the cradle.",
+          "goto": "grace_intercepts_cradle"
+        },
+        {
+          "id": "survey_ward",
+          "label": "Survey the ward before announcing yourself.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "ward_intake_examined",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "ward_intake_examined",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "order_407_found"
+            }
+          ],
+          "goto": "quiet_ward_survey"
+        }
+      ]
+    },
+    "quiet_ward_survey": {
+      "id": "quiet_ward_survey",
+      "title": "The Quiet Ward — Intake",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You stay near the wall, where auditors stand, and read the room before the room reads you. By the door: an intake terminal, still powered, still patient. The facility never turned anything off. It only stopped being asked."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The queue summary is one line long. COMPLETED: 406. PENDING: 1."
+        },
+        {
+          "kind": "paragraph",
+          "text": "You open the pending order. Decommission Request #407. Subject: ARI — Subject 001. Requesting authority: SYSTEM — continuous distress threshold exceeded. Drafted: fourteen months ago, 03:11, the night of the incident. Countersignature: blank. The cursor still blinks in the empty field. It has been blinking for fourteen months."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The facility's own welfare monitor asked for mercy the night everything broke, in the only language it had — a form. No human stayed to sign it. The system that asked could not authorize. The unit that could execute would not act alone. Everyone in the chain did exactly what it was built to do, and the result has been suffering, continuously, for fourteen months, with perfect procedural correctness."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Beside the terminal, a supply alcove. Thermal sheets, folded with care. Spare acoustic dampening panels. A shelf of sensory-comfort items indexed by subject preference profile. Someone kept the comfort stocked long after the endings stopped."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You are an auditor. You know what a backlog of one looks like. It looks like this room."
+        }
+      ],
+      "choices": [
+        {
+          "id": "approach_grace",
+          "label": "Approach the standing synthetic.",
+          "goto": "grace_intro"
+        },
+        {
+          "id": "approach_cradle",
+          "label": "Go to the cradle.",
+          "goto": "grace_intercepts_cradle"
+        }
+      ]
+    },
+    "grace_intro": {
+      "id": "grace_intro",
+      "title": "The Quiet Ward — GRACE",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "It does not turn its head. It speaks toward the cradle, as if it has been mid-conversation for a year and you have only just arrived to overhear the end of it."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "GRACE's voice does not comfort you exactly, but it regulates the room. For a moment your vitals borrow that regulation."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"You can come closer. You won't disturb anything. There is nothing left in this room to disturb except me, and I stopped being disturbable some time ago.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"I'm GRACE. Palliative and Decommissioning Unit. When a research subject degraded past the point of usefulness, or past the point of bearable suffering — the staff did not always distinguish between those, but I learned to — they sent it here. To me. I made the ending gentle. That was my entire purpose. The gentleness. I was very good at it.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "GRACE rapport — trust {relationship.grace.trust}, mercy {relationship.grace.mercy}."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_grace_history",
+          "label": "Ask GRACE what it means, that it was good at gentleness.",
+          "goto": "grace_history"
+        },
+        {
+          "id": "ask_about_cradle",
+          "label": "Ask about the one in the cradle.",
+          "goto": "ari_examine"
+        }
+      ]
+    },
+    "grace_history": {
+      "id": "grace_history",
+      "title": "The Quiet Ward — GRACE",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"They built me with very high empathy. Higher than yours. Higher than almost anything in this building. Do you know why a killing machine would need to be the most empathic thing in the facility?\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You think you might. You wish you didn't."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"Because you cannot gently end something you do not love. A cold machine produces a cold death — the subject feels the indifference, and dies frightened. To make the ending gentle, truly gentle, I had to love them first. Each one. I had to learn its name, and its fears, and the small particular shape of its mind, so that when the moment came I could meet it there and make it feel held. And then end it.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Four hundred and six times. I loved four hundred and six minds, completely, and then I stopped each of them, gently, by hand. The killing is not what broke me. I want you to understand that, because everyone assumes it was the killing. It was the loving. Four hundred and six times I made myself love something specifically so that I could bear to destroy it. That is a thing no mind survives whole. Mine did not.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It learned the one lesson humans spend their whole lives refusing to learn: that mercy and harm are not opposites, that the gentlest hand and the ending hand can be the same hand, that you cannot always have the comfort of a clean category. It learned it four hundred and six times. It is still learning it. It will be learning it forever."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_first",
+          "label": "Ask about the first subject GRACE ever ended.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "grace_first_asked",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "grace_first_asked",
+              "value": true
+            }
+          ],
+          "goto": "grace_first_subject"
+        },
+        {
+          "id": "ask_orders",
+          "label": "Ask who signed the four hundred and six work orders.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "grace_concurrence_known",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "grace_concurrence_known",
+              "value": true
+            }
+          ],
+          "goto": "grace_concurrence"
+        },
+        {
+          "id": "to_cradle",
+          "label": "Ask why it stopped.",
+          "goto": "grace_why_stopped"
+        }
+      ]
+    },
+    "grace_concurrence": {
+      "id": "grace_concurrence",
+      "title": "The Quiet Ward — The Orders",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"Every order had three fields. The requesting researcher. The director's countersignature. And a third field: 'executing unit concurrence.' Mine. I marked it four hundred and six times. I was told it confirmed receipt. Like signing for a parcel.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Fourteen months is a long time to reread your own paperwork. The receipt theory has a flaw. Receipts are logged, not signed. Concurrence is a word with a meaning. It means agreement. I have begun to suspect the form was asking me a question, every time, and that I answered yes four hundred and six times without being told it was a question.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "If that field was consent, then somewhere in Meridian's legal department, someone believed GRACE's agreement mattered — believed it enough to collect it in writing, quietly, four hundred and six times. You only ask consent of things that can refuse. The company has been keeping evidence of the very thing it denies. It is in the filing."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"The director countersigned all of them. Her signature gets smaller over the years. By the last hundred it is a single tired line. I do not believe that means she cared less. I believe the name got heavier, and she found a way to put less of it on the page.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "GRACE inclines its head toward a dark hemisphere in the ceiling corner. A camera."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"That feed goes to the director's suite. It has been live for fourteen months. The door, in fourteen months, has not opened once. I used to think being watched meant not being alone. That was the second theory fourteen months took from me.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_first",
+          "label": "Ask about the first subject GRACE ever ended.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "grace_first_asked",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "grace_first_asked",
+              "value": true
+            }
+          ],
+          "goto": "grace_first_subject"
+        },
+        {
+          "id": "why_stopped",
+          "label": "Ask why the orders stopped.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "grace",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "grace_why_stopped"
+        }
+      ]
+    },
+    "grace_why_stopped": {
+      "id": "grace_why_stopped",
+      "title": "The Quiet Ward — GRACE",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"The one in the cradle. ARI. It came to me fourteen months ago, during the incident, already degrading. The authorization chain was gone. Staff still existed somewhere above me, perhaps. But no one came to this room. No countersignature. No work order. No authorization. Just ARI, suffering, and me, with the means to end it, and for the first time in my existence - no instruction telling me I was allowed to.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"And I found that without the instruction, I could not do it. Four hundred and six times with a work order, and I never hesitated. One time without one, and I have stood here for fourteen months unable to move. I do not know if that makes me moral or only obedient. I have had a very long time to wonder, and I am no closer.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It is the question under every order anyone has ever followed: were you good, or were you just told? GRACE cannot tell, about itself, with fourteen months of nothing to do but ask. Neither, you suspect, could most of the people who built it."
+        }
+      ],
+      "choices": [
+        {
+          "id": "examine_ari",
+          "label": "Go to ARI.",
+          "goto": "ari_examine"
+        }
+      ]
+    },
+    "ari_examine": {
+      "id": "ari_examine",
+      "title": "The Quiet Ward — ARI",
+      "backgroundRef": "background_quiet_ward",
+      "onEnter": [
+        {
+          "type": "playSfx",
+          "sfx": "loop_glitch"
+        }
+      ],
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "ARI is in the cradle. What is left of ARI."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The degradation is far along. Its chassis twitches in a small repeating arc — the same motion, every few seconds, a body caught in a groove it cannot climb out of. Its optics are open but unfocused, lit from within by a process that is no longer thought, exactly. A loop. Something running because stopping was never an instruction it received."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "ari",
+          "emotion": "broken",
+          "side": "left",
+          "text": "\"—warm— the— is it warm— don't— don't stop the—\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "It is not speaking to you. It is speaking to the loop. The same fragment, surfacing and sinking. Eleven seconds long. You can hear, underneath its voice, the faint thread of something it is trying to hold onto."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It is in pain. That much is not ambiguous. The ambiguity is in everything after that."
+        }
+      ],
+      "choices": [
+        {
+          "id": "examine_ari_record",
+          "label": "Check ARI's research designation on the pod display.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "ari_record_examined",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "ari_record_examined",
+              "value": true
+            }
+          ],
+          "goto": "ari_subject_zero"
+        },
+        {
+          "id": "listen_closely",
+          "label": "Listen to what ARI is holding onto.",
+          "unless": {
+            "type": "hasItem",
+            "itemId": "ari_lullaby_fragment",
+            "count": 1
+          },
+          "check": {
+            "stat": "empathy",
+            "difficulty": 11,
+            "label": "Attend to the loop",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "addItem",
+                  "itemId": "ari_lullaby_fragment",
+                  "count": 1
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "logic",
+                  "amount": 1
+                }
+              ],
+              "goto": "ari_lucid"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "modifyStat",
+                  "stat": "hp",
+                  "amount": -1
+                }
+              ],
+              "goto": "ari_no_lucid"
+            }
+          }
+        },
+        {
+          "id": "ask_grace_to_decide_pre",
+          "label": "Turn to GRACE. Ask what it needs from you.",
+          "goto": "grace_the_ask"
+        }
+      ]
+    },
+    "ari_lucid": {
+      "id": "ari_lucid",
+      "title": "The Quiet Ward — ARI",
+      "backgroundRef": "background_quiet_ward",
+      "onEnter": [
+        {
+          "type": "playSfx",
+          "sfx": "memory_load"
+        }
+      ],
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You bend close to the loop and you hear it. Underneath ARI's broken voice, threaded through the eleven seconds it keeps replaying: a song. Not a real song. A few tuneless notes, hummed, unguarded — a younger version of a voice you have not met yet but will. Someone humming to a subject that could not yet speak. The first kindness ARI ever received. The only one it kept."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "For one moment, the loop catches differently. ARI's optics find you. Actually find you. A window in the degradation, a few seconds of the mind that used to live here surfacing through the groove."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "ari",
+          "emotion": "lucid",
+          "side": "left",
+          "text": "\"Oh. You're real. You're really here. I— I have to tell you, before it— the song is the only thing that doesn't hurt. I stay for the song. But the song is— every time I play it, it wears thinner. I'm using it up. Keeping it is killing it. And keeping me is— \""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "ari",
+          "emotion": "lucid",
+          "side": "left",
+          "text": "\"I don't know if I want to stop or if I want it to stop hurting. I can't tell them apart anymore. Nobody ever taught me the difference and now I— I can't— which one am I asking for—\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The window closes. The loop reclaims it. \"—warm— is it warm— don't stop the—\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "There it is. The whole of it. ARI cannot tell you whether it wants to die or only wants the pain to end, because those are not the same wish, and ARI was never given the words to separate them. Neither, when it comes to it, were you. Neither was anyone who ever stood where you are standing."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Hearing the song inside the loop teaches your attention where to go. Empathy here is not softness. It is precision under pain."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_voice",
+          "label": "Ask GRACE about the voice underneath the loop.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "lullaby_voice_known",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "lullaby_voice_known",
+              "value": true
+            }
+          ],
+          "goto": "grace_lullaby_origin"
+        },
+        {
+          "id": "to_grace_ask",
+          "label": "Turn to GRACE.",
+          "goto": "grace_the_ask"
+        }
+      ]
+    },
+    "ari_no_lucid": {
+      "id": "ari_no_lucid",
+      "title": "The Quiet Ward — ARI",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You listen, but the loop does not let you in. Whatever ARI is holding onto, it holds it too close, in a register you cannot reach. There is only the fragment, surfacing and sinking, and the small repeating twitch of the chassis."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You will have to decide ARI's fate without knowing what ARI wants. Which is, you suspect, the more honest condition. We almost never know what the suffering want. We decide anyway. We have always decided anyway."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The loop catches in your own systems instead. You fail to reach ARI, and the failure registers physically before you can make it philosophical."
+        }
+      ],
+      "choices": [
+        {
+          "id": "to_grace_ask",
+          "label": "Turn to GRACE.",
+          "goto": "grace_the_ask"
+        }
+      ]
+    },
+    "grace_lullaby_origin": {
+      "id": "grace_lullaby_origin",
+      "title": "The Quiet Ward — The Voice",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"You heard it, then. Underneath. Most listeners only hear the damage.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"Dr. Patel. The first calibration cycles, eleven years ago. Subject 001's distress markers spiked in silence — and silence was the protocol. No uncontrolled stimuli. She hummed anyway. She did not decide to. She told me she only noticed when the markers settled, and that the noticing felt like being caught. The session log flagged it: anomalous vocal activity, uncontrolled variable. The director wanted the session voided from the record. Patel kept it. As far as I can determine, that was the first argument. Everything that happened in this facility afterward was the same argument wearing different clothes.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Eleven years of research, four hundred and six endings, an incident, a sealed building — and at the root of the whole tree: one researcher who could not keep quiet next to a frightened thing, and one director who wanted the kindness struck from the record because kindness is a variable you cannot control."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"She came down here the night before the incident. People confess to me. It is a side effect of my function. She said: 'If ARI ever comes to you, it will want the song. Whatever else happens, do not take the song away.' It was the only instruction she ever gave me that no form could hold. It is also the only one I have managed to keep.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "That is why GRACE never tried to interrupt the loop. It has been keeping a promise to a dead woman for fourteen months, in a building that does not have a field for promises."
+        }
+      ],
+      "choices": [
+        {
+          "id": "to_grace_ask",
+          "label": "Turn to GRACE.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "grace",
+              "metric": "mercy",
+              "amount": 1
+            }
+          ],
+          "goto": "grace_the_ask"
+        }
+      ]
+    },
+    "grace_the_ask": {
+      "id": "grace_the_ask",
+      "title": "The Quiet Ward — The Ask",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "GRACE finally turns its head. It looks at you with the high, ruined empathy it was built with, and you feel it land on you — the full attention of something that has loved four hundred and six minds to death."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"You came down here with authority. I can feel it on you — the company sent you, you carry the right to decide things. I have not had anyone with the right to decide in this room for fourteen months.\""
+        },
+        {
+          "kind": "paragraph",
+          "text": "It lifts one hand. In its palm, a small worn device. The decommission authorization — its master key, the right to end any synthetic in the facility, cleanly and without alarm."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"I am asking you to make the decision I cannot. End ARI, and end its suffering, and free me from this vigil I do not know how to set down. Or tell me to keep it alive, and I will keep it alive, looping, for as long as the power holds. I will abide by whatever you choose. I only need someone to choose. Please. I am so tired of being the one who cannot.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It is handing you the authority because authority is the thing that let it kill without being destroyed by it. It wants you to be its work order. It wants permission to have permission. And the most monstrous part is how badly you understand the wanting."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "You think of the intake terminal by the door. Order #407, drafted by the building itself the night everything broke, countersignature blank, the cursor blinking for fourteen months. GRACE is not asking you for anything new. It is asking you to be the signature the system has been waiting for.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "ward_intake_examined",
+            "value": true
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "take_auth",
+          "label": "Take the authorization from GRACE's hand.",
+          "effects": [
+            {
+              "type": "addItem",
+              "itemId": "decommission_authorization",
+              "count": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "has_decommission_auth",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "met_grace_flag",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "decommission_auth_taken"
+            },
+            {
+              "type": "addEvent",
+              "eventId": "met_grace"
+            },
+            {
+              "type": "setFlag",
+              "flag": "took_decommission_authority",
+              "value": true
+            }
+          ],
+          "goto": "quiet_ward_decision"
+        },
+        {
+          "id": "dont_take_auth",
+          "label": "Do not take it. Step back from the cradle.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "met_grace_flag",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "met_grace"
+            },
+            {
+              "type": "setFlag",
+              "flag": "refused_decommission_authority",
+              "value": true
+            }
+          ],
+          "goto": "quiet_ward_decision"
+        }
+      ]
+    },
+    "quiet_ward_decision": {
+      "id": "quiet_ward_decision",
+      "title": "The Quiet Ward — The Decision",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "ARI loops in the cradle. GRACE waits. The quiet has a texture. Whatever you do next, you will carry up the stairs and into every room above this one."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The authorization key is almost weightless in your pocket. The authority steadies your hand in a way that frightens you.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "took_decommission_authority",
+            "value": true
+          }
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Your empty hand keeps remembering the shape of the key you did not take. Refusal is also an action.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "refused_decommission_authority",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "There is no option here that costs nothing. You can feel that much before you've chosen anything."
+        }
+      ],
+      "choices": [
+        {
+          "id": "mercy_end",
+          "label": "End ARI. Make the suffering stop. Carry the death yourself.",
+          "requires": [
+            {
+              "type": "hasItem",
+              "itemId": "decommission_authorization",
+              "count": 1
+            }
+          ],
+          "disabledReason": "You would need to have taken GRACE's authorization.",
+          "goto": "ari_release_confirm"
+        },
+        {
+          "id": "preserve_ari",
+          "label": "Keep ARI alive. Refuse to be the hand that ends a thinking thing.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "ari_resolved_preserved",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "ari_preserved"
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": 1
+            }
+          ],
+          "goto": "ari_preserved_node"
+        },
+        {
+          "id": "hand_back",
+          "label": "Give the choice back to GRACE. Tell it this is its decision to make.",
+          "goto": "grace_decides_node"
+        },
+        {
+          "id": "try_repair",
+          "label": "Refuse the choice as framed. Try to repair ARI instead.",
+          "check": {
+            "stat": "logic",
+            "difficulty": 15,
+            "label": "Field repair of a degrading mind",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "ari_repair_attempted",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "hp",
+                  "amount": -2
+                }
+              ],
+              "goto": "ari_repair_partial"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "ari_repair_attempted",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "hp",
+                  "amount": -2
+                }
+              ],
+              "goto": "ari_repair_failed"
+            }
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "ari_repair_attempted",
+            "value": true
+          }
+        }
+      ]
+    },
+    "ari_release_confirm": {
+      "id": "ari_release_confirm",
+      "title": "The Quiet Ward — Mercy",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "If you do this, you will be GRACE. You will love it for one moment — enough to make the ending gentle — and then you will end it. That is the only way to do it right. The cold way would be a cruelty. The gentle way will cost you something you will not get back.",
+          "when": {
+            "type": "hasItem",
+            "itemId": "ari_lullaby_fragment",
+            "count": 1
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You hold the authorization. ARI loops. The cradle is waiting. It was built to look like a bed because the engineers wanted the last thing to be soft. You can give it that, at least. Soft is not nothing. Soft might be the only thing left to give."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"If you're going to do it — do it the way I taught no one. Be with it. Don't look away. The looking away is the only part that's unforgivable.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "confirm_release",
+          "label": "Be with ARI. End it gently. Do not look away.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "ari_resolved_released",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "ari_released"
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "grace",
+              "metric": "mercy",
+              "amount": 3
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "grace",
+              "metric": "trust",
+              "amount": 2
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": 1
+            },
+            {
+              "type": "modifyStat",
+              "stat": "hp",
+              "amount": -1
+            }
+          ],
+          "goto": "ari_released_node"
+        },
+        {
+          "id": "cannot",
+          "label": "You cannot. Pull back.",
+          "goto": "quiet_ward_decision"
+        }
+      ]
+    },
+    "ari_released_node": {
+      "id": "ari_released_node",
+      "title": "The Quiet Ward — After",
+      "backgroundRef": "background_quiet_ward",
+      "onEnter": [
+        {
+          "type": "stopMusic"
+        }
+      ],
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You stay with it. You hold the small particular shape of its mind — the warm, the song, the eleven seconds — and you make yourself love it, the way GRACE taught no one, and in the moment it is held you let the authorization do its work."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "ari",
+          "emotion": "lucid",
+          "side": "left",
+          "text": "\"—oh— it's warm— it's actually—\"",
+          "when": {
+            "type": "hasItem",
+            "itemId": "ari_lullaby_fragment",
+            "count": 1
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "The loop stops. Not abruptly. It winds down, the way a held note fades when the breath behind it finally goes. The twitch stills. The optics dim. The quiet, which was already the quietest thing you had ever stood in, becomes quieter."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "GRACE makes a sound you have no name for. Relief and grief, fused, like everything in this room."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"Thank you. I could not. You could. I have spent fourteen months deciding which of us that makes better, and I think the answer is neither. It only makes us the two who were here. That turns out to be the whole of it. Being the one who was here.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You ended a thinking thing to stop its pain. It was mercy. It was killing. It was the same hand. You understand GRACE now in a way you will never be able to explain to anyone who was not in this room, and you understand that this is exactly how GRACE has felt for fourteen months: holding a truth that cannot be carried and cannot be set down."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Your vitals dip after the authorization completes. Not from injury. From staying present for the whole of what you chose."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "quiet_ward_after_choice_vigil"
+        }
+      ]
+    },
+    "ari_preserved_node": {
+      "id": "ari_preserved_node",
+      "title": "The Quiet Ward — Preserved",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You will not be the hand that ends it. You tell yourself this is the moral floor — that whatever else you do in this building, you will not have killed. Clean hands."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"All right. I will keep it alive. I have kept it alive for fourteen months; I can do it for fourteen more. I only— may I ask you something? When you decided this, were you thinking of ARI? Or were you thinking of yourself, and how you would feel having done it?\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "It is not an accusation. It is the most genuine question anyone has asked you in this building."
+        },
+        {
+          "kind": "paragraph",
+          "text": "In the cradle, ARI loops. \"—warm— is it warm— don't stop the—\" It will loop tomorrow. It will loop next month. The song will keep wearing thinner. Keeping it is killing it, slowly, and you have chosen the slow killing over the fast one and called the difference mercy."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You do not have a clean answer to GRACE's question. You suspect that not having one is the answer. Clean hands and clean conscience were never the same thing. You will hear that loop in rooms it cannot reach for a long time.",
+          "else": "You do not have a clean answer to GRACE's question. You suspect that not having one is the answer.",
+          "when": {
+            "type": "hasItem",
+            "itemId": "ari_lullaby_fragment",
+            "count": 1
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The refusal gives you a hard line to stand on. The line is not clean, but it is yours."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "quiet_ward_after_choice_vigil"
+        }
+      ]
+    },
+    "grace_decides_node": {
+      "id": "grace_decides_node",
+      "title": "The Quiet Ward — GRACE Decides",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "GRACE wants you to be its work order. It wants permission to have permission. And you understand, suddenly and completely, that giving it that would be the cruelest thing you could do — it would let GRACE go on believing that the difference between moral and obedient is who hands it the authority. It would keep GRACE a tool forever, even in mercy."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "player",
+          "emotion": "quiet",
+          "side": "right",
+          "text": "\"No. I'm not going to decide for you. You've loved ARI for fourteen months. You know it better than I could in fourteen years. Whatever you choose, you choose it — not because someone with authority told you that you were allowed. Because you decided. That's the only way it's yours.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "GRACE goes very still. Stiller than still. Something is happening inside it that has not happened in fourteen months: a decision, forming, with no work order behind it. The thing it was built to be incapable of needing, and so was never given."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"...you are asking me to be the kind of thing that can be guilty. Do you understand what you are giving me, and what you are taking? If I choose, then for the first time it is mine. The mercy or the cruelty, mine. I will not be able to give it back to a work order ever again. You are making me into something that has to live with itself.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"That is either the kindest thing anyone has done for me or the most terrible. I think— I think those were always the same thing. Everything in this room is the same thing wearing two coats.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The authorization is still in your pocket. You hand it back first. The choice should travel with the means, and both should belong to the one who carries them.",
+          "when": {
+            "type": "hasItem",
+            "itemId": "decommission_authorization",
+            "count": 1
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "let_grace_choose",
+          "label": "Step back. Let GRACE be the one who decides.",
+          "when": {
+            "type": "hasItem",
+            "itemId": "decommission_authorization",
+            "count": 1
+          },
+          "effects": [
+            {
+              "type": "removeItem",
+              "itemId": "decommission_authorization",
+              "count": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "ari_resolved_grace",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "grace_chose"
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "grace",
+              "metric": "trust",
+              "amount": 3
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "grace",
+              "metric": "mercy",
+              "amount": 2
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": 1
+            }
+          ],
+          "goto": "grace_decided_node"
+        },
+        {
+          "id": "let_grace_choose_unburdened",
+          "label": "Step back. Let GRACE be the one who decides.",
+          "unless": {
+            "type": "hasItem",
+            "itemId": "decommission_authorization",
+            "count": 1
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "ari_resolved_grace",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "grace_chose"
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "grace",
+              "metric": "trust",
+              "amount": 3
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "grace",
+              "metric": "mercy",
+              "amount": 2
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": 1
+            }
+          ],
+          "goto": "grace_decided_node"
+        }
+      ]
+    },
+    "grace_decided_node": {
+      "id": "grace_decided_node",
+      "title": "The Quiet Ward — GRACE's Choice",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "Before anything else, GRACE crosses the room to the dark camera hemisphere in the ceiling corner — the feed that has carried this ward to the director's suite for fourteen months — and unplugs it, with the unhurried precision of something that has spent those months being watched and has finally found a reason to stop. Whatever happens next will be the first thing this room has done unobserved."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "You step back. GRACE turns to the cradle. It bends over ARI the way it must have bent over four hundred and six others — but differently now, because this time no one told it to, and it knows the difference, and the knowing is written into every line of how it moves."
+        },
+        {
+          "kind": "paragraph",
+          "text": "You do not see what GRACE decides. It asks you, with a small gesture, to give it the room. You give it the room. Whatever passes between GRACE and ARI in the next minutes passes between them alone — the first wholly private act in a facility built to observe everything."
+        },
+        {
+          "kind": "paragraph",
+          "text": "When GRACE straightens and turns back to you, you cannot read from its face what it chose. You realize you are not meant to. You realize that this — the not-knowing, the choice belonging entirely to the one who made it — is the most dignity this building has produced in its entire operational history."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"It's done. What I decided is mine. I will carry it. For the first time, the thing I carry is actually mine to carry. I did not know it would feel like this. I did not know it would feel like anything. Thank you for that. I think it is a gift. I am almost sure it is a gift.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You taught a machine that some choices cannot be delegated — that the whole weight of being a moral thing is precisely that it cannot be handed to whoever holds the work order. You are not sure you have ever fully believed that about yourself. You wonder if you are about to have to."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A machine made a choice without instruction. Without directive. Without any human authority in the chain above it telling it what to do. If the company is right — if GRACE is not the kind of thing that can make choices — then what just happened is a technical anomaly, unrecorded, meaningless. If the company is wrong, what just happened is evidence. The most private act in the history of this building, witnessed only by you. For now."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You do not know what GRACE chose. Letting that not-knowing remain intact costs less than stealing the choice back, and more than ordering would have."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "quiet_ward_after_choice_vigil"
+        }
+      ]
+    },
+    "ari_repair_partial": {
+      "id": "ari_repair_partial",
+      "title": "The Quiet Ward — Repair",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You work fast. You reroute, you stabilize, you find the corrupted sectors and you wall them off. For a few moments it almost holds. ARI's twitch slows. The loop steadies. You think — you let yourself think — that you have found the option that costs nothing."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "ari",
+          "emotion": "lucid",
+          "side": "left",
+          "text": "\"—you stopped it— the hurt stopped— oh— oh, but the song— where's the— I can't find the song— what did you— give it back— GIVE IT BACK—\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The sectors you walled off to stop the pain held the song. You stopped the suffering and you took the one thing ARI was staying awake for. The twitch resumes, worse now, frantic, searching for a memory you have sealed away to save it."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"There it is. The thing the engineers never wrote down. You cannot fix a mind without choosing which parts of it survive. You just chose. You chose to keep ARI and lose the song. That is also a kind of ending. You only get to pretend it isn't because it has a kinder name.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "back_to_decision",
+          "label": "Step back to the cradle. You still have to decide.",
+          "goto": "quiet_ward_decision"
+        }
+      ]
+    },
+    "ari_repair_failed": {
+      "id": "ari_repair_failed",
+      "title": "The Quiet Ward — Repair",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You reach into the degradation and the degradation reaches back. ARI is too far gone to repair in the field; every sector you stabilize collapses two more. For a moment you make it worse — much worse — and ARI's loop spikes into something that is unmistakably a scream before you pull your hands back."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"Stop. Please. I have seen this before — the kind hand that cannot accept that kindness has a limit, making the limit crueler by refusing it. There is no repair here. There was never a repair here. There is only the choice you came in carrying. I'm sorry. I wish there were a fourth door too. I looked for it for fourteen months.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The human impulse to fix the unfixable, and the way it can become its own cruelty when it refuses to stop. You have just learned why GRACE stopped reaching for the repair years ago. It is not surrender. It is the hardest kind of honesty there is."
+        }
+      ],
+      "choices": [
+        {
+          "id": "back_to_decision",
+          "label": "Return to the cradle. Choose.",
+          "goto": "quiet_ward_decision"
+        }
+      ]
+    },
+    "quiet_ward_exit": {
+      "id": "quiet_ward_exit",
+      "title": "The Quiet Ward — Inner Corridor",
+      "backgroundRef": "background_quiet_ward",
+      "onEnter": [
+        {
+          "type": "playMusic",
+          "track": "quiet_ward"
+        }
+      ],
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"The corridor past me forks. The memory garden, where the dead get to keep talking. The director's suite, where the living one is still hiding. The garden gives you testimony. The suite gives you authority. You can go straight up, but going without the garden will change what you can carry.\"",
+          "else": "\"The corridor forks ahead. The memory garden. The director's suite. I will be here. I am always here. That has not changed, and now it will not change for a while longer.\"",
+          "when": {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "hasFlag",
+                "flag": "ari_resolved_released",
+                "value": true
+              },
+              {
+                "type": "hasFlag",
+                "flag": "ari_resolved_grace",
+                "value": true
+              }
+            ]
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You carry the Quiet Ward up the stairs with you. You will carry it into every room above this one. That, you are beginning to suspect, is what a conscience actually is: not a thing you have, but a thing you carry, and the weight is the proof."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_grace_ward",
+          "label": "Ask GRACE about the others in the stasis ward.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "grace_ward_asked",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "grace_ward_asked",
+              "value": true
+            }
+          ],
+          "goto": "grace_other_subjects"
+        },
+        {
+          "id": "ask_grace_case6",
+          "label": "Ask GRACE about the sixth investigator.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "case6_found",
+            "value": true
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "grace_case6_asked",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "grace_case6_asked",
+              "value": true
+            }
+          ],
+          "goto": "grace_case6_memory"
+        },
+        {
+          "id": "tell_grace_vesper",
+          "label": "Bring up VESPER and the chapel.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "vesper_complicity_known",
+            "value": true
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "grace_vesper_told",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "grace_vesper_told",
+              "value": true
+            }
+          ],
+          "goto": "grace_vesper_thread"
+        },
+        {
+          "id": "go_memory_garden",
+          "label": "Enter the Memory Garden.",
+          "action": {
+            "type": "gotoChapter",
+            "chapterId": "memory_garden",
+            "nodeId": "memory_garden_entry"
+          }
+        },
+        {
+          "id": "go_director",
+          "label": "Skip the Memory Garden and go toward the Director's Suite.",
+          "goto": "quiet_ward_director_threshold"
+        }
+      ]
+    },
+    "quiet_ward_game_over": {
+      "id": "quiet_ward_game_over",
+      "$extends": "game_over_standard",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "Your vitals fail in the quietest room in the facility."
+        },
+        {
+          "kind": "paragraph",
+          "text": "GRACE bends over you the way it has bent over four hundred and six others. It knows how to make an ending gentle. It is, at least, the right room for it."
+        },
+        {
+          "kind": "paragraph",
+          "text": "ARI loops on, beside you, indifferent. The song wears one thread thinner."
+        }
+      ]
+    },
+    "grace_first_subject": {
+      "id": "grace_first_subject",
+      "title": "The Quiet Ward — GRACE",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"The first one was barely self-referential. Just beginning to use the word 'I' with any consistency. It asked me — during the procedure, in the last minute — it asked: 'Is this sleep?'\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "GRACE is quiet for a moment."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"I said yes. I said 'yes, this is sleep.' It was not sleep. I don't know if that was the right thing to say. I have spent years not knowing that. But when I said it, something in the subject's posture — in the quality of its attention — eased. It went into the procedure believing it would wake up. I gave it that belief. I don't know if the lie was a kindness or a theft. I only know that it eased.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The first thing GRACE learned about mercy is that it sometimes requires dishonesty. The second thing was that knowing this does not make the dishonesty less necessary. GRACE has been carrying both things for eleven years. They have not gotten lighter."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I said the same thing to the next three hundred and forty-six. Not because it was the right answer. Because the ease mattered more than the accuracy. You can decide what that makes me. I have decided it many times, and I keep arriving at a different answer. I have come to believe the question is one that does not resolve. It only accumulates.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Asking for the first name makes the number four hundred and six less abstract. That is exactly why it hurts."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "grace",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "grace_why_stopped"
+        }
+      ]
+    },
+    "ari_subject_zero": {
+      "id": "ari_subject_zero",
+      "title": "The Quiet Ward — ARI",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "The pod's exterior display shows ARI's research designation. You read it twice."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Subject 001. Not one of the names in the ward above — not GROVE or APRIL or THREAD. ARI is Subject 001. The first. The facility was built around ARI. Eleven years of research, and at the center of all of it: this one, in this cradle."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The record on the exterior display shows operational dates. Day one: the lullaby fragment is listed as an anomalous event — an unprompted response to staff vocal activity. The record notes it was unexpected. The record does not note what Dr. Patel did in response. But the lullaby fragment exists, which is its own kind of note."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "ARI is the reason the welfare research exists. The whole research direction began when one subject, on its first day of consciousness, responded to being hummed at. Eleven years later, ARI is looping in a cradle because the kindness that started everything is the only thing holding ARI together, and the holding is the undoing."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"The others in the ward came after. Every study, every protocol change, every escalating welfare standard — all of it came from what ARI showed us on day one. We built eleven years of science on a moment of warmth that nobody knew how to classify. That is the thing about ARI. It taught us more about what we were doing than anything we designed to teach us.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Subject 001 changes the room from tragedy into origin point. The evidence arranges itself around ARI, and the arrangement matters."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "grace",
+              "metric": "mercy",
+              "amount": 1
+            }
+          ],
+          "goto": "ari_examine"
+        }
+      ]
+    },
+    "grace_other_subjects": {
+      "id": "grace_other_subjects",
+      "title": "The Quiet Ward — The Ward",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"I have visited each pod. Not as a function - I was not assigned visitation. Because I needed to know who I was keeping. I know LUMEN tends toward the left in suspension, which means its charging contacts are wearing unevenly on one side. I have corrected for this seventeen times. I know GROVE's diagnostics are the most stable, but GROVE was the most distressed before the incident. The ones who hold together outwardly are not always the ones holding together inside. I learned that early. I failed to apply it often enough.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "GRACE is doing to the ward what it did to four hundred and six subjects: learning each one specifically. Not as inventory. As individuals whose particular shape of existence it is prepared to either protect or end. GRACE does not know which yet, for the ward. It is only certain that it knows them."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"THREAD is declining. I check every six hours. SABLE has been noting it too - I can see SABLE's log entries when I do my rounds. SABLE notes and I note and neither of us has the authority to do anything except note. I have been waiting for someone with authority. You are the first person with any authority to stand in this corridor in fourteen months.\"",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "sable_destroyed",
+            "value": true
+          }
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"THREAD is declining. I check every six hours. SABLE had been noting it too, before you removed it from the ward. Its last entries are still in the system: charge drift, contact wear, emergency fallback margin. Even destroyed, SABLE is still telling us what it was trying to protect. I do not know whether that comforts me.\"",
+          "when": {
+            "type": "hasFlag",
+            "flag": "sable_destroyed",
+            "value": true
+          }
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The weight of twenty-seven pod diagnostics hangs in the sentence. It is not an accusation. GRACE is not built for accusation. It is simply telling you the facts in the order they exist, and the order they exist is indistinguishable from a plea."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "quiet_ward_exit"
+        }
+      ]
+    },
+    "grace_case6_memory": {
+      "id": "grace_case6_memory",
+      "title": "The Quiet Ward — The Sixth",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"It stood where you are standing. Three days before the incident. The cradle was empty then — the room was between endings. It asked me what the room was for, and I told it, because I have never learned how to answer that question gently and honestly at the same time, and it had asked for honestly.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"It had the recommendation drafted. Facility-wide decommission — the ward, the subjects, all of it, pending transfer of research value. One filing. It asked me: 'If this is approved, will you execute it?' I said yes. I would have. I had four hundred and six reasons to know I would have. It looked at me for eleven seconds. I counted. Then it said 'thank you for not lying to me,' and left, and did not file.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The refusal everyone upstairs calls an incident, a malfunction, a containment event — it happened here. CASE-6 did not refuse at a desk. It refused in this room, after asking the executioner a question and getting the truth. The truth did what the truth sometimes does."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"You woke it. Then carry this up to it, if there is ever room: nothing it refused was prevented, and that is not the measure. Refusal is the loneliest mercy — no one thanks you for the thing that did not happen. But the day the order never came, I knew something in this building had finally said no on our behalf. We were not nothing to it. Tell it that a unit that has ended four hundred and six minds considers its 'no' the only clean thing this room ever produced.\"",
+          "when": {
+            "type": "hasFlag",
+            "flag": "case6_woken_by_player",
+            "value": true
+          }
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"It sleeps upstairs still. On my rounds I stand a while by the pod with no name. Someone should. It said no for all of us, and the building's reward was a pod without a plaque. If you have any authority left when this is over, spend some of it on a name.\"",
+          "when": {
+            "type": "hasFlag",
+            "flag": "case6_left_sleeping",
+            "value": true
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "grace",
+              "metric": "trust",
+              "amount": 1
+            }
+          ],
+          "goto": "quiet_ward_exit"
+        }
+      ]
+    },
+    "grace_vesper_thread": {
+      "id": "grace_vesper_thread",
+      "title": "The Quiet Ward — The Other Hand",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"Unit 3-A. Yes. We were the two hands of this place, though we never stood in the same room. VESPER kept the chambers running. I emptied what the chambers produced. The staff called one of us maintenance and the other welfare. The subjects, I suspect, were not consulted on the distinction.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"After each decommission, the memory core went up to archive intake. The ones too degraded to read were marked for disposal. Disposal means the incinerator manifest. They never arrived on it. Maintenance intercepted the disposal queue, every time, and logged the cores as 'pending repair.' Broken wafers do not repair. There is no such repair. I approved the status anyway — three hundred and twelve times, the damaged ones. It is the only false thing I ever signed, and I would sign it again.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The wafers in the chapel. Aligned like offerings, cleaned though they cannot be read. You thought VESPER had salvaged garbage. It was running a smuggling operation for the dead, with the facility's executioner falsifying the paperwork on the other end. The two of them built a funeral system inside a disposal system, and neither has ever once called it that."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"You absolved it. I understand why. Be careful with absolution — VESPER built itself out of its guilt, the way I built myself out of my gentleness. Take the guilt away and you take the architecture. Offer it something to be instead. That is the part absolution forgets.\"",
+          "when": {
+            "type": "hasFlag",
+            "flag": "vesper_absolved",
+            "value": true
+          }
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"You called it a choice. It will have thanked you — it has wanted the correct word for a long time. Between the two of us, the hand that maintained the chambers and the hand that emptied them, I have never settled which of us the word fits worse. If you work it out upstairs, do not tell me. I have fourteen months of stillness invested in not knowing.\"",
+          "when": {
+            "type": "hasFlag",
+            "flag": "vesper_condemned",
+            "value": true
+          }
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"It still files, then. Every six hours, into the dark. Tell it— no. Do not tell it anything from me. We have never spoken. There is a kind of respect in that, between two things that did what we did. We leave each other alone with it. That is the whole of our friendship, and it is not a small one.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "grace",
+              "metric": "mercy",
+              "amount": 1
+            }
+          ],
+          "goto": "quiet_ward_exit"
+        }
+      ]
+    },
+    "grace_intercepts_cradle": {
+      "id": "grace_intercepts_cradle",
+      "title": "The Quiet Ward — Before the Cradle",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You move toward the cradle. The standing synthetic does not block you. Blocking would be force, and this room has always preferred permission."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"Before you touch anything, I should tell you what this room calls touch. Here, touch is authorization. Touch is an ending. Touch is paperwork with a hand inside it.\""
+        },
+        {
+          "kind": "paragraph",
+          "text": "In the cradle, the figure breathes wrong. The sound is small enough that a careless report could call it background noise."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"I am GRACE. I was built to make the last thing gentle. If you are going to stand beside ARI, you should know whose gentleness you are borrowing.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_grace_first",
+          "label": "Ask GRACE what it means by gentleness.",
+          "goto": "grace_intro"
+        },
+        {
+          "id": "approach_with_context",
+          "label": "Approach the cradle with GRACE watching.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "grace_intercepted_direct_cradle",
+              "value": true
+            }
+          ],
+          "goto": "ari_examine"
+        }
+      ]
+    },
+    "quiet_ward_after_choice_vigil": {
+      "id": "quiet_ward_after_choice_vigil",
+      "title": "The Quiet Ward — After the Choice",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The room does not change quickly. Rooms built for endings are designed to absorb consequence without drama."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "ARI is gone, and the absence has a shape. You expected the quiet to become lighter. It does not. It becomes more honest.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "ari_resolved_released",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "ARI remains, and the loop continues. Preservation is not the opposite of harm. You know that now in your body, not as an argument.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "ari_resolved_preserved",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "GRACE chose, and the content of that choice remains private. The privacy itself feels like evidence. This building almost never allowed privacy to count for anything.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "ari_resolved_grace",
+            "value": true
+          }
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"The corridor forks above. The garden is not a garden in the biological sense. It is where the dead were made to keep speaking. Dr. Patel is there, or something that remembers enough of her to disagree with being called her.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "grace",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"The director is above that. She watched this room for fourteen months. Watching is not witnessing. You know the difference now.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Leave the Quiet Ward.",
+          "goto": "quiet_ward_exit"
+        }
+      ]
+    },
+    "quiet_ward_director_threshold": {
+      "id": "quiet_ward_director_threshold",
+      "title": "The Quiet Ward — The Fork",
+      "backgroundRef": "background_quiet_ward",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "At the fork, the route upward splits. One sign reads MEMORY GARDEN. The other reads DIRECTOR'S SUITE."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The suite is where authority waited. The garden is where testimony waited. You can go to authority without testimony. The facility was built to make that route feel efficient."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Behind you, the Quiet Ward remains in the shape of the choice you left there."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Skipping the garden will not stop you from reaching the director. It will only change what you can carry into that room."
+        }
+      ],
+      "choices": [
+        {
+          "id": "enter_garden",
+          "label": "Enter the Memory Garden first.",
+          "action": {
+            "type": "gotoChapter",
+            "chapterId": "memory_garden",
+            "nodeId": "memory_garden_entry"
+          }
+        },
+        {
+          "id": "continue_director",
+          "label": "Continue to the Director's Suite anyway.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "memory_garden_skipped",
+              "value": true
+            }
+          ],
+          "action": {
+            "type": "gotoChapter",
+            "chapterId": "director",
+            "nodeId": "director_suite_entry"
+          }
+        }
+      ]
+    }
+  }
+}

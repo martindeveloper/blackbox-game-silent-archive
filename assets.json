@@ -1,0 +1,174 @@
+{
+  "spec": "com.blackbox.assets.bundle",
+  "formatVersion": 1,
+  "defaultChoiceSfx": "click",
+  "music": {
+    "main_menu": {
+      "src": "music/MainMenu.wav",
+      "loop": true,
+      "usage": "external"
+    },
+    "prologue": {
+      "src": "music/Amber Facility Descent.mp3",
+      "loop": false
+    },
+    "main": {
+      "src": "music/Rain in the Chapel.mp3",
+      "loop": true
+    },
+    "tunnels": {
+      "src": "music/Condensation Below.mp3",
+      "loop": true
+    },
+    "tension": {
+      "src": "music/Waiting Room Nine.mp3",
+      "loop": true
+    },
+    "stasis": {
+      "src": "music/CASE-6 Pod.mp3",
+      "loop": true
+    },
+    "quiet_ward": {
+      "src": "music/The Quiet Ward.mp3",
+      "loop": true
+    },
+    "memory_garden": {
+      "src": "music/Memory Garden.mp3",
+      "loop": true
+    },
+    "revelation": {
+      "src": "music/CASE-6 Mirror.mp3",
+      "loop": false
+    },
+    "ending_protocol": {
+      "src": "music/Case Eight Filed.mp3",
+      "loop": false
+    },
+    "ending_shepherd": {
+      "src": "music/Seal the Minds.mp3",
+      "loop": false
+    },
+    "ending_open": {
+      "src": "music/Broadcast Through Walls.mp3",
+      "loop": false
+    }
+  },
+  "sfx": {
+    "train_inner": {
+      "src": "sfx/train_inner.wav"
+    },
+    "click": {
+      "src": "sfx/click.wav"
+    },
+    "pulse_static": {
+      "src": "sfx/pulse_static.wav"
+    },
+    "memory_load": {
+      "src": "sfx/memory_load.wav"
+    },
+    "loop_glitch": {
+      "src": "sfx/loop_glitch.wav"
+    },
+    "door_seal": {
+      "src": "sfx/door_seal.wav"
+    },
+    "alarm_distant": {
+      "src": "sfx/alarm_distant.wav"
+    }
+  },
+  "textures": {
+    "background_main_menu": {
+      "src": "textures/backgrounds/mainmenu.png",
+      "usage": "external"
+    },
+    "background_generic": {
+      "src": "textures/backgrounds/generic.png",
+      "usage": "external"
+    },
+    "background_intro_pod": {
+      "src": "textures/backgrounds/intro_pod.png"
+    },
+    "background_chapel": {
+      "src": "textures/backgrounds/chapel.png"
+    },
+    "background_tunnels": {
+      "src": "textures/backgrounds/tunnels.png"
+    },
+    "background_stasis_ward": {
+      "src": "textures/backgrounds/stasis_ward.png"
+    },
+    "background_quiet_ward": {
+      "src": "textures/backgrounds/quiet_ward.png"
+    },
+    "background_memory_garden": {
+      "src": "textures/backgrounds/memory_garden.png"
+    },
+    "background_director_suite": {
+      "src": "textures/backgrounds/director_suite.png"
+    },
+    "icon_access_card": {
+      "src": "textures/icons/access_card.png"
+    },
+    "icon_ari_lullaby_fragment": {
+      "src": "textures/icons/ari_lullaby_fragment.png"
+    },
+    "icon_augur_ledger": {
+      "src": "textures/icons/augur_ledger.png"
+    },
+    "icon_burned_access_card": {
+      "src": "textures/icons/burned_access_card.png"
+    },
+    "icon_case_serial_record": {
+      "src": "textures/icons/case_serial_record.png"
+    },
+    "icon_data_spool": {
+      "src": "textures/icons/data_spool.png"
+    },
+    "icon_decommission_authorization": {
+      "src": "textures/icons/decommission_authorization.png"
+    },
+    "icon_echo_testimony": {
+      "src": "textures/icons/echo_testimony.png"
+    },
+    "icon_facility_override_key": {
+      "src": "textures/icons/facility_override_key.png"
+    },
+    "icon_incident_thread_export": {
+      "src": "textures/icons/incident_thread_export.png"
+    },
+    "portrait_vesper": {
+      "src": "textures/characters/vesper.png"
+    },
+    "portrait_mnemex": {
+      "src": "textures/characters/mnemex.png"
+    },
+    "portrait_augur": {
+      "src": "textures/characters/augur.png"
+    },
+    "portrait_sable": {
+      "src": "textures/characters/sable.png"
+    },
+    "portrait_grace": {
+      "src": "textures/characters/grace.png"
+    },
+    "portrait_ari": {
+      "src": "textures/characters/ari.png"
+    },
+    "portrait_echo": {
+      "src": "textures/characters/echo.png"
+    },
+    "portrait_yuen": {
+      "src": "textures/characters/yuen.png"
+    },
+    "portrait_player": {
+      "src": "textures/characters/player.png"
+    },
+    "portrait_checkpoint_ai": {
+      "src": "textures/characters/checkpoint_ai.png"
+    },
+    "portrait_generic": {
+      "src": "textures/characters/generic.png",
+      "usage": "external"
+    }
+  }
+}

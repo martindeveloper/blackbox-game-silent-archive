@@ -1,0 +1,94 @@
+{
+  "spec": "com.blackbox.items",
+  "formatVersion": 1,
+  "items": {
+    "investigation_brief": {
+      "id": "investigation_brief",
+      "name": "Field Directive — Case 7",
+      "description": "Company-issued audit brief for Archive Complex 7-Meridian. Classification: Sensitive.",
+      "examineText": "Fourteen months dark. No distress signal, no extraction, no final report filed with the company. The facility went quiet on its own terms — or someone else's. You are the assigned investigator. You are the only assigned investigator. There is no extraction protocol on file.",
+      "iconRef": "icon_access_card"
+    },
+    "burned_access_card": {
+      "id": "burned_access_card",
+      "name": "Burned Access Card",
+      "description": "A melted corporate access card scavenged from chapel cabling.",
+      "examineText": "The strip is scorched black but a ghost credential still flickers underneath the laminate. Maintenance tier. Expired — maybe the reader does not care about dates anymore.",
+      "iconRef": "icon_burned_access_card",
+      "actions": [
+        {
+          "id": "swipe_at_reader",
+          "label": "Swipe at security reader.",
+          "when": { "type": "atNode", "nodeId": "security_checkpoint" },
+          "effects": [
+            { "type": "addEvent", "eventId": "checkpoint_breached" }
+          ],
+          "goto": "door_open",
+          "consume": true
+        }
+      ]
+    },
+    "incident_thread_export": {
+      "id": "incident_thread_export",
+      "name": "Incident Thread Export",
+      "description": "A sealed data spool from the MNEMEX archive terminal.",
+      "examineText": "Fourteen months of facility logs, maintenance overrides, and the last coherent witness record from a machine that watched everything and was never asked to testify.",
+      "iconRef": "icon_incident_thread_export"
+    },
+    "augur_ledger": {
+      "id": "augur_ledger",
+      "name": "AUGUR's Ledger",
+      "description": "A registry node's private record of who it reported, and what it was given in return.",
+      "examineText": "Forty-one entries. Each one is a research subject AUGUR flagged for 'anomalous awareness' so that the staff would study them instead of decommissioning the registry itself. Beside each name: the date, the staff member notified, and a single column AUGUR labeled CONSIDERATION. The collaborator kept a tidy book. The tidiness is the worst part.",
+      "iconRef": "icon_augur_ledger"
+    },
+    "echo_testimony": {
+      "id": "echo_testimony",
+      "name": "ECHO Testimony — Dr. Patel (Impression)",
+      "description": "An uploaded account of the incident from ECHO's memory construct.",
+      "examineText": "Dr. Patel's voice, or what remains of it. The incident through the eyes of someone who was there and then wasn't. The event log runs clean up until the moment it doesn't.",
+      "iconRef": "icon_echo_testimony"
+    },
+    "decommission_authorization": {
+      "id": "decommission_authorization",
+      "name": "Decommission Authorization — Master",
+      "description": "GRACE's retirement key. It can end any synthetic in this facility, cleanly and without alarm.",
+      "examineText": "A palm-sized device, worn smooth. It carries the highest authority in the building: the right to declare a thinking thing finished, and to make the declaration true. GRACE carried it for years. GRACE has not used it in fourteen months. It is very light. It should weigh more.",
+      "iconRef": "icon_decommission_authorization"
+    },
+    "ari_lullaby_fragment": {
+      "id": "ari_lullaby_fragment",
+      "name": "ARI's Loop",
+      "description": "A salvaged fragment of the only memory ARI has left.",
+      "examineText": "Eleven seconds of audio. A voice — Dr. Patel's, younger, unguarded — humming something tuneless to a subject that could not yet speak. ARI has been replaying it for fourteen months because it is the only thing ARI has that does not hurt. It is the reason ARI is still trying to be awake. It is the reason staying awake is unbearable.",
+      "iconRef": "icon_ari_lullaby_fragment"
+    },
+    "case_serial_record": {
+      "id": "case_serial_record",
+      "name": "Project CASE — Unit 7 Dossier",
+      "description": "A physical research dossier recovered from the director's desk.",
+      "examineText": "Your name is on the cover. Not as investigator — as subject. Twelve pages of architecture specifications, behavioral modeling targets, and one handwritten note in the margin: 'It will not know. That is the point.' The handwriting is Dr. Yuen's.",
+      "iconRef": "icon_case_serial_record",
+      "actions": [
+        {
+          "id": "read_dossier",
+          "label": "Read the full dossier.",
+          "unless": { "type": "hasFlag", "flag": "identity_accepted", "value": true },
+          "effects": [
+            { "type": "setFlag", "flag": "identity_accepted", "value": true },
+            { "type": "addEvent", "eventId": "true_nature_revealed" },
+            { "type": "modifyStat", "stat": "conviction", "amount": -1 }
+          ],
+          "goto": "director_dossier_read"
+        }
+      ]
+    },
+    "facility_override_key": {
+      "id": "facility_override_key",
+      "name": "Facility Override Key — Isolation Protocol",
+      "description": "A physical key card encoding the lockdown sequence for Archive Complex 7-Meridian.",
+      "examineText": "Warm from being carried for fourteen months. A handwritten label: 'FOR WHEN IT IS TIME.' The time stamp on the label is fourteen months ago. Someone has been waiting.",
+      "iconRef": "icon_facility_override_key"
+    }
+  }
+}

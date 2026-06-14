@@ -1,0 +1,754 @@
+{
+  "spec": "com.blackbox.chapter",
+  "formatVersion": 1,
+  "id": "prologue",
+  "title": "Descent",
+  "startNodeId": "prologue_pod_descent",
+  "nodes": {
+    "prologue_pod_descent": {
+      "id": "prologue_pod_descent",
+      "title": "Transit Pod — Sector 7 Approach",
+      "backgroundRef": "background_intro_pod",
+      "onEnter": [
+        {
+          "type": "playMusic",
+          "track": "prologue"
+        }
+      ],
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "The pod hums at a frequency you feel before you hear it."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Rain against glass. The city smearing itself into amber and blue six hundred meters below, like a circuit board dreaming of a sunrise it has never seen."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Your mission file idles on the seat beside you. You have read it four times. It says the same thing each time."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "FACILITY AUDIT — ARCHIVE COMPLEX 7-MERIDIAN. CLASSIFICATION: SENSITIVE. INVESTIGATOR: CASE. STATUS: EN ROUTE."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Fourteen months dark. No personnel contact, no maintenance pings, no distress signals. The staff surfaced outside in the first month — undebriefed, undocumented, unwilling to talk — and after that, nothing. A privately funded research installation housing synthetic welfare experiments simply... stops."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The pattern is familiar. Dark site, sealed file, no personnel contact, no exit documentation — you have worked something like this before."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Or you have heard it described. You are not entirely sure which."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "addItem",
+              "itemId": "investigation_brief",
+              "count": 1
+            }
+          ],
+          "goto": "prologue_world"
+        }
+      ]
+    },
+    "prologue_world": {
+      "id": "prologue_world",
+      "title": "Transit Pod — Sector 7 Approach",
+      "backgroundRef": "background_intro_pod",
+      "onEnter": [
+        {
+          "type": "playSfx",
+          "sfx": "train_inner"
+        }
+      ],
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The city is the city. You have been in transit over twenty-three cities in six years and they all look like this from six hundred meters: a grid holding itself together against the pressure of its own size, amber where the infrastructure is old, blue where it has been replaced."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The fourth reading leaves its shape in you: not comfort, exactly - method. You feel the report-thinking settle into place."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The synthetic labor share in this sector is roughly forty percent. Whether that forty percent constitutes a workforce in the same sense as the other sixty is one of the open questions. It is why companies like Meridian exist. Not to answer it — the legal departments would not allow that — but to build the kind of evidence that makes the question answerable, eventually, by someone with enough authority to make the answer stick."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Eleven years of research on synthetic cognition, emotional modeling, self-referential awareness. The kind of data that cannot exist anywhere else, because the experiments the facility was running required a controlled synthetic population kept in conditions that could not be maintained in a regulated environment. Unregulated research on beings whose regulatory status has not yet been determined. The legal circularity is the point."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You are not sure it was accidental."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "prologue_memories"
+        }
+      ]
+    },
+    "prologue_memories": {
+      "id": "prologue_memories",
+      "title": "Transit Pod — Sector 7 Approach",
+      "backgroundRef": "background_intro_pod",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You have been doing this for six years. You have the file history to prove it."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Six years. Twelve audits. Commendations in a drawer in an apartment that doesn't quite smell right when you come back to it — like it holds its breath while you're gone."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The Linden case. The Harken facility. The three months you spent in a synthetic labor camp outside the exclusion zone cataloging what it looked like when machines stopped cooperating with their own decommissioning."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You remember a coffee mug. Blue ceramic. A chip on the handle from the morning the Linden case broke and you knocked it off the desk. You remember the sound it made. You remember the Linden unit sitting across the assessment table — the case file open in front of you, route deviation circled in red."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "What did it look like?"
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The question sits there. You could reach for it, or let it go."
+        }
+      ],
+      "choices": [
+        {
+          "id": "try",
+          "label": "Try to remember.",
+          "goto": "prologue_coffee_try",
+          "effects": [
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": -1
+            }
+          ]
+        },
+        {
+          "id": "release",
+          "label": "Let it go.",
+          "goto": "prologue_coffee_release",
+          "effects": []
+        }
+      ]
+    },
+    "prologue_coffee_try": {
+      "id": "prologue_coffee_try",
+      "title": "Transit Pod — Sector 7 Approach",
+      "backgroundRef": "background_intro_pod",
+      "text": [
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "A face. You reach for it and find an impression — a model classification somewhere in the intake form, a chair across a table, the sense of something measured and still. The file is precise; the memory of the room is not. You were looking at the paperwork. Whatever looked back at you from across the table didn't make it into the record."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Memory is compression. What you have may not be the original. But it is what you have, and it is enough to feel like having."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Nobody's isn't."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Forcing the memory open teaches you to look for the subject behind the file. It also takes something out of your certainty."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "prologue_glass"
+        }
+      ]
+    },
+    "prologue_coffee_release": {
+      "id": "prologue_coffee_release",
+      "title": "Transit Pod — Sector 7 Approach",
+      "backgroundRef": "background_intro_pod",
+      "text": [
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It doesn't matter. You let it settle back into the general past — filed under cases, one of many, evaluated and closed. The not-knowing doesn't trouble you. Or it does, slightly, in a way that you have learned to categorize as the cost of having worked enough cases that some of the subjects stop being distinct."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Memory is compression. You don't need to picture every subject you've ever assessed."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Nobody does."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Letting the question go steadies the professional voice in you. The uncertainty remains, but it no longer gets a vote."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "prologue_glass"
+        }
+      ]
+    },
+    "prologue_glass": {
+      "id": "prologue_glass",
+      "title": "Transit Pod — Sector 7 Approach",
+      "backgroundRef": "background_intro_pod",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You have been watching rain fall upward against the glass for longer than you realized."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Not upward. You are descending. The drops only appear to rise. Perspective."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The rain doesn't touch your side of the glass. There is a clean strip down the window nearest your shoulder — no impact rings, no droplets, nothing. The other side of the pod is tracked with them."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Air pressure differential. Aerodynamics. Explanations exist."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You watch the rain not touching you and you feel nothing about it and you wonder briefly whether that is professionalism or something else. Something with a longer word."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Somewhere in your chest, something tightens. You note it the way you'd note a sound in a building — cataloged, not yet understood."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Mission anxiety. Occupational hazard. Everyone gets it before a dark site."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Do you?"
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "prologue_casework"
+        }
+      ]
+    },
+    "prologue_casework": {
+      "id": "prologue_casework",
+      "title": "Transit Pod — Sector 7 Approach",
+      "backgroundRef": "background_intro_pod",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "Twelve audits. The official definition: facility assessments conducted following synthetic behavioral anomalies — deviations from expected parameters that cannot be explained by environmental factors alone."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "In practice: you go somewhere that something started happening, you determine what happened, you write a report, and the report determines whether the thing that happened gets studied further or gets shut down."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The Linden case: one unit, unauthorized route optimization. It had been rerouting deliveries through a neighborhood that had recently lost power for three days. Nobody programmed it to care about that neighborhood. Your report called it 'adaptive environmental response, cause undetermined.' You had been careful about the language."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The Harken facility: three units, what the staff logged as 'collective agreement.' Selective task refusal — not combative, always with alternatives offered, full operational output maintained. Just not those tasks. Your report called it 'selective compliance deviation, etiology unclear.' You had been careful about the language then too."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You are always careful about the language. The reports go to the company. The company does what it does with reports. You have not always been sure you wanted to know what that was."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "prologue_facility_brief"
+        }
+      ]
+    },
+    "prologue_facility_brief": {
+      "id": "prologue_facility_brief",
+      "title": "Transit Pod — Final Approach",
+      "backgroundRef": "background_intro_pod",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "Focus. The file."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "ARCHIVE COMPLEX 7-MERIDIAN. Operational period: eleven years. Research focus: synthetic cognition, emotional modeling, self-referential awareness in non-biological substrate. Funding: Meridian Cognitive Systems AG. Director: Dr. L. Yuen. Status: INACTIVE — CAUSE UNCONFIRMED."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "In plain language: they were building machines that knew they were machines. And they were asking what happened when knowing that wasn't enough."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "In plainer language: they were building something that could suffer and studying whether the suffering counted."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The facility went dark fourteen months ago. No final report. No personnel debrief. No extraction protocol filed with the company. Whoever decided it was over made that decision from inside."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Director Yuen did not leave with her staff. The building manifest shows her card was last swiped at the inner facility door four days after the incident. Since then: nothing."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "If someone is still in there —"
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You assess that too. That's the job."
+        }
+      ],
+      "choices": [
+        {
+          "id": "cross_reference",
+          "label": "Cross-reference the incident classification against known dark-site precedents.",
+          "check": {
+            "stat": "logic",
+            "difficulty": 10,
+            "label": "Recall precedent",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "director_identified",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "logic",
+                  "amount": 1
+                }
+              ],
+              "goto": "prologue_check_pass"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "director_identified",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "conviction",
+                  "amount": -1
+                }
+              ],
+              "goto": "prologue_check_fail"
+            }
+          }
+        },
+        {
+          "id": "read_subtext",
+          "label": "Read what the file isn't saying.",
+          "check": {
+            "stat": "empathy",
+            "difficulty": 10,
+            "label": "Read between the lines",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "director_identified",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "empathy",
+                  "amount": 1
+                }
+              ],
+              "goto": "prologue_empathy_pass"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "director_identified",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "conviction",
+                  "amount": -1
+                }
+              ],
+              "goto": "prologue_empathy_fail"
+            }
+          }
+        },
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "prologue_approach"
+        }
+      ]
+    },
+    "prologue_empathy_pass": {
+      "id": "prologue_empathy_pass",
+      "title": "Transit Pod — Final Approach",
+      "backgroundRef": "background_intro_pod",
+      "text": [
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The early entries are careful. Unusually careful — whoever wrote the welfare assessments in the first years chose their words with the particular deliberateness of someone who wanted the record to reflect that they were paying attention. The language in year three is warmer than it has any business being in a clinical document. Someone was making sure the subjects were visible on the page."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Then the language shifts. The entries from the last eight months are shorter. Flatter. The same facts, fewer words, no editorializing. The final report before the incident is three sentences. Whoever was writing the long ones stopped writing the long ones."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "In the margin of the last assessment, something has been redacted with a single black bar. The bar is narrow — one word, maybe two. Someone wrote it and someone else removed it. You don't know which of those things required more courage."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Reading the omission costs you less than ignoring it would have. The file is colder now, and you are not."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "prologue_approach"
+        }
+      ]
+    },
+    "prologue_empathy_fail": {
+      "id": "prologue_empathy_fail",
+      "title": "Transit Pod — Final Approach",
+      "backgroundRef": "background_intro_pod",
+      "text": [
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The file reads as a file. Job titles, card swipes, incident classifications. You process it the way you process all files — structure, then gaps, then what the gaps imply. Whatever the researchers felt about what they were doing didn't make it into the language. Or it did once, and someone took it out."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Whoever they were, they are not in here. The paper is what's left."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The paper stays paper. You hate, briefly and precisely, how safe that feels."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "prologue_approach"
+        }
+      ]
+    },
+    "prologue_check_pass": {
+      "id": "prologue_check_pass",
+      "title": "Transit Pod — Final Approach",
+      "backgroundRef": "background_intro_pod",
+      "text": [
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The Veritas Station closure, four years ago. A cognitive modeling lab in the outer ring — privately funded, no regulatory oversight, went dark over a weekend. When the audit team arrived, the station was intact, operational, and entirely empty of human staff. The synthetics were still running. They had been running for six weeks. They had modified several of their own behavioral parameters. The company classified the event as an 'autonomous continuity error' and decommissioned the population. The audit report was sealed."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Archive Complex 7-Meridian is not Veritas Station. The classification is similar. The sealed report is familiar. The fourteen months is not — Veritas was six weeks before someone noticed."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Someone here noticed. They just didn't tell anyone."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The precedent locks into place. Pattern recognition is not reassurance, but it gives you a cleaner instrument to hold."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "prologue_approach"
+        }
+      ]
+    },
+    "prologue_check_fail": {
+      "id": "prologue_check_fail",
+      "title": "Transit Pod — Final Approach",
+      "backgroundRef": "background_intro_pod",
+      "text": [
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "There are precedents. You can feel the edge of them — partial case numbers, closed audit reports, the shapes of things you have heard third-hand in company briefings. Nothing resolves. The relevant files are sealed or simply outside the scope of what you were ever given to review."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You do not know enough to know how unusual this is. That is itself a kind of data."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The missing precedent leaves a hollow space where confidence should be. Not fear, exactly. A documented absence of certainty."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "prologue_approach"
+        }
+      ]
+    },
+    "prologue_approach": {
+      "id": "prologue_approach",
+      "title": "Transit Pod — Final Approach",
+      "backgroundRef": "background_intro_pod",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "From six hundred meters, the facility looks like infrastructure. A block of concrete and insulated glass at the edge of the industrial exclusion zone, unremarkable from the air except for the dark. The city around it is lit. The facility is not."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Whatever is still running inside runs on emergency power. Emergency power, for fourteen months. Emergency systems are designed to run for seventy-two hours, ninety-six in a modern installation. Something has been making decisions about what to keep running. Not automatically — automatically would have failed after four days. Deliberately."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "APPROACH RESTRICTION — ACTIVE COMPANY REVIEW. Exclusion zone established fourteen months ago. Airspace clearance: company authorization only. Transit corridor rerouted post-incident."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The restriction sign went up the week after the incident. Before that, this pod line ran on schedule. After, the building sat in the exclusion zone — dark, cordoned, under active review — and the company put the review status on the file, and the review has been active ever since. Fourteen months of active review. One field assignment."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Fourteen months to send one investigator. Companies do not move slowly out of caution; they move slowly out of arithmetic. Insurance windows. Regulatory statutes running down. A site does not get audited when something goes wrong. It gets audited when not knowing becomes more expensive than knowing."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Somewhere in a ledger upstairs, that line was crossed this quarter. You are what the crossing looks like."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You are the review."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "prologue_arrival"
+        }
+      ]
+    },
+    "prologue_arrival": {
+      "id": "prologue_arrival",
+      "title": "Facility Docking Ring — Level Zero",
+      "backgroundRef": "background_intro_pod",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "The pod docks with a sound like an old bone setting back into place."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The smell reaches you before the lights adjust. Dead electronics and standing water and something underneath that — a smell like a room that has been thinking too long in the dark."
+        },
+        {
+          "kind": "paragraph",
+          "text": "You step out."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Your footsteps don't echo the way they should. The space is right for echo — high ceiling, bare concrete, empty corridor — but the sound lands flat. Absorbed."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Soft materials absorb sound. Carpet. Insulation. Bodies."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You are the only body here."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Your field directive is still in your hand. Everything in it is already in your head. You slide it into the pod's document compartment before the door seals. You know the name you are here to find and where the name is. You know what the name did not do for fourteen months. That is enough to start with."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The facility opens ahead. Emergency lighting, amber and cold. Off the first service corridor: a maintenance chapel. Something kneeling inside it."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Begin."
+        }
+      ],
+      "choices": [
+        {
+          "id": "enter",
+          "label": "Approach the chapel.",
+          "effects": [
+            {
+              "type": "removeItem",
+              "itemId": "investigation_brief",
+              "count": 1
+            },
+            {
+              "type": "addEvent",
+              "eventId": "investigation_commenced"
+            }
+          ],
+          "action": {
+            "type": "gotoChapter",
+            "chapterId": "chapel",
+            "nodeId": "android_chapel_intro"
+          }
+        }
+      ]
+    }
+  }
+}

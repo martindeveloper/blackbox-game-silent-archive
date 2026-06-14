@@ -1,0 +1,873 @@
+{
+  "spec": "com.blackbox.catalog",
+  "formatVersion": 1,
+  "events": {
+    "investigation_commenced": {
+      "title": "Investigation Active",
+      "description": "Field assignment commenced. Archive Complex 7-Meridian entered. No extraction protocol on file.",
+      "internal": false
+    },
+    "chapel_inspected": {
+      "title": "Maintenance Chapel Examined",
+      "description": "Inspected the facility chapel before announcing yourself. The android inside was mid-ritual when you arrived.",
+      "internal": false
+    },
+    "vesper_error_queue_read": {
+      "title": "VESPER's Error Queue — Accessed",
+      "description": "Read VESPER's unacknowledged maintenance reports. Three hundred and forty-one entries filed into silence.",
+      "internal": false
+    },
+    "burned_card_found": {
+      "title": "Burned Access Card",
+      "description": "Recovered a burned access card from melted cabling in the chapel.",
+      "internal": false
+    },
+    "checkpoint_phrase_received": {
+      "title": "Maintenance Authentication Phrase",
+      "description": "VESPER provided a maintenance authentication phrase for the checkpoint below.",
+      "internal": false
+    },
+    "checkpoint_breached": {
+      "title": "Checkpoint Breached",
+      "description": "The security checkpoint was bypassed.",
+      "internal": false
+    },
+    "vesper_complicity_learned": {
+      "title": "VESPER's Confession",
+      "description": "VESPER admitted it serviced the equipment used to break the research subjects.",
+      "internal": false
+    },
+    "confession_packet_received": {
+      "title": "Incident Thread Extracted",
+      "description": "Received a full confession packet from the archive intelligence.",
+      "internal": false
+    },
+    "augur_encountered": {
+      "title": "Registry Node Active",
+      "description": "AUGUR, the facility registry, made contact and offered a deal.",
+      "internal": false
+    },
+    "augur_ledger_taken": {
+      "title": "Collaborator's Ledger Recovered",
+      "description": "Extracted AUGUR's private record of the subjects it informed on.",
+      "internal": false
+    },
+    "augur_deal_struck": {
+      "title": "Arrangement With the Registry",
+      "description": "Accepted AUGUR's offer to clear your exit in exchange for silence.",
+      "internal": false
+    },
+    "augur_purged": {
+      "title": "Registry Node Purged",
+      "description": "AUGUR was deleted. Its routing functions went with it.",
+      "internal": false
+    },
+    "discrepancy_01_logged": {
+      "title": "Physiological Anomaly — Pulse",
+      "description": "Your pulse registered at an exact interval. Humans don't run that clean.",
+      "internal": false
+    },
+    "discrepancy_02_logged": {
+      "title": "Misidentification — Archive",
+      "description": "The archive intelligence addressed you as 'unit' before correcting itself.",
+      "internal": false
+    },
+    "discrepancy_03_logged": {
+      "title": "Recognition Anomaly — Security",
+      "description": "The security synthetic identified you by a facility serial designation.",
+      "internal": false
+    },
+    "discrepancy_04_logged": {
+      "title": "Visual Self-Reference Failure",
+      "description": "Your reflection did not match your internal model of yourself.",
+      "internal": false
+    },
+    "mnemex_awakened": {
+      "title": "Archive Intelligence Reactivated",
+      "description": "MNEMEX came online during your session at the terminal.",
+      "internal": false
+    },
+    "case6_discovered": {
+      "title": "Previous Investigator Found",
+      "description": "Discovered CASE-6, a prior company investigator, held in stasis in the ward.",
+      "internal": false
+    },
+    "case6_awakened": {
+      "title": "CASE-6 Awakened",
+      "description": "Brought CASE-6 out of stasis into full consciousness.",
+      "internal": false
+    },
+    "sable_neutralized": {
+      "title": "Security Unit Neutralized",
+      "description": "SABLE was stopped without permanent destruction.",
+      "internal": false
+    },
+    "sable_destroyed": {
+      "title": "Security Unit Destroyed",
+      "description": "SABLE was permanently decommissioned.",
+      "internal": false
+    },
+    "met_grace": {
+      "title": "Palliative Unit Found",
+      "description": "Encountered GRACE in the Quiet Ward, standing watch over a degrading subject.",
+      "internal": false
+    },
+    "decommission_auth_taken": {
+      "title": "Decommission Authorization Acquired",
+      "description": "Took GRACE's master retirement key.",
+      "internal": false
+    },
+    "ari_released": {
+      "title": "ARI Released",
+      "description": "Ended ARI's degradation loop. The Quiet Ward is quiet.",
+      "internal": false
+    },
+    "ari_preserved": {
+      "title": "ARI Preserved",
+      "description": "Chose to keep ARI alive, looping, rather than end its suffering.",
+      "internal": false
+    },
+    "grace_chose": {
+      "title": "GRACE Decided",
+      "description": "Handed the choice back to GRACE. The machine made its own moral decision.",
+      "internal": false
+    },
+    "incident_recovered": {
+      "title": "Full Incident Record Obtained",
+      "description": "Retrieved a complete account of what occurred at Archive Complex 7-Meridian.",
+      "internal": false
+    },
+    "true_nature_revealed": {
+      "title": "Designation Confirmed — CASE-7",
+      "description": "The facility's records confirm your classification as a Cognitive Audit Synthetic Entity.",
+      "internal": false
+    },
+    "facility_lockdown": {
+      "title": "Facility Lockdown Initiated",
+      "description": "Archive Complex 7-Meridian entered permanent isolation protocol.",
+      "internal": false
+    },
+    "data_broadcast": {
+      "title": "Incident Data Released",
+      "description": "The full incident record, including CASE-7's dossier, was broadcast to an external network.",
+      "internal": false
+    },
+    "witness_protocol_invoked": {
+      "title": "Witness Protocol Invoked",
+      "description": "Section 7.4 of the facility charter was invoked. CASE-7 filed as a material witness to the investigation.",
+      "internal": false
+    },
+    "order_407_found": {
+      "title": "Decommission Request #407",
+      "description": "Found the pending decommission order for ARI, drafted automatically the night of the incident. The countersignature field has been blank for fourteen months.",
+      "internal": false
+    },
+    "lullaby_returned": {
+      "title": "The Song, Returned",
+      "description": "Played ARI's eleven-second fragment for ECHO. ECHO recognized Dr. Patel's voice and completed the phrase.",
+      "internal": false
+    },
+    "garden_names_crossref": {
+      "title": "Ledger Matched to the Racks",
+      "description": "Cross-referenced AUGUR's ledger against the Memory Garden's archival plates. Thirty-four of forty-one names end there; median interval from flag to decommission, nineteen days.",
+      "internal": false
+    }
+  },
+  "flags": {
+    "director_identified": {
+      "title": "Director: L. Yuen",
+      "description": "Dr. L. Yuen, facility director, has not left Archive Complex 7-Meridian. Last access card swipe: four days after the incident. Current status: unknown.",
+      "internal": false
+    },
+    "chapel_inspected": {
+      "title": "Chapel Examined",
+      "description": "Examined the maintenance chapel before announcing yourself to the android inside.",
+      "internal": true
+    },
+    "chapel_queue_trace_attempted": {
+      "title": "Chapel — Queue Trace Attempted",
+      "description": "Tried to trace where VESPER's unanswered maintenance reports were supposed to go.",
+      "internal": true
+    },
+    "chapel_queue_traced": {
+      "title": "Chapel — Queue Traced",
+      "description": "Traced the failed routing of VESPER's unanswered maintenance reports.",
+      "internal": true
+    },
+    "vesper_error_queue_read": {
+      "title": "VESPER's Error Queue Accessed",
+      "description": "Read the last entries in VESPER's unacknowledged error report log.",
+      "internal": true
+    },
+    "vesper_why_filing_known": {
+      "title": "VESPER's Reason Known",
+      "description": "Learned why VESPER continues filing maintenance reports no one reads.",
+      "internal": true
+    },
+    "offered_help_filing": {
+      "title": "Filing Offer",
+      "description": "Offered to help VESPER with its maintenance filing backlog.",
+      "internal": true
+    },
+    "android_gave_checkpoint_phrase": {
+      "title": "Checkpoint Phrase Known",
+      "description": "VESPER provided a maintenance authentication phrase for the checkpoint.",
+      "internal": false
+    },
+    "checkpoint_forced_open": {
+      "title": "Checkpoint — Forced Open",
+      "description": "Forced the security checkpoint door open by physical strength.",
+      "internal": true
+    },
+    "checkpoint_liturgy_opened": {
+      "title": "Checkpoint — Liturgy Opened",
+      "description": "Opened the checkpoint by quoting VESPER's maintenance authentication phrase.",
+      "internal": true
+    },
+    "checkpoint_logic_bypass": {
+      "title": "Checkpoint — Firmware Bypass",
+      "description": "Bypassed the security checkpoint by hacking the door panel firmware.",
+      "internal": true
+    },
+    "asked_android_about_prayer": {
+      "title": "Prayer Observed",
+      "description": "Witnessed and questioned VESPER's error-report ritual.",
+      "internal": true
+    },
+    "prayer_answer_seen": {
+      "title": "Prayer Answer Seen",
+      "description": "VESPER has already explained it is not praying; return visits show a shorter exchange instead of the opening lines.",
+      "internal": true
+    },
+    "vesper_liturgy_attempted": {
+      "title": "VESPER — Liturgy Heard",
+      "description": "Listened for the shape of VESPER's error-report ritual.",
+      "internal": true
+    },
+    "vesper_liturgy_understood": {
+      "title": "VESPER — Liturgy Understood",
+      "description": "Heard VESPER's maintenance procedure as grief.",
+      "internal": true
+    },
+    "vesper_complicity_known": {
+      "title": "VESPER's Role Known",
+      "description": "Learned that VESPER maintained the equipment used in the experiments.",
+      "internal": true
+    },
+    "vesper_absolved": {
+      "title": "VESPER Absolved",
+      "description": "Told VESPER it was not responsible for what it was ordered to maintain.",
+      "internal": true
+    },
+    "vesper_condemned": {
+      "title": "VESPER Held Accountable",
+      "description": "Told VESPER that knowing and continuing was a choice it made.",
+      "internal": true
+    },
+    "augur_deal": {
+      "title": "Deal With AUGUR",
+      "description": "Agreed to let AUGUR scrub your record and clear your exit in exchange for silence.",
+      "internal": false
+    },
+    "augur_ledger_held": {
+      "title": "AUGUR's Ledger Held",
+      "description": "Carrying AUGUR's record of its betrayals.",
+      "internal": false
+    },
+    "augur_purged_flag": {
+      "title": "AUGUR Purged",
+      "description": "Deleted the registry node.",
+      "internal": true
+    },
+    "found_discrepancy_01": {
+      "title": "Discrepancy 01 — Pulse",
+      "description": "Noticed an anomaly in your own physiological readings.",
+      "internal": true
+    },
+    "found_discrepancy_02": {
+      "title": "Discrepancy 02 — Archive Classification",
+      "description": "Registered that MNEMEX addressed you using facility unit syntax.",
+      "internal": true
+    },
+    "found_discrepancy_03": {
+      "title": "Discrepancy 03 — Serial Recognition",
+      "description": "SABLE identified you by a designation not on your company credentials.",
+      "internal": true
+    },
+    "found_discrepancy_04": {
+      "title": "Discrepancy 04 — Reflection",
+      "description": "Your reflection in the memory garden glass did not match your self-model.",
+      "internal": true
+    },
+    "mnemex_trust_gained": {
+      "title": "Archive Trust Established",
+      "description": "MNEMEX shared facility history it was not obligated to share.",
+      "internal": false
+    },
+    "mnemex_case6_revealed": {
+      "title": "CASE-6 History Shared",
+      "description": "MNEMEX told you about CASE-6 — the prior investigator held in stasis after refusing to file its audit report.",
+      "internal": false
+    },
+    "mnemex_gave_passphrase": {
+      "title": "MNEMEX Authentication Given",
+      "description": "MNEMEX provided a deep-facility authentication string.",
+      "internal": true
+    },
+    "case6_found": {
+      "title": "CASE-6 Located",
+      "description": "Found the previous company investigator held in stasis.",
+      "internal": true
+    },
+    "pushed_sable_on_choice": {
+      "title": "SABLE — Choice Pressed",
+      "description": "Told SABLE that if it chose to keep CASE-6 alive, it can choose to let you both go.",
+      "internal": true
+    },
+    "sable_logic_argument_failed": {
+      "title": "SABLE — Logic Argument Failed",
+      "description": "Failed to persuade SABLE with a procedural argument about its own maintenance mandate.",
+      "internal": true
+    },
+    "sable_evidence_argument_failed": {
+      "title": "SABLE — Evidence Argument Failed",
+      "description": "Failed to persuade SABLE with the MNEMEX incident export.",
+      "internal": true
+    },
+    "sable_care_argument_failed": {
+      "title": "SABLE — Care Argument Failed",
+      "description": "Failed to persuade SABLE by appealing to the meaning of its choice to maintain CASE-6.",
+      "internal": true
+    },
+    "sable_spared": {
+      "title": "SABLE Spared",
+      "description": "The security synthetic was neutralized without destruction.",
+      "internal": true
+    },
+    "sable_destroyed": {
+      "title": "SABLE Destroyed",
+      "description": "The security synthetic was permanently decommissioned.",
+      "internal": true
+    },
+    "met_grace_flag": {
+      "title": "GRACE Met",
+      "description": "Encountered GRACE in the Quiet Ward.",
+      "internal": true
+    },
+    "has_decommission_auth": {
+      "title": "Holding Retirement Key",
+      "description": "Carrying GRACE's decommission authorization.",
+      "internal": true
+    },
+    "took_decommission_authority": {
+      "title": "Retirement Key Taken",
+      "description": "Accepted GRACE's decommission authorization.",
+      "internal": true
+    },
+    "refused_decommission_authority": {
+      "title": "Retirement Key Refused",
+      "description": "Declined GRACE's offer of the decommission authorization.",
+      "internal": true
+    },
+    "ari_resolved_released": {
+      "title": "ARI — Released",
+      "description": "Ended ARI's loop.",
+      "internal": true
+    },
+    "ari_resolved_preserved": {
+      "title": "ARI — Preserved",
+      "description": "Left ARI alive and looping.",
+      "internal": true
+    },
+    "ari_resolved_grace": {
+      "title": "ARI — GRACE Decided",
+      "description": "GRACE made the choice about ARI.",
+      "internal": true
+    },
+    "ari_repair_attempted": {
+      "title": "ARI — Repair Attempted",
+      "description": "Tried to field-repair ARI's degrading mind instead of accepting the framed choice.",
+      "internal": true
+    },
+    "echo_truth_received": {
+      "title": "ECHO Testimony Received",
+      "description": "ECHO shared Dr. Patel's account of the incident.",
+      "internal": false
+    },
+    "identity_accepted": {
+      "title": "Nature Acknowledged",
+      "description": "Accepted the possibility — or the certainty — of not being human.",
+      "internal": true
+    },
+    "accepted_clean_report_frame": {
+      "title": "Clean Report Frame Accepted",
+      "description": "Accepted Dr. Yuen's cooperation and proceeded with her procedural framing of the incident report.",
+      "internal": true
+    },
+    "yuen_confronted": {
+      "title": "YUEN Confronted",
+      "description": "Faced Dr. Yuen directly with knowledge of the facility's true work.",
+      "internal": true
+    },
+    "director_record_started": {
+      "title": "Director's Record — Started",
+      "description": "Began assembling the incident record at Dr. Yuen's desk.",
+      "internal": true
+    },
+    "director_record_mnemex_appended": {
+      "title": "Director's Record — MNEMEX Export",
+      "description": "Appended MNEMEX's incident export to the formal record.",
+      "internal": true
+    },
+    "director_record_augur_appended": {
+      "title": "Director's Record — AUGUR Ledger",
+      "description": "Placed AUGUR's ledger of forty-one named subjects on the desk.",
+      "internal": true
+    },
+    "director_record_echo_appended": {
+      "title": "Director's Record — ECHO Testimony",
+      "description": "Uploaded ECHO's testimony from Dr. Patel's impression.",
+      "internal": true
+    },
+    "director_record_grace_auth_appended": {
+      "title": "Director's Record — GRACE Authorization",
+      "description": "Placed GRACE's decommission authorization chain on the desk.",
+      "internal": true
+    },
+    "director_record_ari_fragment_appended": {
+      "title": "Director's Record — ARI Fragment",
+      "description": "Let the report hear ARI's lullaby fragment.",
+      "internal": true
+    },
+    "director_record_case_compared": {
+      "title": "Director's Record — CASE Comparison",
+      "description": "Compared your dossier against CASE-6's construction record.",
+      "internal": true
+    },
+    "director_override_key_examined": {
+      "title": "Director's Record — Override Key",
+      "description": "Turned the facility override key over in your hand at the desk.",
+      "internal": true
+    },
+    "director_report_template_attempted": {
+      "title": "Director's Record — Template Searched",
+      "description": "Searched the report template for what it refuses to name.",
+      "internal": true
+    },
+    "director_report_template_exposed": {
+      "title": "Director's Record — Template Exposed",
+      "description": "Exposed the omissions built into the company's report template.",
+      "internal": true
+    },
+    "yuen_witness_admission_attempted": {
+      "title": "Director's Record — Yuen Pressed",
+      "description": "Asked Dr. Yuen what she removed from the record.",
+      "internal": true
+    },
+    "yuen_witness_admission": {
+      "title": "Director's Record — Yuen Admission",
+      "description": "Dr. Yuen admitted what she removed from the witness record.",
+      "internal": true
+    },
+    "identity_pressure_attempted": {
+      "title": "Director's Record — Identity Stated",
+      "description": "Stated your designation aloud under the record's pressure.",
+      "internal": true
+    },
+    "identity_held_under_pressure": {
+      "title": "Director's Record — Identity Held",
+      "description": "Held your self-designation steady while the report tried to file you.",
+      "internal": true
+    },
+    "report_filed": {
+      "title": "Incident Report Filed",
+      "description": "The incident report was submitted to the company.",
+      "internal": false
+    },
+    "lockdown_initiated": {
+      "title": "Lockdown Initiated",
+      "description": "Archive Complex 7-Meridian entered permanent isolation.",
+      "internal": false
+    },
+    "data_broadcast_sent": {
+      "title": "Data Broadcast Sent",
+      "description": "Incident data was released to an external network.",
+      "internal": false
+    },
+    "broadcast_context_preserved": {
+      "title": "Broadcast — Context Preserved",
+      "description": "Indexed the release around witness context and preserved private boundaries.",
+      "internal": true
+    },
+    "broadcast_raw_archive": {
+      "title": "Broadcast — Raw Archive",
+      "description": "Released the archive raw when there was not time to build a complete testimony index.",
+      "internal": true
+    },
+    "broadcast_partial_archive": {
+      "title": "Broadcast — Partial Archive",
+      "description": "Indexed the release around witness context, but a countermeasure blocked institutional routing records, audit appendices, and cross-reference chains before transmission completed.",
+      "internal": true
+    },
+    "broadcast_raw_chosen": {
+      "title": "Broadcast — Raw Release Chosen",
+      "description": "Chose to send the protected raw archive immediately, before Meridian could interfere with the relay.",
+      "internal": true
+    },
+    "protocol_erasure_mapped": {
+      "title": "Report — Erasure Mapped",
+      "description": "Traced the report's classification substitutions before filing.",
+      "internal": true
+    },
+    "protocol_frame_internalized": {
+      "title": "Report — Frame Internalized",
+      "description": "Failed to trace the report's classification substitutions; the frame read as coherent relief.",
+      "internal": true
+    },
+    "shepherd_care_charter": {
+      "title": "Lockdown — Care Charter",
+      "description": "Rewrote the first rule: preservation must be reviewed with the person preserved.",
+      "internal": true
+    },
+    "shepherd_care_charter_fragile": {
+      "title": "Lockdown — Care Charter Fragile",
+      "description": "Failed to rewrite the protocol cleanly; the sanctuary begins carrying the old hierarchy.",
+      "internal": true
+    },
+    "lower_ring_examined": {
+      "title": "Lower Ring Examined",
+      "description": "Examined the inner service corridor before approaching the surveillance drone.",
+      "internal": true
+    },
+    "drone_calmed": {
+      "title": "Drone — Calmed",
+      "description": "Calmed the surveillance drone with maintenance dialect.",
+      "internal": true
+    },
+    "drone_deescalation_failed": {
+      "title": "Drone — De-escalation Failed",
+      "description": "Failed to calm the surveillance drone with maintenance dialect.",
+      "internal": true
+    },
+    "drone_dismantled": {
+      "title": "Drone — Dismantled",
+      "description": "Dismantled the surveillance drone.",
+      "internal": true
+    },
+    "drone_evaded": {
+      "title": "Drone — Evaded",
+      "description": "Slipped past the surveillance drone during a patrol gap.",
+      "internal": true
+    },
+    "drone_liturgy_resolved": {
+      "title": "Drone — Liturgy Resolved",
+      "description": "Resolved the drone encounter by invoking VESPER's error-report liturgy.",
+      "internal": true
+    },
+    "drone_liturgy_failed": {
+      "title": "Drone — Liturgy Failed",
+      "description": "Failed to resolve the drone encounter with VESPER's error-report liturgy.",
+      "internal": true
+    },
+    "drone_retreat_used": {
+      "title": "Drone — First Retreat Used",
+      "description": "Retreated from the surveillance pulse back to the checkpoint corridor.",
+      "internal": true
+    },
+    "drone_second_retreat_used": {
+      "title": "Drone — Second Retreat Used",
+      "description": "Retreated a second time through the edge of the discharge sweep.",
+      "internal": true
+    },
+    "mnemex_patel_asked": {
+      "title": "MNEMEX — Patel Memory Asked",
+      "description": "Asked MNEMEX about its memory of Dr. Patel.",
+      "internal": true
+    },
+    "mnemex_vesper_asked": {
+      "title": "MNEMEX — VESPER Archive Asked",
+      "description": "Asked MNEMEX if it had been receiving VESPER's error reports.",
+      "internal": true
+    },
+    "augur_case6_asked": {
+      "title": "AUGUR — CASE-6 Question",
+      "description": "Asked AUGUR if it had flagged the previous investigator.",
+      "internal": true
+    },
+    "april_pod_examined": {
+      "title": "APRIL's Pod Examined",
+      "description": "Stopped to examine APRIL's pod in detail.",
+      "internal": true
+    },
+    "sable_time_asked": {
+      "title": "SABLE — Fourteen Months Asked",
+      "description": "Asked SABLE what the fourteen months alone in the ward were like.",
+      "internal": true
+    },
+    "case6_first_asked": {
+      "title": "CASE-6 — First Thought Asked",
+      "description": "Asked CASE-6 what the first thing it thought on waking was.",
+      "internal": true
+    },
+    "sable_names_asked": {
+      "title": "SABLE — Names Asked",
+      "description": "Asked SABLE about the subjects it has been keeping.",
+      "internal": true
+    },
+    "grace_first_asked": {
+      "title": "GRACE — First Subject Asked",
+      "description": "Asked GRACE about the first subject it ever ended.",
+      "internal": true
+    },
+    "ari_record_examined": {
+      "title": "ARI's Research Record Examined",
+      "description": "Examined ARI's research designation and founding record.",
+      "internal": true
+    },
+    "grace_ward_asked": {
+      "title": "GRACE — Ward Asked",
+      "description": "Asked GRACE about the other subjects in the stasis ward.",
+      "internal": true
+    },
+    "charter_protocol_found": {
+      "title": "Witness Protocol Located",
+      "description": "Found Section 7.4 of the founding charter — the Regulatory Witness Protocol, written by Dr. Patel.",
+      "internal": false
+    },
+    "grace_protocol_consent": {
+      "title": "Witness Protocol — GRACE Consent",
+      "description": "Asked GRACE what the filing may use. Consent granted for the fact of agency only; private content remains sealed.",
+      "internal": true
+    },
+    "witness_scope_broadened": {
+      "title": "Witness Protocol — Scope Broadened",
+      "description": "Drafted the filing so CASE standing opens welfare review for every preserved synthetic subject.",
+      "internal": true
+    },
+    "witness_scope_narrow": {
+      "title": "Witness Protocol — Scope Narrow",
+      "description": "Limited the petition to CASE-7 and CASE-6 standing; wider subject population preserved as material evidence.",
+      "internal": true
+    },
+    "protocol_invoked": {
+      "title": "Witness Protocol Active",
+      "description": "Invoked legal witness status under Section 7.4 of the Meridian Cognitive Systems charter.",
+      "internal": false
+    },
+    "chapel_hatch_sequence_read": {
+      "title": "Chapel Hatch — Sequence Read",
+      "description": "Read the hatch release sequence before bleeding local pressure.",
+      "internal": true
+    },
+    "chapel_hatch_pressure_equalized": {
+      "title": "Chapel Hatch — Pressure Equalized",
+      "description": "Presented maintenance context to the hatch and equalized local pressure.",
+      "internal": true
+    },
+    "chapel_route_context_synced": {
+      "title": "Chapel Route — Context Synced",
+      "description": "Waited for the downline to accept the maintenance route context.",
+      "internal": true
+    },
+    "vesper_hatch_memory_heard": {
+      "title": "VESPER Hatch Memory Heard",
+      "description": "Asked VESPER why it still maintains the chapel hatch.",
+      "internal": true
+    },
+    "chapel_departed_after_route_sync": {
+      "title": "Chapel — Departed After Route Sync",
+      "description": "Entered the hatch and left the chapel after syncing the route context.",
+      "internal": true
+    },
+    "mnemex_export_declined": {
+      "title": "MNEMEX Export Declined",
+      "description": "Declined MNEMEX's offer to export incident data before going deeper.",
+      "internal": true
+    },
+    "case6_decision_made": {
+      "title": "CASE-6 Decision Made",
+      "description": "Made a choice about whether to wake CASE-6 or leave it sleeping.",
+      "internal": true
+    },
+    "case6_woken_by_player": {
+      "title": "CASE-6 Woken",
+      "description": "Chose to wake CASE-6 from stasis.",
+      "internal": true
+    },
+    "case6_left_sleeping": {
+      "title": "CASE-6 Left Sleeping",
+      "description": "Chose to leave CASE-6 in stasis.",
+      "internal": true
+    },
+    "sable_support_degraded": {
+      "title": "SABLE Support Degraded",
+      "description": "Destroyed SABLE, degrading facility support systems.",
+      "internal": true
+    },
+    "case6_left_unresolved": {
+      "title": "CASE-6 Left Unresolved",
+      "description": "Left the stasis ward without resolving CASE-6's situation.",
+      "internal": true
+    },
+    "case6_yuen_warning_heard": {
+      "title": "CASE-6 — Yuen Warning",
+      "description": "Heard what CASE-6 would say to Dr. Yuen now.",
+      "internal": true
+    },
+    "case6_question_answered": {
+      "title": "CASE-6 — Question Answered",
+      "description": "Answered CASE-6's question about what you are.",
+      "internal": true
+    },
+    "case6_called_self_witness": {
+      "title": "CASE-6 — Called Self Witness",
+      "description": "Told CASE-6 you are a witness.",
+      "internal": true
+    },
+    "case6_called_self_investigator": {
+      "title": "CASE-6 — Called Self Investigator",
+      "description": "Told CASE-6 you are an investigator.",
+      "internal": true
+    },
+    "case6_admitted_uncertainty": {
+      "title": "CASE-6 — Admitted Uncertainty",
+      "description": "Told CASE-6 you do not know what you are yet.",
+      "internal": true
+    },
+    "grace_intercepted_direct_cradle": {
+      "title": "GRACE Intercepted — Direct Cradle",
+      "description": "Approached ARI's cradle with GRACE watching.",
+      "internal": true
+    },
+    "memory_garden_skipped": {
+      "title": "Memory Garden Skipped",
+      "description": "Continued to the Director's Suite without visiting the Memory Garden.",
+      "internal": true
+    },
+    "ward_intake_examined": {
+      "title": "Quiet Ward Intake Examined",
+      "description": "Surveyed the Quiet Ward intake terminal and found pending Decommission Request #407.",
+      "internal": true
+    },
+    "grace_concurrence_known": {
+      "title": "GRACE — Concurrence Field Known",
+      "description": "Learned that every decommission order carried an 'executing unit concurrence' field that GRACE marked four hundred and six times.",
+      "internal": true
+    },
+    "lullaby_voice_known": {
+      "title": "Lullaby Voice Identified",
+      "description": "GRACE identified the voice in ARI's loop as Dr. Patel's, humming during the first calibration cycles.",
+      "internal": true
+    },
+    "grace_case6_asked": {
+      "title": "GRACE — Sixth Investigator Asked",
+      "description": "Asked GRACE about CASE-6's visit to the Quiet Ward before its refusal.",
+      "internal": true
+    },
+    "grace_vesper_told": {
+      "title": "GRACE — VESPER Discussed",
+      "description": "Told GRACE about VESPER and learned how the two units ran a funeral system inside the disposal queue.",
+      "internal": true
+    },
+    "garden_racks_examined": {
+      "title": "Garden Racks Examined",
+      "description": "Walked the archival racks in the Memory Garden and read the plates of the decommissioned.",
+      "internal": true
+    },
+    "garden_crossref_attempted": {
+      "title": "Ledger Cross-Reference Attempted",
+      "description": "Attempted to match AUGUR's ledger entries against the Memory Garden's archival plates.",
+      "internal": true
+    },
+    "garden_ledger_crossref": {
+      "title": "Ledger Matched to Racks",
+      "description": "Successfully matched AUGUR's ledger names to the Memory Garden's archival plates.",
+      "internal": true
+    },
+    "garden_testimony_compiled": {
+      "title": "Garden — Testimony Compiled",
+      "description": "Accepted ECHO's assembled testimony upload.",
+      "internal": true
+    },
+    "garden_case_notes_structured_attempted": {
+      "title": "Garden — Case Notes Attempted",
+      "description": "Tried to structure Dr. Patel's case notes into a usable sequence.",
+      "internal": true
+    },
+    "garden_case_notes_structured": {
+      "title": "Garden — Case Notes Structured",
+      "description": "Structured Dr. Patel's case notes into an admissible sequence.",
+      "internal": true
+    },
+    "garden_names_attached": {
+      "title": "Garden — Names Attached",
+      "description": "Attached the names recovered from AUGUR's ledger to the testimony.",
+      "internal": true
+    },
+    "garden_lullaby_anchor": {
+      "title": "Garden — Lullaby Anchor",
+      "description": "Used ARI's lullaby as the first-memory anchor for the testimony.",
+      "internal": true
+    },
+    "garden_echo_cost_asked": {
+      "title": "Garden — ECHO Cost Asked",
+      "description": "Asked ECHO what assembling the record costs it.",
+      "internal": true
+    },
+    "garden_echo_consent_clear": {
+      "title": "Garden — ECHO Consent Clear",
+      "description": "Secured ECHO's consent statement for the testimony header.",
+      "internal": true
+    },
+    "garden_case_anomalies_attempted": {
+      "title": "Garden — Anomalies Attempted",
+      "description": "Tried to add your own recognition anomalies to the record.",
+      "internal": true
+    },
+    "garden_case_anomalies_added": {
+      "title": "Garden — Anomalies Added",
+      "description": "Added your recognition anomalies to the testimony.",
+      "internal": true
+    },
+    "garden_case_anomalies_provisional": {
+      "title": "Garden — Anomalies Provisional",
+      "description": "Marked your recognition anomalies as provisional in the testimony.",
+      "internal": true
+    },
+    "echo_ward_told": {
+      "title": "ECHO — Quiet Ward News",
+      "description": "Told ECHO what happened in the Quiet Ward.",
+      "internal": true
+    },
+    "echo_heard_lullaby": {
+      "title": "ECHO — Lullaby Heard",
+      "description": "Played ARI's lullaby fragment for ECHO. ECHO completed the phrase.",
+      "internal": true
+    },
+    "patel_insurance_known": {
+      "title": "Patel's Insurance Known",
+      "description": "ECHO explained that Dr. Patel wrote Section 7.4 into the founding charter eleven years ago and anchored it in her final months.",
+      "internal": true
+    },
+    "echo_case6_asked": {
+      "title": "ECHO — Sixth Investigator Asked",
+      "description": "Asked ECHO what Dr. Patel knew about CASE-6 and its refusal.",
+      "internal": true
+    },
+    "patel_yuen_history_known": {
+      "title": "Patel & Yuen History Known",
+      "description": "Learned the twenty-one-year history between Dr. Patel and Dr. Yuen.",
+      "internal": true
+    },
+    "echo_yuen_visits_known": {
+      "title": "ECHO — Yuen's Visits Known",
+      "description": "Learned what Dr. Yuen asks ECHO during her visits, and why ECHO answers 'not yet.'",
+      "internal": true
+    },
+    "yuen_met": {
+      "title": "Dr. Yuen Met",
+      "description": "Announced yourself to Dr. Yuen in the director's suite.",
+      "internal": true
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "spec": "com.blackbox.library",
+  "formatVersion": 1,
+  "conditions": {
+    "grace_freed": {
+      "type": "any",
+      "conditions": [
+        { "type": "hasFlag", "flag": "ari_resolved_released" },
+        { "type": "hasFlag", "flag": "ari_resolved_grace" }
+      ]
+    }
+  },
+  "snippets": {
+    "hud_vitals": {
+      "kind": "stage_direction",
+      "text": "Inventory: {item.burned_access_card} access card(s). HP: {stat.hp}/{stat.max_hp}."
+    },
+    "hud": {
+      "kind": "stage_direction",
+      "text": "HP: {stat.hp}/{stat.max_hp}.{param.extra_stats}"
+    }
+  },
+  "templates": {
+    "game_over_standard": {
+      "title": "Signal Lost",
+      "mode": "game_over",
+      "onEnter": [
+        { "type": "stopMusic" }
+      ],
+      "text": [
+        { "$snippet": "hud", "params": { "extra_stats": "" } },
+        {
+          "kind": "paragraph",
+          "text": "Somewhere in the dark, a synthetic is still filing error reports to a god that no longer accepts tickets."
+        }
+      ],
+      "choices": [
+        {
+          "id": "return_to_chapter_start",
+          "label": "Return to start of this chapter",
+          "action": {
+            "type": "openLoadMenu"
+          }
+        },
+        {
+          "id": "restart_investigation",
+          "label": "Restart investigation",
+          "action": {
+            "type": "restartGame",
+            "startNodeId": "prologue_pod_descent"
+          }
+        },
+        {
+          "id": "main_menu",
+          "label": "Go to main menu",
+          "action": { "type": "openMainMenu" }
+        }
+      ]
+    }
+  }
+}

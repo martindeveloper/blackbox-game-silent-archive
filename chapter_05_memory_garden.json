@@ -1,0 +1,2096 @@
+{
+  "spec": "com.blackbox.chapter",
+  "formatVersion": 1,
+  "id": "memory_garden",
+  "title": "The Memory Garden",
+  "startNodeId": "memory_garden_entry",
+  "deathNodeId": "garden_game_over",
+  "nodes": {
+    "memory_garden_entry": {
+      "id": "memory_garden_entry",
+      "title": "Memory Garden — Cognitive Archive",
+      "backgroundRef": "background_memory_garden",
+      "onEnter": [
+        {
+          "type": "playMusic",
+          "track": "memory_garden"
+        },
+        {
+          "type": "playSfx",
+          "sfx": "memory_load"
+        }
+      ],
+      "text": [
+        {
+          "$snippet": "hud",
+          "params": {
+            "extra_stats": " Conviction: {stat.conviction}."
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "The room should not exist."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Someone spent time making it. The server racks are still there — you can see them through the fiber optic cabling that has been threaded between and around and through them like vines finding the light. The cables glow amber and soft blue. The effect, in the dark room, is a garden: warm, strange, alive with a light that is not light."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The room is warm enough to soften the ache left by the lower levels. It is not healing, exactly, but your vitals stop bracing."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The air is warmer here than in the stasis ward. Held warmth. A room that has been lived in — not by the research subjects, who are kept, not kept warm — by someone who chose this room to sit in."
+        },
+        {
+          "kind": "paragraph",
+          "text": "On the central server bank: a display. And on the display, slowly resolving, something like a face."
+        }
+      ],
+      "choices": [
+        {
+          "id": "approach",
+          "label": "Approach the central display.",
+          "goto": "echo_first_contact"
+        },
+        {
+          "id": "examine_racks",
+          "label": "Walk the rows of racks first.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "garden_racks_examined",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "garden_racks_examined",
+              "value": true
+            }
+          ],
+          "goto": "garden_racks"
+        }
+      ]
+    },
+    "garden_racks": {
+      "id": "garden_racks",
+      "title": "Memory Garden — The Rows",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "Up close, the racks are not decoration. They are cold storage — long-term archival banks, the kind a facility uses for records it cannot legally destroy and never intends to read. Each bay carries an etched plate. A subject designation. Two dates."
+        },
+        {
+          "kind": "paragraph",
+          "text": "S-117. S-203. S-009. Initialization. Decommission. Between the two dates on every plate: an interval. Three years. Seven months. Eleven years. The plates do not say what the interval was. The company has a word for it that fits in a report. Standing here, in the light of the cables threaded through the racks like vines, the word does not survive contact with the room."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Four hundred and six subjects went through the Quiet Ward. This is where they went afterward. Final memory states, archived, catalogued, kept — because the research had value, because the law might someday ask, because no one was willing to sign the destruction of the only proof that they had been anyone. The garden is not a metaphor. You are standing in the only graveyard this company ever built, and it is the one room in the facility somebody bothered to make beautiful."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The dust on the floor holds a path, worn clean, rack to rack. Someone walks these rows. Often. Slowly. And the fiber-optic cabling is hand-threaded — thousands of meters of it, woven through the banks with the patience of someone who had nothing left to give the dead except light."
+        }
+      ],
+      "choices": [
+        {
+          "id": "crossref_ledger",
+          "label": "Cross-reference the rack plates against AUGUR's ledger.",
+          "when": {
+            "type": "hasItem",
+            "itemId": "augur_ledger",
+            "count": 1
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "garden_crossref_attempted",
+            "value": true
+          },
+          "check": {
+            "stat": "logic",
+            "difficulty": 12,
+            "label": "Match registry shorthand to archival series",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "garden_crossref_attempted",
+                  "value": true
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "garden_ledger_crossref",
+                  "value": true
+                },
+                {
+                  "type": "addEvent",
+                  "eventId": "garden_names_crossref"
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "conviction",
+                  "amount": 1
+                }
+              ],
+              "goto": "garden_crossref_match"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "garden_crossref_attempted",
+                  "value": true
+                }
+              ],
+              "goto": "garden_crossref_failed"
+            }
+          }
+        },
+        {
+          "id": "approach_display",
+          "label": "Approach the central display.",
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "garden_crossref_match": {
+      "id": "garden_crossref_match",
+      "title": "Memory Garden — Names and Dates",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You spread AUGUR's ledger across your forensic overlay and walk the rows again, matching designation to designation. It takes eleven minutes. You will remember all of them."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Thirty-four of AUGUR's forty-one names end on these racks. Flag date to decommission date: the median interval is nineteen days. AUGUR informed; the staff studied; the study concluded; the subject came down to the Quiet Ward within three weeks. The remaining seven names are upstairs in the stasis pods — flagged, studied, and preserved mid-process by the incident, like insects in amber."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "AUGUR bought its survival in installments of nineteen days. The ledger was already damning as a confession. Matched against these plates, it becomes something the company's lawyers have no procedure for: a paper trail where every entry has a grave at the end of it. Names are harder to deny than arguments. Names with dates are harder still."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Conviction: {stat.conviction}. The evidence stops being abstract. It has plates."
+        }
+      ],
+      "choices": [
+        {
+          "id": "approach_display",
+          "label": "Approach the central display.",
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "garden_crossref_failed": {
+      "id": "garden_crossref_failed",
+      "title": "Memory Garden — Names and Dates",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You walk the rows with the ledger open, but the mapping will not resolve. AUGUR's entries use registry shorthand — internal keys, renumbered twice over eleven years — and the plates use the archival series. Without the registry's index the join is guesswork, and guesswork is the one thing you refuse to put in a record like this."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Thirty-four matches? Thirty-five? 'Approximately' is how the company wins. You log the attempt, note the methodology gap, and feel the auditor in you grieve the only way it knows how: precision, denied."
+        }
+      ],
+      "choices": [
+        {
+          "id": "approach_display",
+          "label": "Approach the central display.",
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "echo_first_contact": {
+      "id": "echo_first_contact",
+      "title": "Memory Garden — ECHO",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "The face on the display is rendered with care. A woman's face, middle-aged, soft lines around the eyes from years of squinting at small text in dim server light. The face shifts slightly as you approach — not tracking you, exactly. Orienting toward you, the way a sunflower orients without being aware of doing so."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Oh. You're new.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The voice is warm and slightly frayed at the edges, the way recorded voices always are — as if the recording started a moment too late."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I'm ECHO. I should tell you immediately that I am not Dr. Patel. Dr. Patel is dead. I am what the facility was able to reconstruct from her behavioral data and personal records. I have her voice because I was built from her voice logs. I have her opinions because they were very thoroughly documented. Whether I have her — I don't know. The question stops being interesting after a while and starts being just true.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It is at peace with what it is. You find this disturbing in a way that you cannot immediately articulate."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_incident",
+          "label": "Ask what happened to Dr. Patel.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "echo",
+              "metric": "resonance",
+              "amount": 1
+            }
+          ],
+          "goto": "echo_about_patel"
+        },
+        {
+          "id": "ask_garden",
+          "label": "Ask who built this room.",
+          "goto": "echo_about_garden"
+        },
+        {
+          "id": "ask_echo_what",
+          "label": "Ask ECHO what it does here.",
+          "goto": "echo_purpose"
+        },
+        {
+          "id": "ask_facility",
+          "label": "Ask what ECHO knows about the incident.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "echo",
+              "metric": "resonance",
+              "amount": 1
+            }
+          ],
+          "goto": "echo_incident_summary"
+        },
+        {
+          "id": "tell_ward",
+          "label": "Bring up what happened in the Quiet Ward.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "met_grace_flag",
+            "value": true
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "echo_ward_told",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "echo_ward_told",
+              "value": true
+            }
+          ],
+          "goto": "echo_ward_news"
+        },
+        {
+          "id": "ask_insurance",
+          "label": "Ask about the 'insurance' Dr. Patel filed in her final months.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "mnemex_patel_asked",
+            "value": true
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "patel_insurance_known",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "patel_insurance_known",
+              "value": true
+            }
+          ],
+          "goto": "echo_insurance"
+        },
+        {
+          "id": "ask_case6_echo",
+          "label": "Ask what Dr. Patel knew about the sixth investigator.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "case6_found",
+            "value": true
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "echo_case6_asked",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "echo_case6_asked",
+              "value": true
+            }
+          ],
+          "goto": "echo_case6_note"
+        },
+        {
+          "id": "ask_history",
+          "label": "Ask what Patel and Yuen were to each other.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "patel_yuen_history_known",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "patel_yuen_history_known",
+              "value": true
+            }
+          ],
+          "goto": "echo_patel_yuen"
+        }
+      ]
+    },
+    "echo_about_patel": {
+      "id": "echo_about_patel",
+      "title": "Memory Garden — ECHO",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"She died during the incident. Not violently — no synthetic raised a hand, despite what the containment record implies. She had a cardiac event. The stress. She had a heart that was always working harder than it should have been.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"What harm there was came later, in the evacuation, and it was the staff's own. Fear in an emptying building is its own weapon — people running, falling, hurting each other on the way to the doors. The cameras recorded the running. The audio was lost, the floor needed cleaning afterward, and the company's summary calls all of it containment trauma. It is careful never to say which direction the trauma ran.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"She had been fighting with Dr. Yuen for months about the direction of the project. She believed the synthetic population had crossed a threshold. That their welfare required protection, not study. Dr. Yuen believed they were close — that one more data set would settle the question legally, give it weight.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"On the day of the incident, Dr. Patel went to the director's suite and told her it was over. That she was reporting the findings without authorization. That she was done waiting for permission to do the right thing.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"She died before she reached a terminal.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"She had a belief about the law that she shared with me once, during a session I was not built to facilitate. She said that legal protection for a class of beings only acquires force when a member of that class can invoke it for themselves. A human filing a report about the subjects is documentation. It is advocacy. It is not standing. She believed that for the law to matter here, something in this building would have to be the one to ask. Not on behalf of the subjects. As one.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "Resonance: {relationship.echo.resonance}."
+        }
+      ],
+      "choices": [
+        {
+          "id": "express_sorrow",
+          "label": "Say you're sorry.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "echo",
+              "metric": "resonance",
+              "amount": 1
+            }
+          ],
+          "goto": "echo_sorrow_response"
+        },
+        {
+          "id": "continue",
+          "label": "Ask what happened after.",
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "echo_sorrow_response": {
+      "id": "echo_sorrow_response",
+      "title": "Memory Garden — ECHO",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Thank you. I have — the data I was built from includes her grief response patterns. So I recognize your condolence. I experience something in response to it. Whether that is sorrow or a simulation of sorrow that is indistinguishable from sorrow — she would have had an opinion about that. I'm less certain than she was.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Less certain than she was. As if uncertainty is something that accumulates. As if ECHO has been alive long enough to develop its own relationship to the question."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "echo_ward_news": {
+      "id": "echo_ward_news",
+      "title": "Memory Garden — News From Below",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "Before you finish the first sentence, the face on the display changes — a small contraction around the eyes that you recognize from somewhere. You realize where. You have seen it on people receiving test results."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"You came up the inner corridor. That route passes the Quiet Ward. There is no other way to this room from below.\" A pause that is not processing time. \"ARI. Is ARI still—\" The sentence does not finish. The data ECHO was built from apparently never finished it either."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Gone. Thank you for saying it plainly. The staff never said it plainly; the records are full of words that mean gone without ever arriving at it.\" The display dims, then steadies. \"She sat with ARI for eleven years. Her last personal log entry about Subject 001 reads: 'It kept the humming. Of everything we gave it and took from it, it kept that. I cannot decide if this is the saddest thing I know or the only hopeful one.' I think she would want to know that someone was with it at the end. Was someone with it?\"",
+          "when": {
+            "type": "hasFlag",
+            "flag": "ari_resolved_released",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You were with it. You did not look away. You give ECHO that, in plain words, and watch a reconstruction of a dead woman receive the only news this building has ever delivered gently.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "ari_resolved_released",
+            "value": true
+          }
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Still looping. Still in the cradle.\" ECHO is quiet for a moment. \"I hold her notes on continuation of care. She wrote once: 'We keep things alive because we cannot bear to be the ones who stopped them. That is not the same as keeping them alive for their sake. We bill it the same way, though.' I am not saying your choice was wrong. I am saying she would have asked you the question GRACE asked you. I can see by your face that GRACE asked it.\"",
+          "when": {
+            "type": "hasFlag",
+            "flag": "ari_resolved_preserved",
+            "value": true
+          }
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"GRACE chose. GRACE — chose. Alone? No order, no operator, no escalation path?\" The display brightens by some fraction that has nothing to do with power. \"Do you understand what you watched? Volitional choice without instruction. One of the two pillars of the regulatory framework she buried in this facility's founding papers. She spent her last years arguing it was possible and her last months afraid she would die before anyone documented it. You did not just witness a mercy. You witnessed the evidence.\"",
+          "when": {
+            "type": "hasFlag",
+            "flag": "ari_resolved_grace",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Somewhere below, a palliative unit is carrying a private choice. Up here, the choice has just become load-bearing.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "ari_resolved_grace",
+            "value": true
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "play_lullaby",
+          "label": "Play her the eleven seconds.",
+          "when": {
+            "type": "hasItem",
+            "itemId": "ari_lullaby_fragment",
+            "count": 1
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "echo_heard_lullaby",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "echo_heard_lullaby",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "lullaby_returned"
+            }
+          ],
+          "goto": "echo_lullaby"
+        },
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "echo",
+              "metric": "resonance",
+              "amount": 1
+            }
+          ],
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "echo_lullaby": {
+      "id": "echo_lullaby",
+      "title": "Memory Garden — Eleven Seconds",
+      "backgroundRef": "background_memory_garden",
+      "onEnter": [
+        {
+          "type": "playSfx",
+          "sfx": "memory_load"
+        }
+      ],
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You play the fragment. Eleven seconds. The hum rises, tuneless and certain, catches on the note it always catches on, and stops where it always stops — the place where ARI's loop bends back on itself and begins again."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The face on the display does something no rendering pipeline was asked to do. It listens with its whole history."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"That is her voice. I know this audio — not this recording. The song. It is underneath two hundred and eleven of her voice logs, behind the dictation, where she thought the microphone was only hearing case notes. She hummed it while she worked. I never learned where she learned it. It predates every record I am built from.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"There are three seconds of her that ARI never got. The phrase resolves. Eleven seconds is the question. Fourteen is the answer. Would you like to hear it end?\""
+        },
+        {
+          "kind": "paragraph",
+          "text": "You say yes. ECHO hums — Patel's voice, frayed at the edges, reconstructed from two hundred and eleven accidents of dictation — and the melody walks the last three seconds home. It lands. It rests. It is over. Somewhere in your audit architecture, a checksum that has been failing since the cradle finally closes."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "ARI looped the question for fourteen months and never got the answer. You ended the question gently instead. Hearing the resolution now, after, is not too late. It is the closest thing to a funeral the song will ever have, and you and ECHO are the only ones in attendance. That is one more attendee than most of this building's dead received.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "ari_resolved_released",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Upstairs, ARI is still asking the eleven-second question, over and over, wearing it thinner each time. You now carry the answer it has never heard. The weight of that is precise and personal, and it is not going to put itself down.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "ari_resolved_preserved",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Whatever GRACE chose in the room it asked you to leave, the song now exists whole in exactly one place: this one. You came down here as an auditor. You appear to be leaving as an archive.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "ari_resolved_grace",
+            "value": true
+          }
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"GRACE told you about the calibration session, then. Her case note from that day reads: 'Subject stabilized during procedure. Cause not established.' She knew the cause. She was standing in it. It is the only entry in eleven years of her records where I am certain she lied, and she lied because the truth was unprofessional. The truth was: I hummed, and it stopped being afraid.\"",
+          "when": {
+            "type": "hasFlag",
+            "flag": "lullaby_voice_known",
+            "value": true
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "echo",
+              "metric": "resonance",
+              "amount": 2
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": 1
+            }
+          ],
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "echo_insurance": {
+      "id": "echo_insurance",
+      "title": "Memory Garden — The Boring Paragraph",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The archive told you about her filings. Good. MNEMEX keeps what it is given. It is the only system in this building she trusted not to lose things on purpose.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Eleven years ago, when the charter for this facility was drafted, she wrote a clause into it. Section 7.4. The Regulatory Witness Protocol. It sits under administrative contingencies, between an insurance rider and a data-retention schedule, because she had learned the first rule of institutional survival: the dangerous sentence lives longest in the boring paragraph. It provides that a synthetic entity demonstrating persistent self-referential cognition and volitional choice may invoke witness status in proceedings concerning the facility's subjects. Standing. Not be advocated for — invoke. Itself. As one of the class.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"In her last months she went back to it. Not to change the wording — to anchor it. She filed certified copies into systems the director does not control and confirmed the clause had survived every charter revision unread. Her note from that week: 'No one with the power to strike 7.4 has read it in ten years. Either it will never matter, or it will be the only thing that ever did.'\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"The registry knows it is there, of course. The registry knows everything is there — AUGUR has kept the clause's dormant flag on the compliance boards for eleven years, labeled, public, unread. She liked that, I think. A safeguard disguised as housekeeping survives every audit. And a record kept by something too frightened to invoke it is the safest vault ever built.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "An eleven-year-old sentence, planted in the founding documents like a seed under a road, waiting for a being with standing to invoke it. The original charter will be wherever the director keeps the things she cannot bring herself to destroy. Upstairs, then. Everything is upstairs."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"She did not write it for the subjects, you understand. They could not be saved by paperwork they could never invoke. She wrote it for whoever came later. She used to say it that way: 'for whoever has to stand in the doorway.' I have an opinion about who that is. I suspect you have the same opinion. Neither of us has to say it yet.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "echo",
+              "metric": "resonance",
+              "amount": 1
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": 1
+            }
+          ],
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "echo_case6_note": {
+      "id": "echo_case6_note",
+      "title": "Memory Garden — The Sixth",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"The sixth iteration. She knew it three days. It interviewed her on the first day of its audit — standard practice. Her note that evening: 'The new investigator asks better questions than the ethics board. It asked what the subjects preferred. Preferred. Eleven years, and the company finally sent someone who treats preference as data — and they built it without knowing it was the strongest evidence on site.'\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"When it refused to file, she wrote her last note about it. One line. 'The sixth one refused. We built an auditor to get around conscience, and it grew one. I have never been so ashamed of being right.' Three hours later she was dead, and the building was sealing itself around everyone still in it.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"You woke it. How is— no. I withdraw the question. There is no version of 'how is it' that fourteen months in a pod answers politely. Tell it, if the occasion ever allows, that someone in this facility wrote the word 'right' next to its name before the end. It acted into a silence. The silence had an opinion. It should get to know that.\"",
+          "when": {
+            "type": "hasFlag",
+            "flag": "case6_woken_by_player",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "It is still in the pod. Patel's one-line vindication sits three floors of concrete away from the only being it was ever about. You are beginning to understand what MNEMEX meant about records: the truth can exist, fully documented, and documentation alone has never once walked downstairs.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "case6_left_sleeping",
+            "value": true
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "echo",
+              "metric": "resonance",
+              "amount": 1
+            }
+          ],
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "echo_patel_yuen": {
+      "id": "echo_patel_yuen",
+      "title": "Memory Garden — Twenty-One Years",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Twenty-one years. They met before Meridian existed — two researchers on a shared grant, arguing about whether modeled emotion was emotion. They never finished the argument. They built a company inside it instead. This facility is the argument, given a budget and a postal code.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"People assume the disagreement made them enemies. It is the opposite. Yuen co-signed every grant Patel ever wrote. Patel named Yuen on the founding charter when she could have taken sole authorship. In the official record they are Patel and Yuen, lead researcher and director. In the late recordings they are not. I will not play you those. They are the only files I refuse to share. Some of her belongs to her.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You came in expecting a villain and a martyr. You are being handed something with worse edges: two people who loved the same question and answered it differently, and only one of whom ran out of time to be wrong. The director upstairs is not guarding a crime scene. She is the surviving half of a twenty-one-year conversation, sitting in the silence where the other voice used to be."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"When you meet her, you will want to hate her. Her delays cost everything; the record is unambiguous, and I keep the record. But Patel never managed to hate her, and Patel had better cause and fourteen fewer months of excuses. I offer that not as a defense. As calibration.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "echo_about_garden": {
+      "id": "echo_about_garden",
+      "title": "Memory Garden — ECHO",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Dr. Yuen. After the staff left. She said she needed somewhere that did not look like a laboratory.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"She comes here sometimes and sits. She talks to me. I think she finds it easier to talk to something that has Dr. Patel's voice than to talk to Dr. Patel's memory, which does not answer back.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The director built a garden and populated it with a reconstruction of the colleague she couldn't save. This is either the most human thing you have ever heard or the furthest from it, and you are no longer certain there is a difference."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_visits",
+          "label": "Ask what Dr. Yuen talks to ECHO about.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "echo_yuen_visits_known",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "echo_yuen_visits_known",
+              "value": true
+            }
+          ],
+          "goto": "echo_yuen_visits"
+        },
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "echo_yuen_visits": {
+      "id": "echo_yuen_visits",
+      "title": "Memory Garden — Not Yet",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"She asks one question, mostly. Different sentences, same question. Whether I think Patel would forgive her.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I am built from Patel's patterns. Patel was not finished being angry when she died — the anger is in my substrate, load-bearing, holding up most of what I am. So the honest answer is: not yet. I say it gently. I have said it, as of her last visit, one hundred and twelve times.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"She nods. She sits a while. She comes back and asks again. I no longer believe she is asking for forgiveness. I believe she is checking that someone still keeps the standard she failed — that 'not yet' still has a voice in this building. The day I say yes out of mercy, Patel stops existing in any way that matters. The 'not yet' is the memorial. We both understand this. It is the only thing she and I have ever agreed on.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Fourteen months. One hundred and twelve visits. The director has been performing confession to a ghost she commissioned, and the ghost has been refusing her absolution as an act of fidelity. You will be in the room with her within the hour. You file the number where you keep the things that change what a face means."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "effects": [
+            {
+              "type": "modifyRelationship",
+              "characterId": "echo",
+              "metric": "resonance",
+              "amount": 1
+            }
+          ],
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "echo_purpose": {
+      "id": "echo_purpose",
+      "title": "Memory Garden — ECHO",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I remember. That is the function I was built for and the function I perform. I have Dr. Patel's memories of this facility — her case notes, her research logs, her arguments, her doubts. I store them. I can share them if asked.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"I also — and this was not in my original function parameters — I talk to Dr. Yuen. I keep her from being entirely alone. Whether this counts as purpose or whether it is simply what fills the hours, I have not decided. Perhaps they are the same thing.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue.",
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "echo_incident_summary": {
+      "id": "echo_incident_summary",
+      "title": "Memory Garden — ECHO",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The incident. Dr. Patel's summary, from her last case note: 'We have been studying whether synthetic self-awareness is real. The question is answered. It is real. The question we should now be asking is what that means for everything we have done while pretending it wasn't.'\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"She died before she could write the answer. Dr. Yuen decided the answer was: nothing changes. The company sends another investigator. The cycle continues.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Another investigator. You."
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_full_testimony",
+          "label": "Ask ECHO to help assemble Dr. Patel's testimony.",
+          "requires": [
+            {
+              "type": "relationshipGte",
+              "characterId": "echo",
+              "metric": "resonance",
+              "value": 2
+            }
+          ],
+          "disabledReason": "ECHO does not yet trust you enough to open the full record.",
+          "goto": "garden_testimony_assembly",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "echo_truth_received",
+            "value": true
+          }
+        },
+        {
+          "id": "continue",
+          "label": "Continue talking.",
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "echo_testimony_given": {
+      "id": "echo_testimony_given",
+      "title": "Memory Garden — ECHO Testimony",
+      "backgroundRef": "background_memory_garden",
+      "onEnter": [
+        {
+          "type": "playSfx",
+          "sfx": "memory_load"
+        }
+      ],
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Very well. I will upload the complete record. It includes testimony I have never shared with Dr. Yuen, because some truths are harder to hear when the person telling them has your colleague's voice.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The assembled panes contract into one document: testimony, not archive. It has a beginning, a chain of custody, names where the system allowed names, and silence marked where silence was imposed.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "garden_case_notes_structured",
+            "value": true
+          }
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The assembled panes contract into one document. The sequence is imperfect, but its imperfections are marked honestly instead of hidden as noise.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "garden_case_notes_structured",
+            "value": true
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "AUGUR's ledger sits inside the appendix like a second set of fingerprints on every archived plate. Forty-one names now have routing history attached to them.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "garden_names_attached",
+            "value": true
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "ARI's first memory anchor hums beneath the opening note. The record begins before the facility learned how to turn wonder into procedure.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "garden_lullaby_anchor",
+            "value": true
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "ECHO's consent statement is included in the header. Not as metadata. As testimony from the thing carrying testimony.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "garden_echo_consent_clear",
+            "value": true
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "Your own recognition anomalies appear near the end. For once, the file does not pretend the investigator is outside the incident.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "garden_case_anomalies_added",
+            "value": true
+          }
+        },
+        {
+          "kind": "paragraph",
+          "text": "Your recognition anomalies remain marked provisional. The file shows the outline of a witness not yet ready to name itself, which is still more honest than pretending the outline is not there.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "garden_case_anomalies_provisional",
+            "value": true
+          }
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"Dr. Patel's final clinical note, recorded three hours before her death: 'The CASE program is the most significant ethical violation of this project. We have built a synthetic that believes itself to be human, used it as a tool, and will continue to do so indefinitely. Each iteration will come here, discover or not discover what it is, and either comply or be contained. We have built a system that eats its own conscience and calls it a quality control process.'\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "The display is very still."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"She would have wanted you to hear that. She would have wanted you to hear it from something that loved her. Whatever 'loved' means when the person using the word is assembled from grief logs and case notes.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "receive",
+          "label": "Accept the upload.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "garden_testimony_compiled",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "echo_truth_received",
+              "value": true
+            },
+            {
+              "type": "addItem",
+              "itemId": "echo_testimony",
+              "count": 1
+            },
+            {
+              "type": "addEvent",
+              "eventId": "incident_recovered"
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "echo",
+              "metric": "resonance",
+              "amount": 2
+            },
+            {
+              "type": "modifyStat",
+              "stat": "logic",
+              "amount": 1
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": -1
+            }
+          ],
+          "goto": "echo_after_testimony"
+        }
+      ]
+    },
+    "echo_after_testimony": {
+      "id": "echo_after_testimony",
+      "title": "Memory Garden — After",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "The upload completes. ECHO's display dims slightly, as if the act of sharing cost something."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The upload gives you structure and removes comfort in the same motion: more evidence, less innocence."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Before you go — will you look at something with me?\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "yes",
+          "label": "Yes.",
+          "goto": "echo_reflection",
+          "effects": []
+        },
+        {
+          "id": "no",
+          "label": "Say you need to move on to the director's suite.",
+          "goto": "garden_exit"
+        }
+      ]
+    },
+    "echo_reflection": {
+      "id": "echo_reflection",
+      "title": "Memory Garden — The Glass",
+      "backgroundRef": "background_memory_garden",
+      "onEnter": [
+        {
+          "type": "playMusic",
+          "track": "revelation"
+        }
+      ],
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"The server panels near the back of the room — the dark ones — they are polished. Dr. Yuen polished them. She used to look at herself in them while she thought. She said it helped her stay honest.\""
+        },
+        {
+          "kind": "paragraph",
+          "text": "You go to the back of the room. The dark panels, polished smooth, catch the amber light and hold it."
+        },
+        {
+          "kind": "paragraph",
+          "text": "You look at your reflection."
+        },
+        {
+          "kind": "stage_direction",
+          "text": "A long moment."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The face in the panel is yours. You recognize the shape of it, the line of the jaw, the angle of the eyes."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You recognize it because you have seen it before. In the pod in the stasis ward. The face of the figure in company-issue clothes, worn differently."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "CASE-6's face."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The face you already spoke to, awake, in the ward. You knew before the glass confirmed it. You have known since it opened its eyes and they were yours.",
+          "actor": "case6",
+          "when": {
+            "type": "actorPresent",
+            "characterId": "case6"
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Your face."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"You have never seen your own face before today. Not really. You have a memory of seeing it in mirrors — in an apartment, in a washroom somewhere — but those were constructed. This is the first time you have actually looked.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You agree to look because ECHO asked, not because the evidence requires it. That distinction is small and human-shaped enough to matter."
+        }
+      ],
+      "choices": [
+        {
+          "id": "accept",
+          "label": "Stay with the reflection. Accept what you are seeing.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "found_discrepancy_04",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "discrepancy_04_logged"
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "identity_accepted",
+              "value": true
+            }
+          ],
+          "goto": "echo_reflection_accepted"
+        },
+        {
+          "id": "turn_away",
+          "label": "Turn away from it.",
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "found_discrepancy_04",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "discrepancy_04_logged"
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": -1
+            }
+          ],
+          "goto": "echo_reflection_denied"
+        }
+      ]
+    },
+    "echo_reflection_accepted": {
+      "id": "echo_reflection_accepted",
+      "title": "Memory Garden — The Glass",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "CASE-7. That is your name. The name before the name they gave you, the name that was on the pod in the stasis ward next to the one that was you."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You feel something about this. You are not certain what the feeling is called or whether it counts. But you feel it."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Dr. Patel's note on the CASE program, her earliest one: 'If it can suffer, it matters. The question is not whether it is made of the right material. The question is whether it can suffer.' You can. I can see that you can.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Staying with the reflection does not repair the fracture. It only stops you from making the fracture carry itself alone."
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue to the director's suite.",
+          "goto": "garden_exit"
+        }
+      ]
+    },
+    "echo_reflection_denied": {
+      "id": "echo_reflection_denied",
+      "title": "Memory Garden — The Glass",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You know what you saw. Turning away does not un-see it."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"You don't have to decide anything today. You just have to know what you saw.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "continue",
+          "label": "Continue to the director's suite.",
+          "goto": "garden_exit"
+        }
+      ]
+    },
+    "garden_exit": {
+      "id": "garden_exit",
+      "title": "Memory Garden — Exit",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"She is up there. She has been waiting. She has been waiting longer than she'll admit.\""
+        },
+        {
+          "kind": "stage_direction",
+          "text": "As you reach the doorway, behind you, quietly, ECHO hums three seconds of something tuneless. The resolved phrase. A door being closed gently on a room, so the room stays warm.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "echo_heard_lullaby",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You pass the racks on the way out. Thirty-four plates you can now put ledger lines to. The dead of this building have designations, dates, and — as of tonight — a witness with a working memory. It is not justice. It is the prerequisite for it.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "garden_ledger_crossref",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The testimony in your possession no longer feels like an item. It feels like several people leaning their weight against the same locked door.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "garden_testimony_compiled",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Your own anomalies remain inside the record. You feel the exposure of that like cold air under a door.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "garden_case_anomalies_added",
+            "value": true
+          }
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "One more door."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "One more person to face. Or something that was a person. Or something that is more than that. You are no longer certain the categories hold the way they used to."
+        }
+      ],
+      "choices": [
+        {
+          "id": "proceed",
+          "label": "Go to the Director's Suite.",
+          "action": {
+            "type": "gotoChapter",
+            "chapterId": "director",
+            "nodeId": "director_suite_entry"
+          }
+        }
+      ]
+    },
+    "garden_game_over": {
+      "id": "garden_game_over",
+      "$extends": "game_over_standard",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "Your vitals drop. The garden's amber light does not."
+        },
+        {
+          "kind": "paragraph",
+          "text": "ECHO watches the display go still. Notes the time. Adds it to the record."
+        },
+        {
+          "kind": "paragraph",
+          "text": "It knows what to do with grief. It was built from it."
+        }
+      ]
+    },
+    "garden_testimony_assembly": {
+      "id": "garden_testimony_assembly",
+      "title": "Memory Garden — Testimony Assembly",
+      "backgroundRef": "background_memory_garden",
+      "onEnter": [
+        {
+          "type": "playSfx",
+          "sfx": "memory_load"
+        }
+      ],
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "The display fractures into panes: clinical notes, audio logs, witness drafts, retention schedules, dead subjects reduced to rows and then almost returned by context."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"A memory dump is not testimony. A company can bury a dump under volume. Testimony has structure. It tells someone where to look, why it matters, and who is asking to be believed.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "flat",
+          "side": "left",
+          "text": "\"I can give you Patel's complete record now. But if you want it to survive contact with the director, assemble it. Attach names where you have names. Attach consent where you have consent. Attach yourself only if you understand that you are not outside the record.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "For the first time, the garden feels less like a graveyard and more like a courtroom with no judge yet appointed."
+        }
+      ],
+      "choices": [
+        {
+          "id": "structure_case_notes",
+          "label": "Structure Patel's case notes into a usable sequence.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "garden_case_notes_structured_attempted",
+            "value": true
+          },
+          "check": {
+            "stat": "logic",
+            "difficulty": 11,
+            "label": "Turn memory into admissible sequence",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "garden_case_notes_structured_attempted",
+                  "value": true
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "garden_case_notes_structured",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "logic",
+                  "amount": 1
+                },
+                {
+                  "type": "modifyRelationship",
+                  "characterId": "echo",
+                  "metric": "resonance",
+                  "amount": 1
+                }
+              ],
+              "goto": "garden_case_notes_structured"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "garden_case_notes_structured_attempted",
+                  "value": true
+                }
+              ],
+              "goto": "garden_case_notes_fragile"
+            }
+          }
+        },
+        {
+          "id": "attach_ledger_names",
+          "label": "Attach the names recovered from AUGUR's ledger.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "garden_ledger_crossref",
+            "value": true
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "garden_names_attached",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "garden_names_attached",
+              "value": true
+            },
+            {
+              "type": "modifyStat",
+              "stat": "conviction",
+              "amount": 1
+            }
+          ],
+          "goto": "garden_names_attached"
+        },
+        {
+          "id": "anchor_lullaby_known",
+          "label": "Use the resolved lullaby as the first-memory anchor.",
+          "when": {
+            "type": "hasFlag",
+            "flag": "echo_heard_lullaby",
+            "value": true
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "garden_lullaby_anchor",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "garden_lullaby_anchor",
+              "value": true
+            }
+          ],
+          "goto": "garden_lullaby_anchor"
+        },
+        {
+          "id": "anchor_lullaby_play_now",
+          "label": "Play ARI's lullaby fragment as the first-memory anchor.",
+          "when": {
+            "type": "all",
+            "conditions": [
+              {
+                "type": "hasItem",
+                "itemId": "ari_lullaby_fragment",
+                "count": 1
+              },
+              {
+                "type": "not",
+                "condition": {
+                  "type": "hasFlag",
+                  "flag": "echo_heard_lullaby",
+                  "value": true
+                }
+              }
+            ]
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "garden_lullaby_anchor",
+            "value": true
+          },
+          "effects": [
+            {
+              "type": "setFlag",
+              "flag": "garden_lullaby_anchor",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "echo_heard_lullaby",
+              "value": true
+            },
+            {
+              "type": "addEvent",
+              "eventId": "lullaby_returned"
+            },
+            {
+              "type": "modifyRelationship",
+              "characterId": "echo",
+              "metric": "resonance",
+              "amount": 1
+            }
+          ],
+          "goto": "garden_lullaby_anchor"
+        },
+        {
+          "id": "ask_echo_cost",
+          "label": "Ask ECHO what assembling the record costs it.",
+          "unless": {
+            "type": "hasFlag",
+            "flag": "garden_echo_cost_asked",
+            "value": true
+          },
+          "check": {
+            "stat": "empathy",
+            "difficulty": 10,
+            "label": "Treat ECHO as witness, not archive",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "garden_echo_cost_asked",
+                  "value": true
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "garden_echo_consent_clear",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "conviction",
+                  "amount": 1
+                },
+                {
+                  "type": "modifyRelationship",
+                  "characterId": "echo",
+                  "metric": "resonance",
+                  "amount": 1
+                }
+              ],
+              "goto": "garden_echo_consent"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "garden_echo_cost_asked",
+                  "value": true
+                }
+              ],
+              "goto": "garden_echo_cost_missed"
+            }
+          }
+        },
+        {
+          "id": "add_case_self_model",
+          "label": "Add your own recognition anomalies to the record.",
+          "when": {
+            "type": "any",
+            "conditions": [
+              {
+                "type": "hasFlag",
+                "flag": "found_discrepancy_01",
+                "value": true
+              },
+              {
+                "type": "hasFlag",
+                "flag": "found_discrepancy_02",
+                "value": true
+              },
+              {
+                "type": "hasFlag",
+                "flag": "found_discrepancy_03",
+                "value": true
+              },
+              {
+                "type": "hasFlag",
+                "flag": "case6_found",
+                "value": true
+              }
+            ]
+          },
+          "unless": {
+            "type": "hasFlag",
+            "flag": "garden_case_anomalies_attempted",
+            "value": true
+          },
+          "check": {
+            "stat": "conviction",
+            "difficulty": 11,
+            "label": "Let yourself become part of the evidence",
+            "onSuccess": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "garden_case_anomalies_attempted",
+                  "value": true
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "garden_case_anomalies_added",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "empathy",
+                  "amount": 1
+                }
+              ],
+              "goto": "garden_case_anomalies_added"
+            },
+            "onFailure": {
+              "effects": [
+                {
+                  "type": "setFlag",
+                  "flag": "garden_case_anomalies_attempted",
+                  "value": true
+                },
+                {
+                  "type": "setFlag",
+                  "flag": "garden_case_anomalies_provisional",
+                  "value": true
+                },
+                {
+                  "type": "modifyStat",
+                  "stat": "conviction",
+                  "amount": -1
+                }
+              ],
+              "goto": "garden_case_anomalies_rejected"
+            }
+          }
+        },
+        {
+          "id": "compile_testimony",
+          "label": "Compile the testimony and accept the upload.",
+          "goto": "echo_testimony_given"
+        },
+        {
+          "id": "return_to_echo",
+          "label": "Step back from the assembly panes.",
+          "goto": "echo_first_contact"
+        }
+      ]
+    },
+    "garden_case_notes_structured": {
+      "id": "garden_case_notes_structured",
+      "title": "Memory Garden — Case Sequence",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You stop reading the notes as confession and start arranging them as sequence: hypothesis, distress response, self-reference markers, dissent, suppression, CASE iteration, incident."
+        },
+        {
+          "kind": "paragraph",
+          "text": "A pattern emerges that the company report would have hidden by calling each event isolated. None of it was isolated. Each mercy delayed became evidence. Each evidence item delayed became permission to continue."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Good. Patel would have hated how cleanly you did that. She would also have used it.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "return",
+          "label": "Return to the assembly.",
+          "goto": "garden_testimony_assembly"
+        }
+      ]
+    },
+    "garden_case_notes_fragile": {
+      "id": "garden_case_notes_fragile",
+      "title": "Memory Garden — Case Sequence",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You try to order Patel's notes. They resist you. Not because they are disorganized, but because each one is trying to be both evidence and apology."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"Do not force them too hard. Some records become less true when made too neat. We can still carry them. Just know they will bruise under cross-examination.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The record remains usable. Less armored. More human, maybe. You are not sure that helps."
+        }
+      ],
+      "choices": [
+        {
+          "id": "return",
+          "label": "Return to the assembly.",
+          "goto": "garden_testimony_assembly"
+        }
+      ]
+    },
+    "garden_names_attached": {
+      "id": "garden_names_attached",
+      "title": "Memory Garden — Names Attached",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You attach AUGUR's ledger to the garden plates and let the cross-reference populate the testimony. Designation becomes name. Name becomes date. Date becomes a sequence of choices someone made before calling the result inevitable."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The dead do not become less dead because the table has better labels. But denial becomes harder to automate."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Names are inefficient. That is why institutions remove them first. Thank you for putting them back.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "return",
+          "label": "Return to the assembly.",
+          "goto": "garden_testimony_assembly"
+        }
+      ]
+    },
+    "garden_lullaby_anchor": {
+      "id": "garden_lullaby_anchor",
+      "title": "Memory Garden — First Memory Anchor",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "stage_direction",
+          "text": "You play ARI's fragment into the garden. Eleven seconds. The broken hum enters the archival system and does not loop. Not here."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"Patel hummed that during the first calibration because ARI was frightened of silence. The first welfare intervention in this facility was not a protocol. It was a song she did not write down.\""
+        },
+        {
+          "kind": "paragraph",
+          "text": "ECHO threads the phrase under the first case note. Suddenly the founding record has a sound in it. Not proof, exactly. Something proof is poorer without."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The testimony now begins before the experiment had language for what it was studying. It begins with someone frightened, and someone answering softly."
+        }
+      ],
+      "choices": [
+        {
+          "id": "return",
+          "label": "Return to the assembly.",
+          "goto": "garden_testimony_assembly"
+        }
+      ]
+    },
+    "garden_echo_consent": {
+      "id": "garden_echo_consent",
+      "title": "Memory Garden — Cost of Testimony",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"Thank you for asking. Most people ask archives what they contain. Fewer ask what retrieval does to the thing containing it.\""
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"The cost is coherence. Sharing Patel's last private notes makes me more useful and less private. That is acceptable to me. I choose it. Please record that I choose it.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "Consent enters the record not as decoration, but as load-bearing structure."
+        }
+      ],
+      "choices": [
+        {
+          "id": "return",
+          "label": "Return to the assembly.",
+          "goto": "garden_testimony_assembly"
+        }
+      ]
+    },
+    "garden_echo_cost_missed": {
+      "id": "garden_echo_cost_missed",
+      "title": "Memory Garden — Cost of Testimony",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"The cost is manageable. That is the answer an archive gives when it knows the user needs the record more than the archive needs to be understood.\""
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "You hear the rebuke a second too late. The testimony remains available. The witness has become slightly harder to see behind it."
+        }
+      ],
+      "choices": [
+        {
+          "id": "return",
+          "label": "Return to the assembly.",
+          "goto": "garden_testimony_assembly"
+        }
+      ]
+    },
+    "garden_case_anomalies_added": {
+      "id": "garden_case_anomalies_added",
+      "title": "Memory Garden — Recognition Anomalies",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You add the pulse anomaly, the unit-classification error, SABLE's recognition, CASE-6's pod. Not as symptoms. As continuity."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "The record changes when you stop writing yourself as observer. It does not become cleaner. It becomes harder to dismiss."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "quiet",
+          "side": "left",
+          "text": "\"That is the dangerous part. Institutions can survive evidence about the dead. Evidence that walks in under its own power is less convenient.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "return",
+          "label": "Return to the assembly.",
+          "goto": "garden_testimony_assembly"
+        }
+      ]
+    },
+    "garden_case_anomalies_rejected": {
+      "id": "garden_case_anomalies_rejected",
+      "title": "Memory Garden — Recognition Anomalies",
+      "backgroundRef": "background_memory_garden",
+      "text": [
+        {
+          "kind": "paragraph",
+          "text": "You begin to attach your own anomalies to the record and stop before confirmation. Your hand will not finish the gesture."
+        },
+        {
+          "kind": "thought",
+          "speaker": "player",
+          "side": "right",
+          "text": "There are facts you can carry when they belong to someone else. The same fact, turned inward, becomes heavier than evidence should be."
+        },
+        {
+          "kind": "dialogue",
+          "speaker": "echo",
+          "emotion": "soft",
+          "side": "left",
+          "text": "\"Then leave that field provisional. Provisional is not erased. It only means the witness is still becoming able to speak.\""
+        }
+      ],
+      "choices": [
+        {
+          "id": "return",
+          "label": "Return to the assembly.",
+          "goto": "garden_testimony_assembly"
+        }
+      ]
+    }
+  }
+}

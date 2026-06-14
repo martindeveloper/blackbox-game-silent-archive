@@ -1,0 +1,2385 @@
+{
+  "version": 2,
+  "analytics": {
+    "accessibility": [
+      {
+        "count": 86,
+        "id": "game_over_android_curse",
+        "pct": 72.88135593220339,
+        "total": 118
+      },
+      {
+        "count": 32,
+        "id": "door_alarm",
+        "pct": 27.11864406779661,
+        "total": 118
+      }
+    ],
+    "hotNodes": [
+      {
+        "id": "android_chapel_intro",
+        "outDegree": 6,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 279
+      },
+      {
+        "id": "prologue_approach",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_arrival",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_casework",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_facility_brief",
+        "outDegree": 3,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_glass",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_memories",
+        "outDegree": 2,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_pod_descent",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_world",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "android_chapel_inspect_room",
+        "outDegree": 2,
+        "reach": 60,
+        "reachPct": 50.847457627118644,
+        "visits": 94
+      },
+      {
+        "id": "game_over_android_curse",
+        "outDegree": 3,
+        "reach": 86,
+        "reachPct": 72.88135593220339,
+        "visits": 86
+      },
+      {
+        "id": "prologue_coffee_try",
+        "outDegree": 1,
+        "reach": 82,
+        "reachPct": 69.49152542372882,
+        "visits": 82
+      },
+      {
+        "id": "android_chapel_route_request",
+        "outDegree": 7,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 64
+      },
+      {
+        "id": "chapel_self_check",
+        "outDegree": 1,
+        "reach": 40,
+        "reachPct": 33.89830508474576,
+        "visits": 40
+      },
+      {
+        "id": "prologue_check_pass",
+        "outDegree": 1,
+        "reach": 36,
+        "reachPct": 30.508474576271187,
+        "visits": 36
+      },
+      {
+        "id": "prologue_coffee_release",
+        "outDegree": 1,
+        "reach": 36,
+        "reachPct": 30.508474576271187,
+        "visits": 36
+      },
+      {
+        "id": "android_chapel_after_confession",
+        "outDegree": 4,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "android_chapel_prayer_answer",
+        "outDegree": 9,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "android_chapel_route_explanation",
+        "outDegree": 2,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_downline_acceptance",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_hatch_identity_context",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_hatch_inspection",
+        "outDegree": 2,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_hatch_pressure_bleed",
+        "outDegree": 3,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_hatch_release_sequence",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_vesper_goodbye",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "door_alarm",
+        "outDegree": 3,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "lower_service_tunnels",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "prologue_check_fail",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "security_checkpoint",
+        "outDegree": 5,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_queue_trace_success",
+        "outDegree": 1,
+        "reach": 18,
+        "reachPct": 15.254237288135593,
+        "visits": 18
+      }
+    ],
+    "importance": [
+      {
+        "count": 8,
+        "id": "__death__",
+        "pct": 61.53846153846154,
+        "total": 13
+      },
+      {
+        "count": 8,
+        "id": "director_game_over",
+        "pct": 61.53846153846154,
+        "total": 13
+      },
+      {
+        "count": 8,
+        "id": "game_over_vitals_failure",
+        "pct": 61.53846153846154,
+        "total": 13
+      },
+      {
+        "count": 8,
+        "id": "garden_game_over",
+        "pct": 61.53846153846154,
+        "total": 13
+      },
+      {
+        "count": 8,
+        "id": "quiet_ward_game_over",
+        "pct": 61.53846153846154,
+        "total": 13
+      },
+      {
+        "count": 8,
+        "id": "tunnels_game_over",
+        "pct": 61.53846153846154,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_after_confession",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_after_confession_searched",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_audit_announce",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_checkpoint_warning",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_error_queue",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_inspect_room",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_intro",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_last_word",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_offer_help",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_prayer_answer",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_prayer_first_answer",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_route_explanation",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_route_request",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_staff_question",
+        "pct": 53.84615384615385,
+        "total": 13
+      }
+    ],
+    "mandatoryNodes": [],
+    "nodeImportance": [
+      {
+        "count": 8,
+        "id": "__death__",
+        "pct": 61.53846153846154,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_after_confession",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_after_confession_searched",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_audit_announce",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_checkpoint_warning",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_error_queue",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_inspect_room",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_intro",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_last_word",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_offer_help",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_prayer_answer",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_prayer_first_answer",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_route_explanation",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_route_request",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_staff_question",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_vesper_memory",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "android_chapel_why_continue",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "archive_terminal",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "ari_examine",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "ari_lucid",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "ari_no_lucid",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "ari_preserved_node",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "ari_release_confirm",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "ari_released_node",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "ari_repair_failed",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "ari_repair_partial",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "ari_subject_zero",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_blocks_bulkhead",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_case6_admission",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_deal_accepted",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_how_survived",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_intercepts_passage",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_ledger_demand",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_ledger_lost",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_ledger_taken_node",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_offer",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_purge_attempt",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_purge_failed",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_purged_node",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_refused",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "augur_registry_contact",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "case6_awoken",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "case6_counsel",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "case6_first_question",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "case6_left_sleeping",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "case6_pod_decision",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "case6_question",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "case6_question_investigator",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "case6_question_uncertain",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "case6_question_witness_failure",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "case6_question_witness_success",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "case6_yuen_warning",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "chapel_downline_acceptance",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "chapel_hatch_identity_context",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "chapel_hatch_inspection",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "chapel_hatch_pressure_bleed",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "chapel_hatch_release_sequence",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "chapel_liturgy_missed",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "chapel_liturgy_understood",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "chapel_queue_trace_failed",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "chapel_queue_trace_success",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "chapel_self_check",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "chapel_vesper_goodbye",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "chapel_vesper_hatch_memory",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_charter_found",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_clean_report_frame",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_desk_search",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_dossier_read",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 8,
+        "id": "director_game_over",
+        "pct": 61.53846153846154,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_ari_fragment",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_augur_ledger",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_case_compare",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_challenge_menu",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_echo_testimony",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_grace_authorization",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_identity_conviction_failure",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_identity_conviction_success",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_institution_menu",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_mnemex_append",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_override_key",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_table",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_template_logic_failure",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_template_logic_success",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_testimony_menu",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_yuen_empathy_failure",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_record_yuen_empathy_success",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "director_suite_entry",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "door_alarm",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "door_open",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "drone_corridor",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "drone_resolution_calmed",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "drone_resolution_dismantled",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "drone_resolution_evaded",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "drone_resolution_liturgy",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "drone_resolution_pulse",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_about_garden",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_about_patel",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_after_testimony",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_case6_note",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_first_contact",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_incident_summary",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_insurance",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_lullaby",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_patel_yuen",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_purpose",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_reflection",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_reflection_accepted",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_reflection_denied",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_sorrow_response",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_testimony_given",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_ward_news",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "echo_yuen_visits",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "ending_last_shepherd",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "ending_open_question",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "ending_protocol_maintained",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "ending_witness_protocol",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_broadcast_context",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_broadcast_context_failure",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_broadcast_context_raw_choice",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_broadcast_context_success",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_choice_confirm_a",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_choice_confirm_b",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_choice_confirm_c",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_choice_confirm_d",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_choice_grace_consent",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_choice_report_erasure",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_choice_report_review",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_path_broadcast",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_path_disclosure",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_path_obedience",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_path_protection",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_path_standing",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_protocol_classification_failure",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_protocol_classification_success",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_shepherd_charter",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_shepherd_charter_failure",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_shepherd_charter_success",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_witness_scope",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_witness_scope_failure",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "final_witness_scope_success",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "game_over_android_curse",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 8,
+        "id": "game_over_vitals_failure",
+        "pct": 61.53846153846154,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "garden_case_anomalies_added",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "garden_case_anomalies_rejected",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "garden_case_notes_fragile",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "garden_case_notes_structured",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "garden_crossref_failed",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "garden_crossref_match",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "garden_echo_consent",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "garden_echo_cost_missed",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "garden_exit",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 8,
+        "id": "garden_game_over",
+        "pct": 61.53846153846154,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "garden_lullaby_anchor",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "garden_names_attached",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "garden_racks",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "garden_testimony_assembly",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "grace_case6_memory",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "grace_concurrence",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "grace_decided_node",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "grace_decides_node",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "grace_first_subject",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "grace_history",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "grace_intercepts_cradle",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "grace_intro",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "grace_lullaby_origin",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "grace_other_subjects",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "grace_the_ask",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "grace_vesper_thread",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "grace_why_stopped",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "lower_service_tunnels",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "memory_garden_entry",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_about_facility",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_about_incident",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_about_patel_personal",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_case6_revelation",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_denial_response",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_direct_answer",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_export_failed",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_export_granted",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_export_refused_warning",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_export_request",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_first_exchange",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_registry_routing_warning",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_secondary_project",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_self_description",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_unit_slip",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "mnemex_vesper_archive",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_approach",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_arrival",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_casework",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_check_fail",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_check_pass",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_coffee_release",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_coffee_try",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_empathy_fail",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_empathy_pass",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_facility_brief",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_glass",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_memories",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_pod_descent",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "prologue_world",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "quiet_ward_after_choice_vigil",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "quiet_ward_decision",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "quiet_ward_director_threshold",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "quiet_ward_entry",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "quiet_ward_exit",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 8,
+        "id": "quiet_ward_game_over",
+        "pct": 61.53846153846154,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "quiet_ward_survey",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_alone_months",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_assessment_begin",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_assessment_escaped",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_case6_confrontation",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_destroyed_node",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_encounter",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_identification_response",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_in_stasis",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_names",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_recognition",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_standoff",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_unmoved",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_yielded_by_choice",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "sable_yields",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "security_checkpoint",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "stasis_case6_found",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "stasis_case6_registered",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "stasis_direct_route_names",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "stasis_exit",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "stasis_exit_after_case6",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "stasis_game_over",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "stasis_leave_case6_warning",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "stasis_pod_april",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "stasis_rows_examine",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "stasis_ward_entry",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "surveillance_pulse",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 8,
+        "id": "tunnels_game_over",
+        "pct": 61.53846153846154,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "tunnels_lower_ring_evidence",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "tunnels_proceed_to_stasis",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "tunnels_stasis_handoff",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "vesper_absolved_node",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "vesper_complicity_confession",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "vesper_condemned_node",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "vesper_no_judgment_node",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "yuen_about_case6",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "yuen_confronted_with_evidence",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "yuen_final_choice_setup",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "yuen_first_encounter",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "yuen_professional_exchange",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "yuen_truth_moment",
+        "pct": 53.84615384615385,
+        "total": 13
+      },
+      {
+        "count": 7,
+        "id": "yuen_why_stayed",
+        "pct": 53.84615384615385,
+        "total": 13
+      }
+    ],
+    "nodeTraffic": [
+      {
+        "id": "android_chapel_intro",
+        "outDegree": 6,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 279
+      },
+      {
+        "id": "prologue_approach",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_arrival",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_casework",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_facility_brief",
+        "outDegree": 3,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_glass",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_memories",
+        "outDegree": 2,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_pod_descent",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_world",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "android_chapel_inspect_room",
+        "outDegree": 2,
+        "reach": 60,
+        "reachPct": 50.847457627118644,
+        "visits": 94
+      },
+      {
+        "id": "game_over_android_curse",
+        "outDegree": 3,
+        "reach": 86,
+        "reachPct": 72.88135593220339,
+        "visits": 86
+      },
+      {
+        "id": "prologue_coffee_try",
+        "outDegree": 1,
+        "reach": 82,
+        "reachPct": 69.49152542372882,
+        "visits": 82
+      },
+      {
+        "id": "android_chapel_route_request",
+        "outDegree": 7,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 64
+      },
+      {
+        "id": "chapel_self_check",
+        "outDegree": 1,
+        "reach": 40,
+        "reachPct": 33.89830508474576,
+        "visits": 40
+      },
+      {
+        "id": "prologue_check_pass",
+        "outDegree": 1,
+        "reach": 36,
+        "reachPct": 30.508474576271187,
+        "visits": 36
+      },
+      {
+        "id": "prologue_coffee_release",
+        "outDegree": 1,
+        "reach": 36,
+        "reachPct": 30.508474576271187,
+        "visits": 36
+      },
+      {
+        "id": "android_chapel_after_confession",
+        "outDegree": 4,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "android_chapel_prayer_answer",
+        "outDegree": 9,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "android_chapel_route_explanation",
+        "outDegree": 2,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_downline_acceptance",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_hatch_identity_context",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_hatch_inspection",
+        "outDegree": 2,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_hatch_pressure_bleed",
+        "outDegree": 3,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_hatch_release_sequence",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_vesper_goodbye",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "door_alarm",
+        "outDegree": 3,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "lower_service_tunnels",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "prologue_check_fail",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "security_checkpoint",
+        "outDegree": 5,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_queue_trace_success",
+        "outDegree": 1,
+        "reach": 18,
+        "reachPct": 15.254237288135593,
+        "visits": 18
+      },
+      {
+        "id": "android_chapel_after_confession_searched",
+        "outDegree": 2,
+        "reach": 16,
+        "reachPct": 13.559322033898304,
+        "visits": 16
+      },
+      {
+        "id": "android_chapel_audit_announce",
+        "outDegree": 1,
+        "reach": 16,
+        "reachPct": 13.559322033898304,
+        "visits": 16
+      },
+      {
+        "id": "android_chapel_last_word",
+        "outDegree": 1,
+        "reach": 16,
+        "reachPct": 13.559322033898304,
+        "visits": 16
+      },
+      {
+        "id": "android_chapel_prayer_first_answer",
+        "outDegree": 1,
+        "reach": 16,
+        "reachPct": 13.559322033898304,
+        "visits": 16
+      },
+      {
+        "id": "chapel_queue_trace_failed",
+        "outDegree": 1,
+        "reach": 16,
+        "reachPct": 13.559322033898304,
+        "visits": 16
+      }
+    ],
+    "perEnding": [
+      {
+        "ending": "game_over_android_curse",
+        "nodes": [
+          {
+            "id": "game_over_android_curse",
+            "reach": 86,
+            "reachPct": 100
+          },
+          {
+            "id": "android_chapel_inspect_room",
+            "reach": 60,
+            "reachPct": 69.76744186046511
+          },
+          {
+            "id": "chapel_self_check",
+            "reach": 40,
+            "reachPct": 46.51162790697674
+          },
+          {
+            "id": "chapel_queue_trace_success",
+            "reach": 18,
+            "reachPct": 20.930232558139537
+          },
+          {
+            "id": "chapel_queue_trace_failed",
+            "reach": 16,
+            "reachPct": 18.6046511627907
+          }
+        ],
+        "pathCount": 86
+      },
+      {
+        "ending": "door_alarm",
+        "nodes": [
+          {
+            "id": "android_chapel_after_confession",
+            "reach": 32,
+            "reachPct": 100
+          },
+          {
+            "id": "android_chapel_prayer_answer",
+            "reach": 32,
+            "reachPct": 100
+          },
+          {
+            "id": "android_chapel_route_explanation",
+            "reach": 32,
+            "reachPct": 100
+          },
+          {
+            "id": "android_chapel_route_request",
+            "reach": 32,
+            "reachPct": 100
+          },
+          {
+            "id": "chapel_downline_acceptance",
+            "reach": 32,
+            "reachPct": 100
+          },
+          {
+            "id": "chapel_hatch_identity_context",
+            "reach": 32,
+            "reachPct": 100
+          },
+          {
+            "id": "chapel_hatch_inspection",
+            "reach": 32,
+            "reachPct": 100
+          },
+          {
+            "id": "chapel_hatch_pressure_bleed",
+            "reach": 32,
+            "reachPct": 100
+          },
+          {
+            "id": "chapel_hatch_release_sequence",
+            "reach": 32,
+            "reachPct": 100
+          },
+          {
+            "id": "chapel_vesper_goodbye",
+            "reach": 32,
+            "reachPct": 100
+          },
+          {
+            "id": "door_alarm",
+            "reach": 32,
+            "reachPct": 100
+          },
+          {
+            "id": "lower_service_tunnels",
+            "reach": 32,
+            "reachPct": 100
+          },
+          {
+            "id": "security_checkpoint",
+            "reach": 32,
+            "reachPct": 100
+          },
+          {
+            "id": "android_chapel_after_confession_searched",
+            "reach": 16,
+            "reachPct": 50
+          },
+          {
+            "id": "android_chapel_audit_announce",
+            "reach": 16,
+            "reachPct": 50
+          },
+          {
+            "id": "android_chapel_last_word",
+            "reach": 16,
+            "reachPct": 50
+          },
+          {
+            "id": "android_chapel_prayer_first_answer",
+            "reach": 16,
+            "reachPct": 50
+          }
+        ],
+        "pathCount": 32
+      }
+    ],
+    "splitCandidates": [
+      {
+        "id": "prologue_approach",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_arrival",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_casework",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_glass",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_pod_descent",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_world",
+        "outDegree": 1,
+        "reach": 118,
+        "reachPct": 100,
+        "visits": 118
+      },
+      {
+        "id": "prologue_coffee_try",
+        "outDegree": 1,
+        "reach": 82,
+        "reachPct": 69.49152542372882,
+        "visits": 82
+      },
+      {
+        "id": "chapel_self_check",
+        "outDegree": 1,
+        "reach": 40,
+        "reachPct": 33.89830508474576,
+        "visits": 40
+      },
+      {
+        "id": "prologue_check_pass",
+        "outDegree": 1,
+        "reach": 36,
+        "reachPct": 30.508474576271187,
+        "visits": 36
+      },
+      {
+        "id": "prologue_coffee_release",
+        "outDegree": 1,
+        "reach": 36,
+        "reachPct": 30.508474576271187,
+        "visits": 36
+      },
+      {
+        "id": "chapel_downline_acceptance",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_hatch_identity_context",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_hatch_release_sequence",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_vesper_goodbye",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "lower_service_tunnels",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "prologue_check_fail",
+        "outDegree": 1,
+        "reach": 32,
+        "reachPct": 27.11864406779661,
+        "visits": 32
+      },
+      {
+        "id": "chapel_queue_trace_success",
+        "outDegree": 1,
+        "reach": 18,
+        "reachPct": 15.254237288135593,
+        "visits": 18
+      },
+      {
+        "id": "android_chapel_audit_announce",
+        "outDegree": 1,
+        "reach": 16,
+        "reachPct": 13.559322033898304,
+        "visits": 16
+      },
+      {
+        "id": "android_chapel_last_word",
+        "outDegree": 1,
+        "reach": 16,
+        "reachPct": 13.559322033898304,
+        "visits": 16
+      },
+      {
+        "id": "android_chapel_prayer_first_answer",
+        "outDegree": 1,
+        "reach": 16,
+        "reachPct": 13.559322033898304,
+        "visits": 16
+      },
+      {
+        "id": "chapel_queue_trace_failed",
+        "outDegree": 1,
+        "reach": 16,
+        "reachPct": 13.559322033898304,
+        "visits": 16
+      }
+    ],
+    "totalEndings": 13,
+    "totalPaths": 118
+  },
+  "meta": {
+    "mode": "explore",
+    "goals": "ending",
+    "goalBudget": 50000,
+    "maxStates": 500000,
+    "threads": 0,
+    "heuristic": "graph"
+  },
+  "capturedAt": 1781392005060,
+  "contentFingerprint": "862dca8acd95c22119ade2988ae3ee785fe61b79fc74b8a8ec0665f1996881c3",
+  "sourceRevision": 12,
+  "scenarioRevision": "5.0",
+  "runId": "bdb5ba06-66c7-4003-96cc-6a3fc0ef8992"
+}

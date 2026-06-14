@@ -1,0 +1,44 @@
+{
+  "chapters": {
+    "tunnels": {
+      "nodes": {
+        "archive_terminal": {
+          "x": 174,
+          "y": 808
+        },
+        "door_alarm": {
+          "x": 32,
+          "y": 420
+        },
+        "door_open": {
+          "x": 316,
+          "y": 420
+        },
+        "drone_corridor": {
+          "x": 316,
+          "y": 614
+        },
+        "end_of_demo": {
+          "x": 316,
+          "y": 1002
+        },
+        "ending_escape": {
+          "x": 32,
+          "y": 1002
+        },
+        "lower_service_tunnels": {
+          "x": 174,
+          "y": 32
+        },
+        "security_checkpoint": {
+          "x": 174,
+          "y": 226
+        },
+        "surveillance_pulse": {
+          "x": 458,
+          "y": 808
+        }
+      }
+    }
+  }
+}
