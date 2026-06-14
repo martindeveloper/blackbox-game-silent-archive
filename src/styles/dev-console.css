@@ -1,0 +1,128 @@
+/* Silent Archive owns the green CRT presentation; the engine provides layout only. */
+
+.dev-console {
+  color: #d6d8ce;
+  background:
+    linear-gradient(180deg, rgba(15, 19, 17, 0.88), rgba(4, 7, 6, 0.82)),
+    repeating-linear-gradient(90deg, transparent 0 39px, rgba(135, 255, 183, 0.018) 40px);
+  border-bottom: 1px solid rgba(126, 255, 171, 0.28);
+  box-shadow:
+    0 12px 42px rgba(0, 0, 0, 0.48),
+    inset 0 -1px rgba(126, 255, 171, 0.08);
+  backdrop-filter: blur(5px) saturate(0.82);
+  isolation: isolate;
+  animation: silent-archive-console-drop 140ms cubic-bezier(0.2, 0.72, 0.2, 1) both;
+}
+
+.dev-console::before,
+.dev-console::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.dev-console::before {
+  opacity: 0.14;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(180, 255, 202, 0.055) 4px
+  );
+}
+
+.dev-console::after {
+  inset-block: 0 auto;
+  height: 4rem;
+  opacity: 0.11;
+  background: linear-gradient(180deg, transparent, rgba(126, 255, 171, 0.2), transparent);
+  animation: silent-archive-console-scan 6s linear infinite;
+}
+
+.dev-console__header {
+  color: rgba(178, 255, 205, 0.72);
+  background: rgba(126, 255, 171, 0.035);
+  border-bottom: 1px solid rgba(126, 255, 171, 0.12);
+}
+
+.dev-console__header button {
+  color: rgba(178, 255, 205, 0.62);
+}
+
+.dev-console__header button:hover,
+.dev-console__header button:focus-visible {
+  color: #d9ffe6;
+  outline: 1px solid rgba(126, 255, 171, 0.26);
+}
+
+.dev-console__log {
+  scrollbar-color: rgba(126, 255, 171, 0.28) transparent;
+}
+
+.dev-console__line {
+  color: rgba(202, 215, 205, 0.74);
+}
+
+.dev-console__line--command {
+  color: #e6e8df;
+}
+
+.dev-console__line--success {
+  color: #8ef0ad;
+}
+
+.dev-console__line--error {
+  color: #ff806e;
+}
+
+.dev-console__line--info {
+  color: rgba(159, 198, 171, 0.68);
+}
+
+.dev-console__prompt {
+  color: #91eaae;
+  background: rgba(0, 0, 0, 0.26);
+  border-top: 1px solid rgba(126, 255, 171, 0.15);
+}
+
+.dev-console__prompt input {
+  color: #edf5eb;
+  caret-color: #91eaae;
+}
+
+.dev-console__busy {
+  color: rgba(255, 194, 89, 0.72);
+}
+
+.dev-console__prompt input::placeholder {
+  color: rgba(145, 234, 174, 0.4);
+}
+
+@keyframes silent-archive-console-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes silent-archive-console-scan {
+  from {
+    transform: translateY(-5rem);
+  }
+  to {
+    transform: translateY(46vh);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dev-console,
+  .dev-console::after {
+    animation: none;
+  }
+}

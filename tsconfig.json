@@ -1,11 +1,4 @@
 {
-  "extends": "../../apps/web/tsconfig.base.json",
-  "compilerOptions": {
-    "composite": true,
-    "paths": {
-      "@engine/*": ["../../apps/web/src/engine/*"],
-      "@game/*": ["./src/*"]
-    }
-  },
+  "extends": "../../apps/web/tsconfig.game.json",
   "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
