@@ -4,7 +4,7 @@ Game-owned presentation for Silent Archive:
 
 - React screens, panels, modals, and icons
 - English copy and investigation/archive terminology
-- visual theme and complete stylesheet
+- visual theme and complete stylesheet (`src/fonts.css` is prepended by the Blackbox CSS build; `app.css` → `styles/`)
 - keyboard shortcuts, animation timing, and music fades
 - character, stat, notification, and resolution presentation
 
