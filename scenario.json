@@ -21,7 +21,9 @@
   "deathNode": {
     "title": "Signal Lost",
     "onEnter": [
-      { "type": "stopMusic" }
+      {
+        "type": "stopMusic"
+      }
     ],
     "text": [
       {
@@ -63,12 +65,96 @@
     ]
   },
   "chapters": [
-    { "id": "prologue", "title": "Descent", "ref": "chapter_00_prologue.json" },
-    { "id": "chapel", "title": "The Chapel", "ref": "chapter_01_chapel.json" },
-    { "id": "tunnels", "title": "Lower Service Tunnels", "ref": "chapter_02_tunnels.json" },
-    { "id": "stasis", "title": "The Stasis Ward", "ref": "chapter_03_stasis.json" },
-    { "id": "quiet_ward", "title": "The Quiet Ward", "ref": "chapter_04_quiet_ward.json" },
-    { "id": "memory_garden", "title": "The Memory Garden", "ref": "chapter_05_memory_garden.json" },
-    { "id": "director", "title": "The Director's Suite", "ref": "chapter_06_director.json" }
-  ]
+    {
+      "id": "prologue",
+      "title": "Descent",
+      "ref": "chapter_00_prologue.json"
+    },
+    {
+      "id": "chapel",
+      "title": "The Chapel",
+      "ref": "chapter_01_chapel.json"
+    },
+    {
+      "id": "tunnels",
+      "title": "Lower Service Tunnels",
+      "ref": "chapter_02_tunnels.json"
+    },
+    {
+      "id": "stasis",
+      "title": "The Stasis Ward",
+      "ref": "chapter_03_stasis.json"
+    },
+    {
+      "id": "quiet_ward",
+      "title": "The Quiet Ward",
+      "ref": "chapter_04_quiet_ward.json"
+    },
+    {
+      "id": "memory_garden",
+      "title": "The Memory Garden",
+      "ref": "chapter_05_memory_garden.json"
+    },
+    {
+      "id": "director",
+      "title": "The Director's Suite",
+      "ref": "chapter_06_director.json"
+    }
+  ],
+  "platforms": {
+    "web": {
+      "appName": "Silent Archive",
+      "outputName": "silent-archive-web",
+      "icon": "platform/web/favicon.svg",
+      "icons": {
+        "tags": {
+          "path": "platform/web/tags.svg",
+          "dest": "silent-archive-tags.svg"
+        }
+      }
+    },
+    "ios": {
+      "bundleId": "dev.blackbox.silentarchivegame",
+      "appName": "Silent Archive",
+      "displayName": "Silent Archive",
+      "version": "5.0",
+      "buildNumber": "50",
+      "category": "games",
+      "orientations": {
+        "iphone": ["portrait"],
+        "ipad": ["portrait"]
+      },
+      "backgroundColor": "#070503",
+      "icon": "platform/ios/icon.svg",
+      "splash": {
+        "image": "textures/backgrounds/mainmenu.png",
+        "backgroundColor": "#070503"
+      },
+      "signing": {
+        "teamId": "env:APPLE_TEAM_ID",
+        "method": "app-store"
+      }
+    },
+    "android": {
+      "applicationId": "dev.blackbox.silentarchivegame",
+      "appName": "Silent Archive",
+      "version": "5.0",
+      "versionCode": 50,
+      "orientations": {
+        "phone": ["portrait"]
+      },
+      "backgroundColor": "#070503",
+      "icon": "platform/android/icon.svg",
+      "splash": {
+        "image": "textures/backgrounds/mainmenu.png",
+        "backgroundColor": "#070503"
+      },
+      "keystore": {
+        "path": "release.keystore",
+        "storePasswordEnv": "ANDROID_KEYSTORE_PASSWORD",
+        "keyAlias": "upload",
+        "keyPasswordEnv": "ANDROID_KEY_PASSWORD"
+      }
+    }
+  }
 }
