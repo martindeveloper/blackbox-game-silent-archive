@@ -31,7 +31,7 @@ interface GamePanelModalContext {
   onSave: () => void;
   onOpenMainMenu: () => void;
   onRestart: () => void;
-  onCreateSupportBundle: () => void;
+  onCreateSupportBundle?: () => void;
 }
 
 interface PanelTarget {
@@ -120,7 +120,9 @@ function createGamePanelModal(
               ctx.onRestart();
               onClose();
             }}
-            onCreateSupportBundle={ctx.onCreateSupportBundle}
+            {...(ctx.onCreateSupportBundle
+              ? { onCreateSupportBundle: ctx.onCreateSupportBundle }
+              : {})}
           />
         ),
       };

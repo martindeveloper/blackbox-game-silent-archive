@@ -45,7 +45,7 @@ interface GamePanelProps {
   onRestart: () => void;
   onOpenLoad: () => void;
   onOpenMainMenu: () => void;
-  onCreateSupportBundle: () => void;
+  onCreateSupportBundle?: () => void;
 }
 
 function firstBlockKey(text: TextBlock[]): string {

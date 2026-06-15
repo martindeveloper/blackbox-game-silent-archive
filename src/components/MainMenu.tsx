@@ -16,6 +16,7 @@ import {
 } from "@engine/lib/slots.js";
 import { useModal } from "@engine/ui/ModalContext.js";
 import { MenuButton, SettingsPanel } from "@engine/ui/menu.js";
+import { SUPPORT_BUNDLE_ENABLED } from "@platform";
 import { BugIcon, HeadphonesIcon } from "./Icons.js";
 import { RestartConfirmButtons } from "./RestartConfirm.js";
 
@@ -29,7 +30,7 @@ interface MainMenuProps {
   initialSlot?: number;
   onContinueSlot: (index: number) => void;
   onRestartSlot: (index: number) => void;
-  onCreateSupportBundle: () => void;
+  onCreateSupportBundle?: () => void;
 }
 
 export function MainMenu({
@@ -205,15 +206,17 @@ export function MainMenu({
       )}
 
       <footer className="mm-footer-meta">
-        <button
-          type="button"
-          className="mm-footer-support-btn"
-          onClick={onCreateSupportBundle}
-          title={t("mainMenu.supportBundle")}
-          aria-label={t("mainMenu.supportBundle")}
-        >
-          <BugIcon size={11} />
-        </button>
+        {SUPPORT_BUNDLE_ENABLED && onCreateSupportBundle ? (
+          <button
+            type="button"
+            className="mm-footer-support-btn"
+            onClick={onCreateSupportBundle}
+            title={t("mainMenu.supportBundle")}
+            aria-label={t("mainMenu.supportBundle")}
+          >
+            <BugIcon size={11} />
+          </button>
+        ) : null}
         {projectRevision ? <span className="mm-footer-version">v{projectRevision}</span> : null}
       </footer>
     </div>

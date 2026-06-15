@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppSettings } from "@engine/context/AppSettings.js";
+import { IS_DEBUG_CONFIGURATION, IS_WEB_PLATFORM, SUPPORT_BUNDLE_ENABLED } from "@platform";
 import {
   ArchiveIcon,
   IncidentIcon,
@@ -17,7 +18,7 @@ interface SystemMenuProps {
   onSave: () => void;
   onOpenMainMenu: () => void;
   onRestart: () => void;
-  onCreateSupportBundle: () => void;
+  onCreateSupportBundle?: () => void;
 }
 
 export function SystemMenu({
@@ -119,15 +120,17 @@ export function SystemMenu({
               </span>
             </button>
           )}
-          <button className="sys-menu-utility-btn" role="menuitem" onClick={cycleLogLevel}>
-            <span className="sys-menu-utility-icon" style={{ fontSize: "0.6rem" }}>
-              ◉
-            </span>
-            <span>{t("menu.logLevel")}</span>
-            <span className={`sys-menu-utility-value sys-menu-log-${logLevel}`}>
-              {t(`menu.logLevels.${logLevel}`)}
-            </span>
-          </button>
+          {IS_WEB_PLATFORM && IS_DEBUG_CONFIGURATION && (
+            <button className="sys-menu-utility-btn" role="menuitem" onClick={cycleLogLevel}>
+              <span className="sys-menu-utility-icon" style={{ fontSize: "0.6rem" }}>
+                ◉
+              </span>
+              <span>{t("menu.logLevel")}</span>
+              <span className={`sys-menu-utility-value sys-menu-log-${logLevel}`}>
+                {t(`menu.logLevels.${logLevel}`)}
+              </span>
+            </button>
+          )}
           {analyticsAvailable && (
             <button className="sys-menu-utility-btn" role="menuitem" onClick={toggleAnalytics}>
               <span className="sys-menu-utility-icon" aria-hidden>
@@ -139,13 +142,15 @@ export function SystemMenu({
               </span>
             </button>
           )}
-          <button className="sys-menu-utility-btn" role="menuitem" onClick={onCreateSupportBundle}>
-            <span className="sys-menu-utility-icon">
-              <IncidentIcon size={9} />
-            </span>
-            <span>{t("menu.createSupportBundle")}</span>
-            <span className="sys-menu-utility-value">↓</span>
-          </button>
+          {SUPPORT_BUNDLE_ENABLED && onCreateSupportBundle ? (
+            <button className="sys-menu-utility-btn" role="menuitem" onClick={onCreateSupportBundle}>
+              <span className="sys-menu-utility-icon">
+                <IncidentIcon size={9} />
+              </span>
+              <span>{t("menu.createSupportBundle")}</span>
+              <span className="sys-menu-utility-value">↓</span>
+            </button>
+          ) : null}
           <button className="sys-menu-utility-btn" role="menuitem" onClick={onSave}>
             <span className="sys-menu-utility-icon">
               <ArchiveIcon size={9} />
