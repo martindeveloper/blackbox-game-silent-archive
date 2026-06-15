@@ -2,12 +2,12 @@
 Thumbs.db
 
 # Editor machine-local state
-**/.blackbox/user.preferences.json
-.blackbox/tool-runs/
+.blackbox/user/
 
-# IDE-only TypeScript config; generated per-machine by the editor (developer
-# machines only). Its relative extends path is invalid outside the monorepo.
+# IDE files generated per-machine by the editor. They contain absolute paths
+# into the installed editor SDK.
 tsconfig.json
+.vscode/settings.json
 
 # Runtime player saves (not authored content)
 saves/
