@@ -5,8 +5,13 @@ Thumbs.db
 **/.blackbox/user.preferences.json
 .blackbox/tool-runs/
 
+# IDE-only TypeScript config; generated per-machine by the editor (developer
+# machines only). Its relative extends path is invalid outside the monorepo.
+tsconfig.json
+
 # Runtime player saves (not authored content)
 saves/
 
 *.log
 .cache/
+node_modules/
