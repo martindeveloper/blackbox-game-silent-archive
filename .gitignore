@@ -4,6 +4,7 @@ Thumbs.db
 # Editor machine-local state
 .blackbox/user/
 .blackbox/build/
+.blackbox/heatmap.json
 
 # IDE files generated per-machine by the editor. They contain absolute paths
 # into the installed editor SDK.

@@ -120,6 +120,7 @@
       "version": "5.0",
       "buildNumber": "50",
       "category": "games",
+      "safeAreaMode": "bleed",
       "orientations": {
         "iphone": ["portrait"],
         "ipad": ["portrait"]
@@ -140,6 +141,7 @@
       "appName": "Silent Archive",
       "version": "5.0",
       "versionCode": 50,
+      "safeAreaMode": "bleed",
       "orientations": {
         "phone": ["portrait"]
       },
