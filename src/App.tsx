@@ -87,7 +87,7 @@ function SilentArchiveHeader({
   const hasMusic = music != null;
   return (
     <header
-      className="flex-shrink-0 flex items-center gap-2 px-3 sm:px-5 min-h-[2.5rem] border-b border-border-2"
+      className="flex-shrink-0 flex items-center gap-2 px-3 pb-1 sm:px-5 min-h-[2.5rem] border-b border-border-2"
       style={{
         background: "var(--color-surface)",
         // Bleed the bar's background under the status bar / camera cutout, but pad
