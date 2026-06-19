@@ -119,6 +119,7 @@
       "displayName": "Silent Archive",
       "version": "5.0",
       "buildNumber": "50",
+      "deploymentTarget": "16.0",
       "category": "games",
       "safeAreaMode": "bleed",
       "orientations": {
@@ -141,6 +142,9 @@
       "appName": "Silent Archive",
       "version": "5.0",
       "versionCode": 50,
+      "minSdk": 26,
+      "compileSdk": 36,
+      "targetSdk": 36,
       "safeAreaMode": "bleed",
       "orientations": {
         "phone": ["portrait"]
