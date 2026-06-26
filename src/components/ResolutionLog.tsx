@@ -248,18 +248,13 @@ function AnimatedPip({
   const [display, setDisplay] = useState(() =>
     rolling ? Math.floor(Math.random() * sides) + 1 : value,
   );
-  const [settled, setSettled] = useState(!rolling);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     if (rolling) {
-      setSettled(false);
       intervalRef.current = setInterval(() => {
         setDisplay(Math.floor(Math.random() * sides) + 1);
       }, UI_TIMING.rollPipIntervalMs);
-    } else {
-      setDisplay(value);
-      setSettled(true);
     }
     return () => {
       if (intervalRef.current) {
@@ -267,13 +262,15 @@ function AnimatedPip({
         intervalRef.current = null;
       }
     };
-  }, [rolling, value, sides]);
+  }, [rolling, sides]);
+
+  const displayValue = rolling ? display : value;
 
   return (
     <span
-      className={`roll-dice-pip${rolling ? " roll-dice-pip--rolling" : ""}${settled && !rolling ? " roll-dice-pip--settled" : ""}`}
+      className={`roll-dice-pip${rolling ? " roll-dice-pip--rolling" : " roll-dice-pip--settled"}`}
     >
-      {display}
+      {displayValue}
     </span>
   );
 }
@@ -282,7 +279,6 @@ function RollEntry({ roll, startDelay }: { roll: RollRecord; startDelay: number 
   const { t } = useTranslation();
   const [phase, setPhase] = useState<"hidden" | "rolling" | "settled">("hidden");
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const t1 = setTimeout(() => setPhase("rolling"), startDelay);
     const t2 = setTimeout(() => setPhase("settled"), startDelay + UI_TIMING.rollDurationMs);
@@ -290,7 +286,7 @@ function RollEntry({ roll, startDelay }: { roll: RollRecord; startDelay: number 
       clearTimeout(t1);
       clearTimeout(t2);
     };
-  }, []);
+  }, [startDelay]);
 
   if (phase === "hidden") return null;
 

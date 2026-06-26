@@ -191,51 +191,34 @@ export function InventoryPanel({
 }: InventoryPanelProps) {
   const { t } = useTranslation();
   const items = view.inventory_items;
-  const itemActions = useMemo(() => actionsByItem(view), [view.item_actions]);
+  const itemActions = useMemo(() => actionsByItem(view), [view]);
   const [selectedRef, setSelectedRef] = useState<string | null>(() =>
     initialItemRef && items.some((item) => item.ref_id === initialItemRef) ? initialItemRef : null,
   );
+  const targetedRef =
+    initialItemRef && items.some((item) => item.ref_id === initialItemRef) ? initialItemRef : null;
+  const retainedRef =
+    selectedRef && items.some((item) => item.ref_id === selectedRef) ? selectedRef : null;
+  const activeSelectedRef = targetedRef ?? retainedRef ?? items[0]?.ref_id ?? null;
 
   useEffect(() => {
-    if (!items.length) {
-      setSelectedRef(null);
-      return;
+    if (activeSelectedRef && !commandPending && examine?.ref_id !== activeSelectedRef) {
+      onExamine(activeSelectedRef);
     }
-
-    const targetedItem = initialItemRef
-      ? items.find((item) => item.ref_id === initialItemRef)
-      : undefined;
-    const fallbackRef = items[0]?.ref_id ?? null;
-    let nextRef: string | null = null;
-
-    setSelectedRef((prev) => {
-      if (targetedItem) {
-        nextRef = targetedItem.ref_id;
-        return targetedItem.ref_id;
-      }
-      if (prev && items.some((item) => item.ref_id === prev)) {
-        nextRef = prev;
-        return prev;
-      }
-      nextRef = fallbackRef;
-      return fallbackRef;
-    });
-
-    if (nextRef && !commandPending && examine?.ref_id !== nextRef) onExamine(nextRef);
-  }, [commandPending, examine?.ref_id, initialItemRef, items, onExamine]);
+  }, [activeSelectedRef, commandPending, examine?.ref_id, onExamine]);
 
   useEffect(() => {
-    if (!initialItemRef || selectedRef !== initialItemRef) return;
+    if (!initialItemRef || activeSelectedRef !== initialItemRef) return;
     const target = document.querySelector<HTMLElement>(
       `[data-inventory-item-ref="${CSS.escape(initialItemRef)}"]`,
     );
     target?.scrollIntoView({ block: "nearest" });
     target?.focus({ preventScroll: true });
-  }, [initialItemRef, selectedRef]);
+  }, [activeSelectedRef, initialItemRef]);
 
   const selectItem = (ref: string) => {
     setSelectedRef(ref);
-    if (ref !== selectedRef || examine?.ref_id !== ref) onExamine(ref);
+    if (ref !== activeSelectedRef || examine?.ref_id !== ref) onExamine(ref);
   };
 
   if (!items.length) {
@@ -247,18 +230,18 @@ export function InventoryPanel({
     );
   }
 
-  const selectedItem = items.find((item) => item.ref_id === selectedRef);
-  const selectedActions = (selectedRef ? (itemActions.get(selectedRef) ?? []) : []).filter(
-    (action) => action.enabled,
-  );
-  const detailLoading = commandPending && examine?.ref_id !== selectedRef;
+  const selectedItem = items.find((item) => item.ref_id === activeSelectedRef);
+  const selectedActions = (
+    activeSelectedRef ? (itemActions.get(activeSelectedRef) ?? []) : []
+  ).filter((action) => action.enabled);
+  const detailLoading = commandPending && examine?.ref_id !== activeSelectedRef;
 
   return (
     <div className="inventory-modal-content inventory-split">
       <div className="inventory-split-grid">
         <div className="inventory-grid" role="list">
           {items.map((item, index) => {
-            const isSelected = item.ref_id === selectedRef;
+            const isSelected = item.ref_id === activeSelectedRef;
             const slotStyle = { "--slot-i": index } as CSSProperties;
 
             return (

@@ -145,21 +145,7 @@ export function useGamePanelModals(ctx: GamePanelModalContext) {
         },
         targetRef.current,
       ),
-    [
-      t,
-      components,
-      ctx.examine,
-      ctx.commandPending,
-      ctx.view,
-      ctx.memoryKeys,
-      ctx.isTerminal,
-      ctx.onExamine,
-      ctx.onUseItem,
-      ctx.onSave,
-      ctx.onOpenMainMenu,
-      ctx.onRestart,
-      ctx.onCreateSupportBundle,
-    ],
+    [t, components, ctx],
   );
 
   const { showPanel: showPanelModal } = usePanelModals({

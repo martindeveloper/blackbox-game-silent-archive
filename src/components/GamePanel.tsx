@@ -224,11 +224,16 @@ export function GamePanel({
     autoScrollEnabled: false,
     prefixKey: firstBlockKey(view.text),
   });
+  const latestTextRef = useRef(view.text);
 
   const updateScrollHint = (el: HTMLDivElement) => {
     const nearBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 80;
     setShowScrollHint(!nearBottom && el.scrollHeight > el.clientHeight + 80);
   };
+
+  useEffect(() => {
+    latestTextRef.current = view.text;
+  }, [view.text]);
 
   useEffect(() => {
     const scrollEl = scrollRef.current;
@@ -239,7 +244,7 @@ export function GamePanel({
       nodeId: view.node_id,
       contentHeight: narrativeRef.current?.scrollHeight ?? 0,
       autoScrollEnabled: false,
-      prefixKey: firstBlockKey(view.text),
+      prefixKey: firstBlockKey(latestTextRef.current),
     };
 
     updateScrollHint(scrollEl);
@@ -355,18 +360,23 @@ export function GamePanel({
   }>(() => ({ current: readyBackgroundUrl, previous: undefined }));
 
   useEffect(() => {
-    setBackgroundLayers((layers) => {
-      if (layers.current === readyBackgroundUrl) return layers;
-      return { current: readyBackgroundUrl, previous: layers.current };
-    });
+    const transitionTimer = setTimeout(() => {
+      setBackgroundLayers((layers) => {
+        if (layers.current === readyBackgroundUrl) return layers;
+        return { current: readyBackgroundUrl, previous: layers.current };
+      });
+    }, 0);
 
-    const timer = setTimeout(() => {
+    const clearTimer = setTimeout(() => {
       setBackgroundLayers((layers) =>
         layers.current === readyBackgroundUrl ? { ...layers, previous: undefined } : layers,
       );
     }, UI_TIMING.backgroundFadeMs);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(transitionTimer);
+      clearTimeout(clearTimer);
+    };
   }, [readyBackgroundUrl]);
 
   return (
