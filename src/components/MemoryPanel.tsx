@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { formatRefId } from "@engine/v1/format.js";
-import type { MetaCatalog } from "@engine/v1/types.js";
+import { formatRefId } from "@engine/sdk/v1/format.js";
+import type { MetaCatalog } from "@engine/sdk/v1/types.js";
 
 interface MemoryPanelProps {
   memories: string[];

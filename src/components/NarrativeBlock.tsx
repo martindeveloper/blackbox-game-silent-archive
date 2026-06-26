@@ -1,13 +1,13 @@
 import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
-import type { CharacterView, TextBlock } from "@engine/v1/types.js";
+import type { CharacterView, TextBlock } from "@engine/sdk/v1/types.js";
 import {
   characterAccentColor,
   characterBySpeaker,
   speakerDisplayName,
   type CharacterLookup,
 } from "../lib/characters.js";
-import { useCharacterPortrait } from "@engine/v1/hooks/assets.js";
+import { useCharacterPortrait } from "@engine/sdk/v1/hooks/assets.js";
 
 interface NarrativeBlockProps {
   block: TextBlock;

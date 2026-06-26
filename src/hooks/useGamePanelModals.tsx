@@ -1,13 +1,10 @@
 import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { ArchiveIcon, GridIcon, IncidentIcon } from "../components/Icons.js";
-import { usePanelModals } from "@engine/v1/hooks/panel-modals.js";
-import type { ModalDescriptor } from "@engine/v1/ui/modal.js";
-import type { GameView, ItemExamineView } from "@engine/v1/types.js";
-import {
-  useTextGameComponents,
-  type TextGameComponents,
-} from "@engine/v1/ui/components.js";
+import { usePanelModals } from "@engine/sdk/v1/hooks/panel-modals.js";
+import type { ModalDescriptor } from "@engine/sdk/v1/ui/modal.js";
+import type { GameView, ItemExamineView } from "@engine/sdk/v1/types.js";
+import { useTextGameComponents, type TextGameComponents } from "@engine/sdk/v1/ui/components.js";
 import { UI_SHORTCUTS } from "../uiConfig.js";
 
 type GamePanelId = "inventory" | "memory" | "journal" | "system";

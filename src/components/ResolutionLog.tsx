@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
-import type { RollRecord, UiNotification } from "@engine/v1/types.js";
+import type { RollRecord, UiNotification } from "@engine/sdk/v1/types.js";
 import { rollsSequenceMs, UI_TIMING } from "../uiConfig.js";
 import { ArchiveIcon, DamageIcon, HealingIcon, KeycardIcon, StatIcon } from "./Icons.js";
 

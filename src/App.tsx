@@ -1,15 +1,15 @@
 import { useTranslation } from "react-i18next";
 import { ContentWarning } from "./components/ContentWarning.js";
 import { ArchiveIcon, MuteIcon, VolumeIcon } from "./components/Icons.js";
-import { resetMusicTracking, DEFAULT_CHOICE_SFX } from "@engine/v1/audio.js";
-import type { MusicCue } from "@engine/v1/types.js";
+import { resetMusicTracking, DEFAULT_CHOICE_SFX } from "@engine/sdk/v1/audio.js";
+import type { MusicCue } from "@engine/sdk/v1/types.js";
 import {
   TextGamePlayerApp,
   type ChapterTransitionProps,
   type NewGameConfirmationProps,
   type TextGamePlayerAppConfig,
   type TextGamePlayerHeaderProps,
-} from "@engine/v1/ui/player-app.js";
+} from "@engine/sdk/v1/ui/player-app.js";
 import { collectStateNotifications } from "./lib/notifications.js";
 import {
   resolveMusicFade,

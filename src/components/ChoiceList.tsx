@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import type { ChoiceView, GameView } from "@engine/v1/types.js";
-import { isEditableTarget } from "@engine/v1/keyboard.js";
+import type { ChoiceView, GameView } from "@engine/sdk/v1/types.js";
+import { isEditableTarget } from "@engine/sdk/v1/keyboard.js";
 import { UI_FLAGS, UI_TIMING } from "../uiConfig.js";
 import { LockReason } from "./LockReason.js";
 

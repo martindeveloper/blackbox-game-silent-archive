@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import type { MetaCatalog } from "@engine/v1/types.js";
+import type { MetaCatalog } from "@engine/sdk/v1/types.js";
 
 interface JournalPanelProps {
   events: string[];

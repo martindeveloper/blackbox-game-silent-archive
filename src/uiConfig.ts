@@ -1,8 +1,4 @@
-import {
-  createUiTiming,
-  type MusicFadeKind,
-  type UiTimingValues,
-} from "@engine/v1/timing.js";
+import { createUiTiming, type MusicFadeKind, type UiTimingValues } from "@engine/sdk/v1/timing.js";
 
 export type { MusicFadeKind };
 

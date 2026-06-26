@@ -1,12 +1,12 @@
-import type { CharacterView } from "@engine/v1/types.js";
-import { i18n } from "@engine/v1/i18n.js";
-import { formatRefId } from "@engine/v1/format.js";
-import { characterAccentColor as engineCharacterAccentColor } from "@engine/v1/characters.js";
+import type { CharacterView } from "@engine/sdk/v1/types.js";
+import { i18n } from "@engine/sdk/v1/i18n.js";
+import { formatRefId } from "@engine/sdk/v1/format.js";
+import { characterAccentColor as engineCharacterAccentColor } from "@engine/sdk/v1/characters.js";
 export {
   characterBySpeaker,
   indexCharacters,
   type CharacterLookup,
-} from "@engine/v1/characters.js";
+} from "@engine/sdk/v1/characters.js";
 
 export function speakerDisplayName(
   character: CharacterView | undefined,

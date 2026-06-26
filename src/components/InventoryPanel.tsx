@@ -2,13 +2,13 @@ import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
 import { LockReason } from "./LockReason.js";
 import { UI_FLAGS } from "../uiConfig.js";
-import { useAssetScope, useManagedTexture } from "@engine/v1/hooks/assets.js";
+import { useAssetScope, useManagedTexture } from "@engine/sdk/v1/hooks/assets.js";
 import type {
   GameView,
   ItemActionView,
   ItemExamineView,
   InventoryItemView,
-} from "@engine/v1/types.js";
+} from "@engine/sdk/v1/types.js";
 
 interface InventoryPanelProps {
   view: GameView;

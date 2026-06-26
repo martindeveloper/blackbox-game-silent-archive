@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import type { GameView } from "@engine/v1/types.js";
+import type { GameView } from "@engine/sdk/v1/types.js";
 import { statAbbrev } from "../lib/vitals.js";
 
 interface VitalsStripProps {

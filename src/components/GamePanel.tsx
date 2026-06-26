@@ -7,14 +7,14 @@ import type {
   RollRecord,
   TextBlock,
   UiNotification,
-} from "@engine/v1/types.js";
-import { activeIntelKeys } from "@engine/v1/format.js";
+} from "@engine/sdk/v1/types.js";
+import { activeIntelKeys } from "@engine/sdk/v1/format.js";
 import { statAbbrev } from "../lib/vitals.js";
 import { useCharacterProfileModal } from "../hooks/useCharacterProfileModal.js";
 import { useGamePanelModals } from "../hooks/useGamePanelModals.js";
-import { useManagedTexture } from "@engine/v1/hooks/assets.js";
-import { useResolutionPresentation } from "@engine/v1/hooks/resolution.js";
-import { useTextGameComponents } from "@engine/v1/ui/components.js";
+import { useManagedTexture } from "@engine/sdk/v1/hooks/assets.js";
+import { useResolutionPresentation } from "@engine/sdk/v1/hooks/resolution.js";
+import { useTextGameComponents } from "@engine/sdk/v1/ui/components.js";
 
 import { timing, UI_SHORTCUTS, UI_TIMING } from "../uiConfig.js";
 import {
