@@ -5,8 +5,11 @@
       {
         "patterns": [
           {
-            "group": ["@engine/**", "!@engine/v1/**"],
-            "message": "Use the stable @engine/v1/* API. Raw @engine/* modules are internal and may change without a version bump."
+            "group": [
+              "@engine/**",
+              "!@engine/sdk/v1/**"
+            ],
+            "message": "Use the stable @engine/sdk/v1/* API. Raw @engine/* modules are internal and may change without a version bump."
           }
         ]
       }

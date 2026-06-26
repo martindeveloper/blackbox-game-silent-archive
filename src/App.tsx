@@ -77,9 +77,9 @@ function SilentArchiveHeader({
   scenarioTitle,
   music,
   musicLabel,
-  muted,
+  paused,
   audioBlocked,
-  toggleMute,
+  togglePause,
 }: TextGamePlayerHeaderProps) {
   const { t } = useTranslation();
   const view = session.phase === "ready" ? session.view : undefined;
@@ -114,32 +114,32 @@ function SilentArchiveHeader({
         {hasMusic && (
           <div
             className="hidden sm:flex items-center gap-2"
-            style={{ opacity: muted ? 0.3 : 0.85, transition: "opacity 0.35s" }}
+            style={{ opacity: paused ? 0.3 : 0.85, transition: "opacity 0.35s" }}
           >
-            <MusicBars active={!muted && !audioBlocked} />
+            <MusicBars active={!paused && !audioBlocked} />
             <span
               className="text-xs tracking-[0.1em]"
               style={{ color: "var(--color-muted-2)", fontFamily: "var(--font-mono)" }}
             >
-              {audioBlocked && !muted ? t("header.enableAudio") : musicLabel}
+              {audioBlocked && !paused ? t("header.enableAudio") : musicLabel}
             </span>
           </div>
         )}
 
         <button
-          onClick={toggleMute}
+          onClick={togglePause}
           className="sys-btn sys-btn-icon"
           style={{
             padding: "3px 7px",
-            color: muted || audioBlocked ? "var(--color-muted)" : "var(--color-muted-2)",
+            color: paused || audioBlocked ? "var(--color-muted)" : "var(--color-muted-2)",
           }}
-          title={`${audioBlocked ? t("header.enableAudio") : muted ? t("shortcuts.unmute") : t("shortcuts.mute")} [${UI_SHORTCUTS.mute.display}]`}
+          title={`${audioBlocked ? t("header.enableAudio") : paused ? t("shortcuts.unmute") : t("shortcuts.mute")} [${UI_SHORTCUTS.mute.display}]`}
           aria-label={
-            audioBlocked ? t("header.enableAudio") : muted ? t("header.unmute") : t("header.mute")
+            audioBlocked ? t("header.enableAudio") : paused ? t("header.unmute") : t("header.mute")
           }
           aria-keyshortcuts={UI_SHORTCUTS.mute.aria}
         >
-          {muted || audioBlocked ? <MuteIcon size={12} /> : <VolumeIcon size={12} />}
+          {paused || audioBlocked ? <MuteIcon size={12} /> : <VolumeIcon size={12} />}
         </button>
 
         <div className="flex items-center gap-2 pl-1">
