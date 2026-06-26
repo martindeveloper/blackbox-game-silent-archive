@@ -2,9 +2,9 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { CharacterProfileCard } from "../components/CharacterProfileCard.js";
 import { KeycardIcon } from "../components/Icons.js";
-import { useModal } from "@engine/ui/ModalContext.js";
+import { useModal } from "@engine/v1/ui/modal.js";
 import { characterAccentColor } from "../lib/characters.js";
-import type { CharacterView } from "@engine/types/game.js";
+import type { CharacterView } from "@engine/v1/types.js";
 
 const MODAL_PREFIX = "character-profile:";
 

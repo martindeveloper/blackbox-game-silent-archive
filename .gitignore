@@ -17,3 +17,12 @@ saves/
 *.log
 .cache/
 node_modules/
+
+# Local/generated paths (Blackbox Editor)
+._*
+.Spotlight-V100
+.Trashes
+Desktop.ini
+ehthumbs.db
+tmp/
+.blackbox/cache/

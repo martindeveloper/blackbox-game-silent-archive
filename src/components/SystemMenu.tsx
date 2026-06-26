@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useAppSettings } from "@engine/context/AppSettings.js";
+import { useAppSettings } from "@engine/v1/settings.js";
 import { IS_DEBUG_CONFIGURATION, IS_WEB_PLATFORM, SUPPORT_BUNDLE_ENABLED } from "@platform";
 import {
   ArchiveIcon,

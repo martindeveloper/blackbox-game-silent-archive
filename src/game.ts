@@ -1,4 +1,4 @@
-import type { GameDefinition } from "@engine/boot.js";
+import type { GameDefinition } from "@engine/v1/boot.js";
 import { App } from "./App.js";
 import { ChoiceList } from "./components/ChoiceList.js";
 import { InventoryPanel } from "./components/InventoryPanel.js";

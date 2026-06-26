@@ -1,10 +1,10 @@
 import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
-import { useManagedTexture } from "@engine/hooks/useAssetScope.js";
+import { useManagedTexture } from "@engine/v1/hooks/assets.js";
 import { characterAccentColor } from "../lib/characters.js";
-import { formatRefId } from "@engine/lib/format.js";
+import { formatRefId } from "@engine/v1/format.js";
 import { statAbbrev } from "../lib/vitals.js";
-import type { CharacterView } from "@engine/types/game.js";
+import type { CharacterView } from "@engine/v1/types.js";
 
 interface CharacterProfileCardProps {
   character: CharacterView;

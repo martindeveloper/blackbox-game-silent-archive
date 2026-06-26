@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { projectInfo } from "@content-source";
-import { useManagedTexture } from "@engine/hooks/useAssetScope.js";
-import { useNumberKeySelect } from "@engine/hooks/useNumberKeySelect.js";
-import { formatPlaytime, relativeTime } from "@engine/lib/format.js";
-import { isEditableTarget } from "@engine/lib/keyboard.js";
+import { useManagedTexture } from "@engine/v1/hooks/assets.js";
+import { isEditableTarget, useNumberKeySelect } from "@engine/v1/keyboard.js";
+import { formatPlaytime, relativeTime } from "@engine/v1/format.js";
 import {
   clearAllPlayerData,
   clearSlot,
@@ -13,9 +12,9 @@ import {
   readAllSlots,
   readLastUsedSlot,
   type SlotData,
-} from "@engine/lib/slots.js";
-import { useModal } from "@engine/ui/ModalContext.js";
-import { MenuButton, SettingsPanel } from "@engine/ui/menu.js";
+} from "@engine/v1/state/save-load.js";
+import { useModal } from "@engine/v1/ui/modal.js";
+import { MenuButton, SettingsPanel } from "@engine/v1/ui/menu.js";
 import { SUPPORT_BUNDLE_ENABLED } from "@platform";
 import { BugIcon, HeadphonesIcon } from "./Icons.js";
 import { RestartConfirmButtons } from "./RestartConfirm.js";

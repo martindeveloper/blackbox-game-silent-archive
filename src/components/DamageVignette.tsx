@@ -1,5 +1,5 @@
 import { type CSSProperties } from "react";
-import type { DamagePulse } from "@engine/lib/resolutionPresentation.js";
+import type { DamagePulse } from "@engine/v1/hooks/resolution.js";
 
 interface HpSnapshot {
   hp: number;
