@@ -34,12 +34,12 @@ items.json             inventory
 assets.json            media registry
 textures/ music/ sfx/  authored assets
 src/                   custom web UI (React)
-LORE.md                canon bible for writers
+docs/                  universe and local canon reference
 ```
 
 ## Canon and writing
 
-**[LORE.md](./LORE.md)** is the source of truth for world details, character rules, timeline, locations, themes, and expansion guidance. Read it before adding chapters, dialogue, items, or endings.
+**[docs/compendium](./docs/compendium/README.md)** is the source of truth for world details, character rules, timeline, locations, themes, and expansion guidance. Read it before adding chapters, dialogue, items, endings, sequels, or other games in this universe.
 
 ## Blackbox
 
